@@ -29,10 +29,13 @@
 
 using System.Linq;
 using System.Numerics;
+using Content.Client._RMC14.Movement;
+using Content.Client._RMC14.Weapons.Ranged.Prediction;
 using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
 using Content.Client.Weapons.Ranged.Components;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.CombatMode;
 using Content.Shared.Weapons.Ranged;
@@ -43,7 +46,6 @@ using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Robust.Client.Physics;
 using Robust.Client.Player;
 using Robust.Client.State;
 using Robust.Shared.Animations;
@@ -70,7 +72,10 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+
+    // RMC14
+    [Dependency] private readonly GunPredictionSystem _gunPrediction = default!;
+    [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
 
     public static readonly EntProtoId HitscanProto = "HitscanEffect";
 
@@ -121,7 +126,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
     private void OnUpdateClientAmmo(EntityUid uid, AmmoCounterComponent ammoComp, ref UpdateClientAmmoEvent args)
     {
-        UpdateAmmoCount(uid, ammoComp);
+        UpdateAmmoCount(uid, ammoComp, args.AritifialIncrease); //RMC14
     }
 
     private void OnMuzzleFlash(MuzzleFlashEvent args)
@@ -236,9 +241,12 @@ public sealed partial class GunSystem : SharedGunSystem
         if (_player.LocalSession is not { } session)
             return;
 
+        // if (_itemPickup.RecentItemPickUp)
+        //     return;
+
         Log.Debug($"Sending shoot request tick {Timing.CurTick} / {Timing.CurTime}");
 
-        var projectiles = ShootRequested(GetNetEntity(gunUid), GetNetCoordinates(coordinates), target, null, session);
+        var projectiles = _gunPrediction.ShootRequested(GetNetEntity(gunUid), GetNetCoordinates(coordinates), target, null, session);
 
         RaisePredictiveEvent(new RequestShootEvent()
         {
@@ -246,6 +254,7 @@ public sealed partial class GunSystem : SharedGunSystem
             Coordinates = GetNetCoordinates(coordinates),
             Gun = GetNetEntity(gunUid),
             Shot = projectiles?.Select(e => e.Id).ToList(),
+            LastRealTick = _rmcLagCompensation.GetLastRealTick(null),
         });
     }
 
@@ -380,7 +389,7 @@ public sealed partial class GunSystem : SharedGunSystem
         float speed = 20)
     {
         EnsureComp<PredictedProjectileClientComponent>(uid);
-        _physics.UpdateIsPredicted(uid);
+        Physics.UpdateIsPredicted(uid);
         base.ShootProjectile(uid, direction, gunVelocity, gunUid, user, speed);
     }
 }
