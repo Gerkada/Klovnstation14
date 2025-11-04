@@ -13,8 +13,8 @@
       - !type:FadeBehaviour
         id: radiating
         maxDuration: 2.0
-        startValue: 3.0
-        endValue: 2.0
+        startValue: 2.4 # was 3, klovn
+        endValue: 1.5 # was 2
         isLooped: true
         reverseWhenFinished: true
       - !type:PulseBehaviour
@@ -22,7 +22,7 @@
         interpolate: Nearest
         maxDuration: 1.0
         startValue: 0.1
-        endValue: 2.0
+        endValue: 1.5 #was 2
         isLooped: true
   - type: PowerCellSlot
     cellSlotId: cell_slot
@@ -42,7 +42,7 @@
     heldPrefix: off
   - type: PointLight
     enabled: false
-    radius: 3
+    radius: 2.5 #was 3
     energy: 1.4 #klovn, was 2
     netsync: false
   - type: ToggleableVisuals
@@ -217,7 +217,7 @@
         - HighImpassable
   - type: PointLight
     enabled: false
-    radius: 8
+    radius: 7 #klovn, was 8
     energy: 4 #klovn, was 5
   - type: ItemSlots
     slots:
