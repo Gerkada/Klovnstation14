@@ -447,6 +447,9 @@
           visible: false
           shader: unshaded
           map: [ "shield" ]
+    - type: Construction
+      graph: EnergyShieldRepair
+      node: EnergyShieldRepair
     - type: Item
       size: Small
       sprite: Objects/Weapons/Melee/e_shield.rsi
@@ -521,7 +524,7 @@
   name: broken energy shield
   parent: BaseItem
   id: BrokenEnergyShield
-  description: Something inside is burned out, it is no longer functional.
+  description: The energy shield is broken, but you can fix it with a new high capacity power cell.
   components:
     - type: Sprite
       sprite: Objects/Weapons/Melee/e_shield.rsi
@@ -530,6 +533,9 @@
       sprite: Objects/Weapons/Melee/e_shield.rsi
       size: Small
       heldPrefix: eshield
+    - type: Tag
+      tags:
+        - BrokenEnergyShield
 
 - type: entity
   name: telescopic shield
