@@ -32,6 +32,7 @@
 # SPDX-FileCopyrightText: 2025 Nox
 # SPDX-FileCopyrightText: 2025 RedBookcase
 # SPDX-FileCopyrightText: 2025 github_actions[bot]
+# SPDX-FileCopyrightText: 2025 nabegator220
 #
 # SPDX-License-Identifier: MPL-2.0
 
@@ -133,6 +134,10 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 2
+    pvsIncrease: 0.2
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -177,6 +182,10 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 2
+    pvsIncrease: 0.2
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -224,6 +233,10 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 2
+    pvsIncrease: 0.2
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -313,8 +326,8 @@
   #   sprintModifier: 0.75
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 2
-    pvsIncrease: 0.2
+    maxOffset: 3
+    pvsIncrease: 0.3
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
