@@ -36,6 +36,7 @@
 // SPDX-FileCopyrightText: 2025 chromiumboy
 // SPDX-FileCopyrightText: 2025 corresp0nd
 // SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 // SPDX-FileCopyrightText: 2025 pa.pecherskij
 // SPDX-FileCopyrightText: 2025 slarticodefast
 // SPDX-FileCopyrightText: 2025 taydeo

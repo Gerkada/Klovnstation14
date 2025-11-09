@@ -4,6 +4,7 @@
 // SPDX-FileCopyrightText: 2024 Aiden
 // SPDX-FileCopyrightText: 2024 DrSmugleaf
 // SPDX-FileCopyrightText: 2025 Toastermeister
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 // SPDX-FileCopyrightText: 2025 taydeo
 //
 // SPDX-License-Identifier: MIT
