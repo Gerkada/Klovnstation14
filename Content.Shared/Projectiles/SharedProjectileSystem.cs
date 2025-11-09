@@ -172,7 +172,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
                 $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(shooterOrWeapon):source} hit {otherName:target} and dealt {modifiedDamage.GetTotal():damage} damage");
         }
 
-        if (!deleted && ourBody.LinearVelocity.Length() > 0)
+        if (!deleted && !(float.IsNaN(ourBody.LinearVelocity.X) || float.IsNaN(ourBody.LinearVelocity.Y)) && ourBody.LinearVelocity.Length() > 0)
         {
             var direction = ourBody.LinearVelocity.Normalized();
             _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
