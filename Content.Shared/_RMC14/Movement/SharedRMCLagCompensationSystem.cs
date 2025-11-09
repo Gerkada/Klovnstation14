@@ -1,4 +1,8 @@
-﻿using Content.Shared._RMC14.CCVar;
+// SPDX-FileCopyrightText: 2025 Alin
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Coordinates;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
