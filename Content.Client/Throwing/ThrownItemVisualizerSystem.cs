@@ -5,6 +5,7 @@
 // SPDX-FileCopyrightText: 2025 Tayrtahn
 // SPDX-FileCopyrightText: 2025 Toaster
 // SPDX-FileCopyrightText: 2025 Toastermeister
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 // SPDX-FileCopyrightText: 2025 taydeo
 //
 // SPDX-License-Identifier: MIT

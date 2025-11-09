@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: 2025 Alin
 // SPDX-FileCopyrightText: 2025 Toaster
 // SPDX-FileCopyrightText: 2025 Toastermeister
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
