@@ -101,3 +101,9 @@ Entries:
       message: Now borgs by default follow AI orders above others.
   id: 12
   time: '2025-11-08T18:12:37.0000000+00:00'
+- author: DeusMaldPr
+  changes:
+    - type: Add
+      message: SERBIAAAAAAAAAAAAAAAA
+  id: 13
+  time: '2025-11-09T17:13:05.0000000+00:00'
