@@ -58,6 +58,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Examine;
+using Content.Shared.Gravity;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Hands.Components;
@@ -104,6 +105,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected readonly IRobustRandom Random = default!;
     [Dependency] protected readonly ISharedAdminLogManager Logs = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
+    [Dependency] private   readonly SharedGravitySystem _gravity = default!;
     [Dependency] protected readonly ExamineSystemShared Examine = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
@@ -123,7 +125,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   readonly UseDelaySystem _useDelay = default!;
     [Dependency] private   readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private   readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private   readonly StaminaSystem _stamina = default!;
+    [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private   readonly SharedStunSystem _stun = default!;
     [Dependency] private   readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private   readonly SharedCameraRecoilSystem _recoil = default!;
@@ -253,7 +255,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// <summary>
     /// Attempts to shoot at the target coordinates. Resets the shot counter after every shot.
     /// </summary>
-    public bool AttemptShoot(EntityUid user, EntityUid gunUid, GunComponent gun, EntityCoordinates toCoordinates, EntityUid? target = null)
+    public List<EntityUid>? AttemptShoot(EntityUid user, EntityUid gunUid, GunComponent gun, EntityCoordinates toCoordinates, EntityUid? target = null)
     {
         gun.ShootCoordinates = toCoordinates;
         gun.Target = target;
@@ -266,7 +268,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// <summary>
     /// Shoots by assuming the gun is the user at default coordinates.
     /// </summary>
-    public bool AttemptShoot(EntityUid gunUid, GunComponent gun)
+    public List<EntityUid>? AttemptShoot(EntityUid gunUid, GunComponent gun)
     {
         var coordinates = new EntityCoordinates(gunUid, gun.DefaultDirection);
         gun.ShootCoordinates = coordinates;
@@ -390,7 +392,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (ev.Ammo.Count <= 0)
         {
             if (gun.LastShotWasEmpty)
-                return false;
+                return null;
 
             // MNET Start
             gun.LastShotWasEmpty = true;
@@ -466,8 +468,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         var shotEv = new GunShotEvent(user, ev.Ammo);
         RaiseLocalEvent(gunUid, ref shotEv);
 
-        if (!userImpulse || !TryComp<PhysicsComponent>(user, out var userPhysics))
-            return true;
+        if (userImpulse && TryComp<PhysicsComponent>(user, out var userPhysics))
+        {
+            if (_gravity.IsWeightless(user))
+                CauseImpulse(fromCoordinates, toCoordinates.Value, user, userPhysics);
+        }
 
         Dirty(gunUid, gun);
         UpdateAmmoCount(gunUid); //GoobStation - Multishot KS14 - keeping it here to check for eternal full auto bug
@@ -971,7 +976,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         _recoil.KickCamera(user.Value, recoil.Normalized() * 0.5f * recoilScalar);
     }
 
-    public virtual void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid gunUid, EntityUid? user = null, float speed = 20f)
+    public virtual void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid? gunUid, EntityUid? user = null, float speed = 20f)
     {
         var physics = EnsureComp<PhysicsComponent>(uid);
         Physics.SetBodyStatus(uid, physics, BodyStatus.InAir);
@@ -983,7 +988,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         var projectile = EnsureComp<ProjectileComponent>(uid);
         projectile.Weapon = gunUid;
-        var shooter = user ?? gunUid;
+        var shooter = user ?? gunUid ?? null;
         if (shooter != null)
             Projectiles.SetShooter(uid, projectile, shooter.Value);
 
@@ -997,16 +1002,12 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (user == null)
             return null;
 
-        // Goobstation - Check combat mode on pilot (combat mode component is on pilot, not mech)
-        var combatModeEntity = user.Value;
-        var gunUser = user.Value;
+        var gunUser = user!.Value;
 
-        // Goobstation - Handle mech pilot for gun lookup
-        if (TryComp<MechPilotComponent>(user.Value, out var mechPilot))
-            gunUser = mechPilot.Mech;
+        if (user == null)
+            return null;
 
-        if (!_combatMode.IsInCombatMode(combatModeEntity) ||
-            !TryGetGun(gunUser, out var ent, out var gun))
+        if (!TryGetGun(gunUser, out var ent, out var gun))
         {
             return null;
         }

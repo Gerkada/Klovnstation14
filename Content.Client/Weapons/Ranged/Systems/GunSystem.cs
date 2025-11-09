@@ -50,6 +50,7 @@ using Robust.Shared.Animations;
 using Robust.Shared.Input;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using SharedGunSystem = Content.Shared.Weapons.Ranged.Systems.SharedGunSystem;
@@ -69,7 +70,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
     public static readonly EntProtoId HitscanProto = "HitscanEffect";
 
@@ -374,7 +375,7 @@ public sealed partial class GunSystem : SharedGunSystem
     public override void ShootProjectile(EntityUid uid,
         Vector2 direction,
         Vector2 gunVelocity,
-        EntityUid gunUid,
+        EntityUid? gunUid,
         EntityUid? user = null,
         float speed = 20)
     {
