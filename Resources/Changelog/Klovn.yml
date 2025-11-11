@@ -113,3 +113,9 @@ Entries:
       message: Improves the camera monitor significantly.
   id: 14
   time: '2025-11-11T07:51:32.0000000+00:00'
+- author: nabegator220
+  changes:
+    - type: Add
+      message: Added zipion, an easy to make atmos stimulant.
+  id: 15
+  time: '2025-11-11T20:17:41.0000000+00:00'
