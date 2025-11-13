@@ -152,8 +152,6 @@
         orGroup: GiftPool
       - id: ViolaInstrument
         orGroup: GiftPool
-      - id: ClothingNeckCloakTrans
-        orGroup: GiftPool
       - id: ClothingNeckCloakAdmin
         orGroup: GiftPool
       - id: ToySkeleton
@@ -179,10 +177,6 @@
       - id: ClothingHeadHelmetCosmonaut
         orGroup: GiftPool
       - id: ClothingShoeSlippersDuck
-        orGroup: GiftPool
-      - id: ClothingUnderSocksBee
-        orGroup: GiftPool
-      - id: ClothingUnderSocksCoder
         orGroup: GiftPool
       - id: ClothingBeltUtilityFilled
         orGroup: GiftPool

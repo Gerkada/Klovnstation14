@@ -58,9 +58,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingNeckLGBTPin
-        prob: 0.06
-        orGroup: dressermainloot
       - id: ClothingUniformJumpsuitColorGrey
         prob: 0.06
         orGroup: dressermainloot
@@ -242,12 +239,6 @@
         prob: 0.03
         orGroup: dresserthirdloot
       - id: ClothingMultipleHeadphones
-        prob: 0.03
-        orGroup: dresserthirdloot
-      - id: ClothingUnderSocksCoder
-        prob: 0.03
-        orGroup: dressermainloot
-      - id: ClothingUnderSocksBee
         prob: 0.03
         orGroup: dresserthirdloot
       - id: ClothingHeadHatAnimalMonkey

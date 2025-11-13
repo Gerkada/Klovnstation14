@@ -44465,58 +44465,6 @@ entities:
     - type: Transform
       pos: 10.28999,-87.42052
       parent: 2
-- proto: ClothingNeckCloakAce
-  entities:
-  - uid: 17323
-    components:
-    - type: Transform
-      pos: -9.488791,-1.3849742
-      parent: 2
-- proto: ClothingNeckCloakAro
-  entities:
-  - uid: 8150
-    components:
-    - type: Transform
-      pos: 39.571434,-28.464401
-      parent: 2
-    - type: CollisionWake
-      enabled: False
-    - type: Conveyed
-- proto: ClothingNeckCloakBi
-  entities:
-  - uid: 6921
-    components:
-    - type: Transform
-      pos: 57.523323,-96.46691
-      parent: 2
-- proto: ClothingNeckCloakEnby
-  entities:
-  - uid: 13645
-    components:
-    - type: Transform
-      pos: 79.02105,-25.344301
-      parent: 2
-- proto: ClothingNeckCloakGay
-  entities:
-  - uid: 17328
-    components:
-    - type: Transform
-      pos: -39.37852,-58.430256
-      parent: 2
-- proto: ClothingNeckCloakIntersex
-  entities:
-  - uid: 7509
-    components:
-    - type: Transform
-      pos: 105.5457,-45.44423
-      parent: 2
-- proto: ClothingNeckCloakLesbian
-  entities:
-  - uid: 3874
-    components:
-    - type: Transform
-      pos: 68.37186,-17.557957
-      parent: 2
 - proto: ClothingNeckCloakMoth
   entities:
   - uid: 17237
@@ -44530,13 +44478,6 @@ entities:
     components:
     - type: Transform
       pos: -38.53285,-69.49862
-      parent: 2
-- proto: ClothingNeckCloakTrans
-  entities:
-  - uid: 17331
-    components:
-    - type: Transform
-      pos: 77.515434,-20.379131
       parent: 2
 - proto: ClothingNeckScarfStripedBlack
   entities:
@@ -44864,20 +44805,6 @@ entities:
     components:
     - type: Transform
       pos: 13.501459,-50.591175
-      parent: 2
-- proto: ClothingUnderSocksBee
-  entities:
-  - uid: 16047
-    components:
-    - type: Transform
-      pos: 82.43239,-18.852234
-      parent: 2
-- proto: ClothingUnderSocksCoder
-  entities:
-  - uid: 1826
-    components:
-    - type: Transform
-      pos: -48.461044,-61.42407
       parent: 2
 - proto: ClothingUniformJumpskirtColorGrey
   entities:

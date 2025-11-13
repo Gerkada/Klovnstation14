@@ -233,9 +233,6 @@
     - id: ClothingHeadHatCardborg
       prob: 0.01
       orGroup: Clothes
-    - id: ClothingUnderSocksCoder
-      prob: 0.01
-      orGroup: Clothes
     - id: ClothingUniformJumpskirtOfLife
       prob: 0.01
       orGroup: Clothes
