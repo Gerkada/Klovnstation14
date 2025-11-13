@@ -274,7 +274,6 @@
       - id: ClothingHeadHatBeret
         prob: 0.03
         orGroup: dresserthirdloot
-        orGroup: dresserthirdloot
       - id: ClothingOuterSuitShrineMaiden
         prob: 0.03
         orGroup: dressersecondloot
