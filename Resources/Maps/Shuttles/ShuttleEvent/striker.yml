@@ -1448,13 +1448,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -1.5,-0.5
       parent: 325
-- proto: PlushieNuke
-  entities:
-  - uid: 47
-    components:
-    - type: Transform
-      pos: 0.5061571,-5.233775
-      parent: 325
 - proto: PortableGeneratorSuperPacmanMachineCircuitboard
   entities:
   - uid: 232

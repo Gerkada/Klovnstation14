@@ -81,7 +81,6 @@
         - MobTickSalvage
         - MobTickSalvage
         - MobTickSalvage
-        - PlushieCarp
         - DehydratedSpaceCarp
       chance: 0.25
       offset: 0.2
@@ -133,7 +132,6 @@
     - MobTickSalvage
     - MobTickSalvage
     - MobTickSalvage
-    - PlushieCarp
     - DehydratedSpaceCarp
     chance: 0.75
     offset: 0.2

@@ -829,14 +829,6 @@ entities:
         Glip Glorp,
 
         NanoTrasen Motorpool Division
-- proto: PlushieRouny
-  entities:
-  - uid: 83
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -0.53599805,-6.526394
-      parent: 1
 - proto: PortableGeneratorPacman
   entities:
   - uid: 41

@@ -2616,13 +2616,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.5,-15.5
       parent: 2
-- proto: PlushieLizard
-  entities:
-  - uid: 353
-    components:
-    - type: Transform
-      pos: 7.3750105,0.676074
-      parent: 2
 - proto: PosterContrabandVoteWeh
   entities:
   - uid: 355

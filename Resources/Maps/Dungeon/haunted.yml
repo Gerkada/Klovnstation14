@@ -2098,20 +2098,6 @@ entities:
     - pos: 30.486202,10.491858
       parent: 1653
       type: Transform
-- proto: PlushieLizard
-  entities:
-  - uid: 41
-    components:
-    - pos: 35.503193,14.666253
-      parent: 1653
-      type: Transform
-- proto: PlushiePenguin
-  entities:
-  - uid: 415
-    components:
-    - pos: 13.526197,27.541958
-      parent: 1653
-      type: Transform
 - proto: PortableGeneratorJrPacman
   entities:
   - uid: 392

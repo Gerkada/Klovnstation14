@@ -2702,14 +2702,6 @@ entities:
     - type: Transform
       pos: 1.4262546,7.3712606
       parent: 1
-- proto: PlushieLizard
-  entities:
-  - uid: 400
-    components:
-    - type: Transform
-      rot: 6.283185307179586 rad
-      pos: -0.4939462,15.561475
-      parent: 1
 - proto: PowerCageRecharger
   entities:
   - uid: 163

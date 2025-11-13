@@ -5979,13 +5979,6 @@ entities:
     - type: Transform
       pos: 1.5,-18.5
       parent: 2
-- proto: PlushieArachind
-  entities:
-  - uid: 1171
-    components:
-    - type: Transform
-      pos: 3.5221367,-14.46238
-      parent: 2
 - proto: PoweredLEDLightPostSmall
   entities:
   - uid: 619

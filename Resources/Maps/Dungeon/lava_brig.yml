@@ -9259,13 +9259,6 @@ entities:
     - type: Transform
       pos: 14.537998,42.878975
       parent: 588
-- proto: PlushieNuke
-  entities:
-  - uid: 1850
-    components:
-    - type: Transform
-      pos: 22.519993,28.594225
-      parent: 588
 - proto: PortableFlasher
   entities:
   - uid: 1234

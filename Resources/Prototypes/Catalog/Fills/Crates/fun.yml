@@ -92,56 +92,6 @@
           value: 5
 
 - type: entity
-  id: CrateFunPlushie
-  parent: CrateGenericSteel
-  name: plushie crate
-  description: A buncha soft plushies. Throw them around and then wonder how you're gonna explain this purchase to NT.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:NestedSelector
-        tableId: AllPlushiesTable
-        rolls: !type:ConstantNumberSelector
-          value: 10
-
-- type: entity
-  id: CrateFunLizardPlushieBulk
-  parent: CrateGenericSteel
-  name: bulk lizard plushie crate
-  description: A buncha soft lizard plushies. Throw them around and then wonder how you're gonna explain this purchase to NT.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: PlushieLizard
-          amount: !type:ConstantNumberSelector
-            value: 3
-        - id: PlushieSpaceLizard
-          amount: !type:ConstantNumberSelector
-            value: 3
-
-- type: entity
-  id: CrateFunSharkPlushieBulk
-  parent: CrateGenericSteel
-  name: bulk soft toy shark crate
-  description: A crate filled with a variety of everyone's favorite finned friend. Rawr!
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: PlushieSharkBlue
-          amount: !type:ConstantNumberSelector
-            value: 2
-        - id: PlushieSharkPink
-          amount: !type:ConstantNumberSelector
-            value: 2
-        - id: PlushieSharkGrey
-          amount: !type:ConstantNumberSelector
-            value: 2
-
-- type: entity
   id: CrateFunInstrumentsVariety
   parent: CrateGenericSteel
   name: variety instrument collection

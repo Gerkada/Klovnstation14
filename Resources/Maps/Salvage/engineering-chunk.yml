@@ -1978,13 +1978,6 @@ entities:
     - type: Transform
       pos: -5.6244073,3.4866257
       parent: 1
-- proto: PlushieSpaceLizard
-  entities:
-  - uid: 1226
-    components:
-    - type: Transform
-      pos: 18.52544,-18.478405
-      parent: 1
 - proto: PortableGeneratorJrPacman
   entities:
   - uid: 156

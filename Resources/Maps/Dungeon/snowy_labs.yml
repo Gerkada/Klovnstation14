@@ -10904,20 +10904,6 @@ entities:
     - type: Transform
       pos: 30.568752,4.54119
       parent: 1653
-- proto: PlushieDiona
-  entities:
-  - uid: 653
-    components:
-    - type: Transform
-      pos: 20.508192,0.61549807
-      parent: 1653
-- proto: PlushieSharkGrey
-  entities:
-  - uid: 926
-    components:
-    - type: Transform
-      pos: 6.4745436,18.474607
-      parent: 1653
 - proto: PortableGeneratorJrPacman
   entities:
   - uid: 1716

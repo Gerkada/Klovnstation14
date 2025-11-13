@@ -1143,13 +1143,6 @@ entities:
     - type: Transform
       pos: 11.5,-1.5
       parent: 289
-- proto: PlushieSpaceLizard
-  entities:
-  - uid: 135
-    components:
-    - type: Transform
-      pos: 8.5167885,-8.516763
-      parent: 289
 - proto: PosterLegitNanotrasenLogo
   entities:
   - uid: 281

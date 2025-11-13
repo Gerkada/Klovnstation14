@@ -1294,15 +1294,6 @@ entities:
     - type: Transform
       pos: -2.5,0.5
       parent: 2
-- proto: PlushieLizardMirrored
-  entities:
-  - uid: 125
-    components:
-    - type: MetaData
-      desc: Something about this lizard plushie feels off...
-    - type: Transform
-      pos: 12.5,-7.5
-      parent: 2
 - proto: PosterBroken
   entities:
   - uid: 167

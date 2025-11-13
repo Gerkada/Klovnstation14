@@ -3532,13 +3532,6 @@ entities:
     - type: Transform
       pos: 29.876812,28.272526
       parent: 2
-- proto: PlushieSlime
-  entities:
-  - uid: 1025
-    components:
-    - type: Transform
-      pos: 6.3847184,15.547257
-      parent: 2
 - proto: PortableGeneratorJrPacman
   entities:
   - uid: 292

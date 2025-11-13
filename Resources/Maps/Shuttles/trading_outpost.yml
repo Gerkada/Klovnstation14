@@ -5462,27 +5462,6 @@ entities:
     - type: Transform
       pos: 3.5,-20.5
       parent: 2
-- proto: PlushieArachind
-  entities:
-  - uid: 763
-    components:
-    - type: Transform
-      pos: 3.4869597,-25.514135
-      parent: 2
-- proto: PlushieSharkBlue
-  entities:
-  - uid: 1095
-    components:
-    - type: Transform
-      pos: 1.6245749,-25.800743
-      parent: 2
-- proto: PlushieSlime
-  entities:
-  - uid: 772
-    components:
-    - type: Transform
-      pos: 1.5933249,-25.519493
-      parent: 2
 - proto: PosterContrabandUnreadableAnnouncement
   entities:
   - uid: 535

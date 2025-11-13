@@ -4395,13 +4395,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: PlushieVox
-  entities:
-  - uid: 789
-    components:
-    - type: Transform
-      pos: -9.496842,4.466636
-      parent: 1
 - proto: PortableGeneratorPacman
   entities:
   - uid: 808

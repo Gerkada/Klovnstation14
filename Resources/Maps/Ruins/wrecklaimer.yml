@@ -2937,13 +2937,6 @@ entities:
     - type: Transform
       pos: 7.5,-11.5
       parent: 1
-- proto: CrateFunPlushie
-  entities:
-  - uid: 521
-    components:
-    - type: Transform
-      pos: 6.5,5.5
-      parent: 1
 - proto: CrateInternals
   entities:
   - uid: 653

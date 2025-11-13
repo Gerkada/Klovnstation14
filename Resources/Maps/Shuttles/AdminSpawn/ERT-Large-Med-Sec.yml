@@ -5731,20 +5731,6 @@ entities:
       parent: 1
     - type: DeltaPressure
       gridUid: 1
-- proto: PlushieLizard
-  entities:
-  - uid: 706
-    components:
-    - type: Transform
-      pos: -4.463278,-9.441589
-      parent: 1
-- proto: PlushieSlime
-  entities:
-  - uid: 707
-    components:
-    - type: Transform
-      pos: 4.4983554,-5.6872573
-      parent: 1
 - proto: PosterContrabandInterdyne
   entities:
   - uid: 708

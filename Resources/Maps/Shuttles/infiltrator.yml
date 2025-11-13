@@ -3788,13 +3788,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -2.5,-3.5
       parent: 1
-- proto: PlushieNuke
-  entities:
-  - uid: 523
-    components:
-    - type: Transform
-      pos: -2.4227936,-2.3320491
-      parent: 1
 - proto: PosterContrabandC20r
   entities:
   - uid: 524

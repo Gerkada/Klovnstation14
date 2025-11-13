@@ -3999,13 +3999,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -25.5,4.5
       parent: 1
-- proto: PlushieAtmosian
-  entities:
-  - uid: 566
-    components:
-    - type: Transform
-      pos: 5.4804916,2.6926491
-      parent: 1
 - proto: PortableGeneratorPacman
   entities:
   - uid: 978

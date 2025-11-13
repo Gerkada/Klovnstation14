@@ -73958,35 +73958,6 @@ entities:
     - type: Transform
       pos: 6.0254927,-3.2604024
       parent: 2
-- proto: PlushieLizard
-  entities:
-  - uid: 1705
-    components:
-    - type: Transform
-      rot: 6.283185307179586 rad
-      pos: 53.482903,43.66107
-      parent: 2
-- proto: PlushieSharkGrey
-  entities:
-  - uid: 5727
-    components:
-    - type: Transform
-      pos: 25.597736,6.3236885
-      parent: 2
-- proto: PlushieSharkPink
-  entities:
-  - uid: 13077
-    components:
-    - type: Transform
-      pos: 6.6388106,-13.475947
-      parent: 2
-- proto: PlushieSpaceLizard
-  entities:
-  - uid: 7441
-    components:
-    - type: Transform
-      pos: -3.4634295,-18.46823
-      parent: 2
 - proto: PortableFlasher
   entities:
   - uid: 13649

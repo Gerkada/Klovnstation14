@@ -12855,20 +12855,6 @@ entities:
     - type: Transform
       pos: 50.5,22.5
       parent: 1
-- proto: PlushieArachind
-  entities:
-  - uid: 3153
-    components:
-    - type: Transform
-      pos: 81.526054,7.4306707
-      parent: 1
-- proto: PlushieAtmosian
-  entities:
-  - uid: 2660
-    components:
-    - type: Transform
-      pos: 25.5,46.5
-      parent: 1
 - proto: PortableScrubber
   entities:
   - uid: 1053

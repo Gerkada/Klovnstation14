@@ -4549,20 +4549,6 @@ entities:
     - type: Transform
       pos: -5.5,-16.5
       parent: 1
-- proto: PlushieAtmosian
-  entities:
-  - uid: 749
-    components:
-    - type: Transform
-      pos: -4.509609,-17.519836
-      parent: 1
-- proto: PlushieSharkGrey
-  entities:
-  - uid: 751
-    components:
-    - type: Transform
-      pos: -1.4927623,-5.4639225
-      parent: 1
 - proto: PortableScrubber
   entities:
   - uid: 129

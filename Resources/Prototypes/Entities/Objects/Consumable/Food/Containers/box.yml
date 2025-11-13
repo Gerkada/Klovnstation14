@@ -642,8 +642,6 @@
       - id: BalloonSyn
         prob: 0.6
         orGroup: GiftPool
-      - id: PlushieNuke
-        orGroup: GiftPool
 
 - type: entity
   parent: HappyHonkNukie
@@ -670,8 +668,6 @@
       orGroup: GiftPool
     - id: BalloonSyn
       prob: 0.6
-      orGroup: GiftPool
-    - id: PlushieNuke
       orGroup: GiftPool
     # drinks - 4 cans, up to 2 blood-red brews
     - id: DrinkNukieCan

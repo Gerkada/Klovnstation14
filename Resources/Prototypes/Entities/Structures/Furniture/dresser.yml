@@ -283,8 +283,6 @@
       - id: ClothingHeadHatBeret
         prob: 0.03
         orGroup: dresserthirdloot
-      - id: PlushieLizard
-        prob: 0.03
         orGroup: dresserthirdloot
       - id: ClothingOuterSuitShrineMaiden
         prob: 0.03

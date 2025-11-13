@@ -7704,32 +7704,6 @@ entities:
     - type: Transform
       pos: 30.568752,4.54119
       parent: 1653
-- proto: PlushieSharkGrey
-  entities:
-  - uid: 926
-    components:
-    - type: Transform
-      pos: 6.4745436,18.474607
-      parent: 1653
-- proto: PlushieSlime
-  entities:
-  - uid: 1456
-    components:
-    - type: Transform
-      pos: 28.542555,0.5099404
-      parent: 1653
-- proto: PlushieSpaceLizard
-  entities:
-  - uid: 713
-    components:
-    - type: Transform
-      pos: 10.508222,14.448289
-      parent: 1653
-  - uid: 820
-    components:
-    - type: Transform
-      pos: 12.476972,14.557664
-      parent: 1653
 - proto: PortableGeneratorPacman
   entities:
   - uid: 1528
