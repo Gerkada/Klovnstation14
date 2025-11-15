@@ -119,3 +119,11 @@ Entries:
       message: Added zipion, an easy to make atmos stimulant.
   id: 15
   time: '2025-11-11T20:17:41.0000000+00:00'
+- author: December
+  changes:
+    - type: Add
+      message: Scroll runes are now purchasable at wizard's spellbook!
+    - type: Tweak
+      message: G.O.R.I.L.L.A fist now stuns people for short time when its charged.
+  id: 16
+  time: '2025-11-15T17:04:48.0000000+00:00'
