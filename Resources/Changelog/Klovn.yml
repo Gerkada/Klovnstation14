@@ -177,3 +177,9 @@ Entries:
       message: Protein heals more brute damage and more bloodloss.
   id: 22
   time: '2025-11-20T10:23:14.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Fix
+      message: Fixed textures for ammoboxes, etc
+  id: 23
+  time: '2025-11-20T22:21:57.0000000+00:00'
