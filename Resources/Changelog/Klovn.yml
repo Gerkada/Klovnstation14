@@ -167,3 +167,13 @@ Entries:
         Also gave it new ambience. Its also emaggable now
   id: 21
   time: '2025-11-20T09:21:50.0000000+00:00'
+- author: DeusMaldPr
+  changes:
+    - type: Tweak
+      message: >-
+        Nutriment and vitamins now heal slight amounts of damage off, aswell as
+        healing bloodloss.
+    - type: Tweak
+      message: Protein heals more brute damage and more bloodloss.
+  id: 22
+  time: '2025-11-20T10:23:14.0000000+00:00'
