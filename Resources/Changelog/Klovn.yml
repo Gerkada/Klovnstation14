@@ -153,3 +153,17 @@ Entries:
       message: Added nuclear bombs
   id: 20
   time: '2025-11-16T22:56:09.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: '[1] More material varieties for nuclear reactor rods/etc'
+    - type: Add
+      message: '[1] You can now make reactor rods in protolathes(?), i didnt test it'
+    - type: Add
+      message: '[1] Guidebook entries for nuclear reactor (i didnt test it either)'
+    - type: Add
+      message: >-
+        [2] Nuclear reactor will now make alarms and noise upon overheating.
+        Also gave it new ambience. Its also emaggable now
+  id: 21
+  time: '2025-11-20T09:21:50.0000000+00:00'
