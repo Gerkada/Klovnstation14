@@ -52,6 +52,7 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobWarden
+<<<<<<< HEAD
       time: 3600 #1 hr
 #    - !type:RoleTimeRequirement Klovn, meme role
 #      role: JobDetective
@@ -62,6 +63,18 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 18000 # 5 hrs, klovn
+=======
+      time: 1h
+    - !type:RoleTimeRequirement
+      role: JobDetective
+      time: 1h # knowing how to use the tools is important
+    - !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 5h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 10h
+>>>>>>> upstream/master
   weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
@@ -74,7 +87,6 @@
   - Security
   - Armory
   - Maintenance
-  - Service
   - External
   - Detective
   - Cryogenics

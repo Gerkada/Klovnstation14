@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // SPDX-FileCopyrightText: 2024 Baptr0b0t
 // SPDX-FileCopyrightText: 2024 Fildrance
 // SPDX-FileCopyrightText: 2024 metalgearsloth
@@ -14,6 +15,9 @@
 //
 // SPDX-License-Identifier: MPL-2.0
 
+=======
+using Content.Shared.Access.Systems;
+>>>>>>> upstream/master
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Managers;
@@ -58,6 +62,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly ItemToggleSystem _toggles = default!;
+    [Dependency] private readonly AccessReaderSystem _access = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly SharedAirlockSystem _airlocks = default!;

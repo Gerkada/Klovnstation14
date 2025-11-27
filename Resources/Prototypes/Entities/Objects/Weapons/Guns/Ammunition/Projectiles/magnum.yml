@@ -54,8 +54,13 @@
   - type: Projectile
     damage:
       types:
+<<<<<<< HEAD
         Blunt: 5
         Heat: 40
+=======
+        Piercing: 26
+        Heat: 9
+>>>>>>> upstream/master
 
 - type: entity
   id: BulletMagnumAP

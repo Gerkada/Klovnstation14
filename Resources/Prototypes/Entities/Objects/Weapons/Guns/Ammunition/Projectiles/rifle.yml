@@ -50,8 +50,13 @@
   - type: Projectile
     damage:
       types:
+<<<<<<< HEAD
         Blunt: 10
         Heat: 20
+=======
+        Piercing: 12
+        Heat: 5
+>>>>>>> upstream/master
 
 - type: entity
   id: BulletRifleUranium

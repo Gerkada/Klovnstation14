@@ -57,7 +57,9 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
+    layers:
+    - state: bullet #just reapplying to here so it can be shaded
+
   - type: Projectile
     damage:
       types:
@@ -71,9 +73,6 @@
   categories: [ HideSpawnMenu ]
   parent: BaseBullet
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
   - type: Projectile
     damage:
       types:
@@ -97,14 +96,16 @@
   categories: [ HideSpawnMenu ]
   parent: BaseBulletIncendiary
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot-flare
   - type: Projectile
     damage:
       types:
+<<<<<<< HEAD
         Blunt: 3
         Heat: 10
+=======
+        Piercing: 7
+        Heat: 3
+>>>>>>> upstream/master
   - type: IgnitionSource
     ignited: true
 
@@ -124,9 +125,6 @@
   categories: [ HideSpawnMenu ]
   parent: BaseBulletPractice
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
   - type: Projectile
     damage:
       types:
@@ -150,7 +148,9 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: shard
+    layers:
+    - state: shard
+      shader: unshaded
   - type: Projectile
     damage:
       types:
@@ -173,9 +173,6 @@
   categories: [ HideSpawnMenu ]
   parent: BaseBulletPractice
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
   - type: Projectile
     damage:
       types:
@@ -184,14 +181,8 @@
     solutions:
       ammo:
         maxVol: 15
-  - type: RefillableSolution
-    solution: ammo
-  - type: DrainableSolution
-    solution: ammo
   - type: SolutionInjectOnProjectileHit
     transferAmount: 15
-    solution: ammo
-  - type: InjectableSolution
     solution: ammo
 
 - type: entity
@@ -245,11 +236,8 @@
   id: PelletShotgunUranium
   name: pellet (.50 uranium)
   categories: [ HideSpawnMenu ]
-  parent: BaseBullet
+  parent: BaseBulletUranium
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: depleted-uranium
   - type: Projectile
     damage:
       types:
@@ -305,7 +293,6 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: shard
-      shader: unshaded
   - type: EmbeddableProjectile
     deleteOnRemove: true
   - type: Projectile

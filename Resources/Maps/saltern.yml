@@ -106803,6 +106803,7 @@ entities:
       parent: 2
     - type: WarpPoint
       location: library
+<<<<<<< HEAD
 - proto: WarpPointBombing
   entities:
   - uid: 12689
@@ -106910,6 +106911,8 @@ entities:
       parent: 2
     - type: WarpPoint
       location: telecomms
+=======
+>>>>>>> upstream/master
 - proto: WaterCooler
   entities:
   - uid: 12704
