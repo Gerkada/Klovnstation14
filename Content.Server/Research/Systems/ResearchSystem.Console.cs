@@ -56,8 +56,46 @@ public sealed partial class ResearchSystem
             return;
         }
 
+        // 1. Try to unlock the technology
+
         if (!UnlockTechnology(uid, args.Id, act))
+
             return;
+
+
+        // --- FIX START ---
+
+        // 1. Get the R&D Server and its database
+        if (TryGetClientServer(uid, out var serverUid, out var researchServerComp, null) &&
+            TryComp<TechnologyDatabaseComponent>(serverUid, out var serverDatabase))
+        {
+            foreach (var recipe in technologyPrototype.RecipeUnlocks)
+            {
+                // 2. Unlock on the R&D SERVER (Global)
+                if (!serverDatabase.UnlockedRecipes.Contains(recipe))
+                {
+                    serverDatabase.UnlockedRecipes.Add(recipe);
+                }
+
+                // 3. Unlock on all connected LATHES (Clients)
+                // We iterate through every machine connected to this server and force-add the recipe
+                foreach (var clientUid in researchServerComp.Clients)
+                {
+                    if (!TryComp<TechnologyDatabaseComponent>(clientUid, out var clientDatabase))
+                        continue;
+
+                    // Helper method from SharedResearchSystem that adds + Dirties + Raises Event
+                    AddLatheRecipe(clientUid, recipe, clientDatabase);
+                }
+            }
+
+            // Sync the server itself
+            Dirty(serverUid.Value, serverDatabase);
+            var ev = new TechnologyDatabaseModifiedEvent();
+            RaiseLocalEvent(serverUid.Value, ref ev);
+        }
+
+        // --- FIX END ---
 
         if (!_emag.CheckFlag(uid, EmagType.Interaction))
         {

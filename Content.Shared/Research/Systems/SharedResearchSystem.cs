@@ -315,4 +315,19 @@ public abstract class SharedResearchSystem : EntitySystem
         var ev = new TechnologyDatabaseModifiedEvent(new List<string> { recipe });
         RaiseLocalEvent(uid, ref ev);
     }
+
+    /// <summary>
+    /// KS14/Goob Port: Checks if a recipe is unlocked.
+    /// Checks the UnlockedRecipes list first (Dynamic), then falls back to Technology requirements (Static).
+    /// </summary>
+    public bool IsRecipeUnlocked(EntityUid uid, LatheRecipePrototype recipe, TechnologyDatabaseComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return false;
+
+        // Since 'RequiredTechnology' no longer exists, we rely PURELY on the unlock list.
+        // This handles both the Tech Tree unlocks (which we fixed on the server)
+        // and ideally standard recipes too.
+        return component.UnlockedRecipes.Contains(recipe.ID);
+    }
 }
