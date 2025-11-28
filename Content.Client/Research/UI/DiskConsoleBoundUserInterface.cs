@@ -1,5 +1,6 @@
 using Content.Shared.Research;
 using Content.Shared.Research.Components;
+using Content.Shared._KS14.Research.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 

@@ -119,5 +119,16 @@ namespace Content.Server.Research.Systems
                 UpdateServer(uid, (int) server.ResearchConsoleUpdateTime.TotalSeconds, server);
             }
         }
+
+    private void OnDatabaseRegistrationChanged(EntityUid uid, TechnologyDatabaseComponent component, ref ResearchRegistrationChangedEvent args)
+    {
+        if (TryComp<ResearchServerComponent>(uid, out var serverComp))
+        {
+            foreach (var client in serverComp.Clients)
+            {
+                RaiseLocalEvent(client, ref args);
+            }
+        }
     }
+}
 }

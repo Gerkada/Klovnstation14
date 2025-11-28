@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Power.EntitySystems;
+using Content.Shared._KS14.Research.Components;
 using Content.Shared.Research.Components;
 
 namespace Content.Server.Research.Systems;
@@ -140,5 +141,10 @@ public sealed partial class ResearchSystem
 
         server = component.Server;
         return true;
+    }
+
+    private void SyncClientWithServer(EntityUid uid, ResearchClientComponent? component = null)
+    {
+        UpdateClientInterface(uid, component);
     }
 }

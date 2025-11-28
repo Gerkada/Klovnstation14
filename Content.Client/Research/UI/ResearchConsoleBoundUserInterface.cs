@@ -1,4 +1,5 @@
 using Content.Shared.Research.Components;
+using Content.Shared._KS14.Research.Components;
 using Content.Shared.Research.Prototypes;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;

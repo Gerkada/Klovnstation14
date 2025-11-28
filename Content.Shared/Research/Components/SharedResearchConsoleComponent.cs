@@ -1,6 +1,7 @@
 using Robust.Shared.Serialization;
+using Content.Shared._KS14.Research;
 
-namespace Content.Shared.Research.Components
+namespace Content.Shared._KS14.Research.Components
 {
     [NetSerializable, Serializable]
     public enum ResearchConsoleUiKey : byte
@@ -29,9 +30,16 @@ namespace Content.Shared.Research.Components
     public sealed class ResearchConsoleBoundInterfaceState : BoundUserInterfaceState
     {
         public int Points;
-        public ResearchConsoleBoundInterfaceState(int points)
+        
+        /// <summary>
+        /// Goobstation field - all researches and their availablities
+        /// </summary>
+        public Dictionary<string, ResearchAvailability> Researches;
+
+        public ResearchConsoleBoundInterfaceState(int points, Dictionary<string, ResearchAvailability> researches) // Goobstation R&D console rework = researches field
         {
             Points = points;
+            Researches = researches; // Goobstation R&D console rework
         }
     }
 }

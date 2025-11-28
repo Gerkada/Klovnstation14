@@ -71,7 +71,7 @@ public sealed partial class ResearchSystem
 
         serverComponent.Clients.Add(client);
         clientComponent.Server = server;
-        SyncClientWithServer(client, clientComponent: clientComponent);
+        UpdateClientInterface(client, component: clientComponent);
 
         if (dirtyServer && !TerminatingOrDeleted(server))
             Dirty(server, serverComponent);
@@ -113,7 +113,7 @@ public sealed partial class ResearchSystem
 
         serverComponent.Clients.Remove(client);
         clientComponent.Server = null;
-        SyncClientWithServer(client, clientComponent: clientComponent);
+        UpdateClientInterface(client, component: clientComponent);
 
         if (dirtyServer && !TerminatingOrDeleted(server))
         {

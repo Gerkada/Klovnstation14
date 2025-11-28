@@ -1,4 +1,5 @@
 using Content.Shared.Research.Components;
+using Content.Shared._KS14.Research.Components;
 using Content.Shared.Xenoarchaeology.Equipment.Components;
 using Robust.Client.UserInterface;
 using JetBrains.Annotations;
