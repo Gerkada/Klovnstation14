@@ -85,6 +85,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        MinSize = new Vector2(650, 500);
         _research = _entity.System<ResearchSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _accessReader = _entity.System<AccessReaderSystem>();
@@ -106,17 +107,48 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
     public void UpdatePanels(Dictionary<string, ResearchAvailability> dict)
     {
-        DragContainer.RemoveAllChildren();
         List = dict;
+
+        // 1. Create a map of existing buttons for fast lookup
+        var existingItems = new Dictionary<string, FancyResearchConsoleItem>();
+        foreach (var child in DragContainer.Children)
+        {
+            if (child is FancyResearchConsoleItem item)
+            {
+                existingItems[item.Prototype.ID] = item;
+            }
+        }
 
         foreach (var tech in List)
         {
-            var proto = _prototype.Index<TechnologyPrototype>(tech.Key);
+            // 2. Check if we already have a button for this tech
+            if (existingItems.TryGetValue(tech.Key, out var item))
+            {
+                // Only update if the status changed (e.g. from Available -> Researched)
+                if (item.Availability != tech.Value)
+                {
+                    item.Availability = tech.Value;
+                    item.UpdateColor(); // Repaint the button
+                }
+
+                // If it's the currently selected tech, refresh the sidebar too
+                if (tech.Key == CurrentTech)
+                {
+                    // Refresh the info panel to update the "Research" button status
+                    SelectTech(item.Prototype, tech.Value);
+                }
+
+                continue; // We are done with this tech, move to the next one
+            }
+
+            // 3. If it's a NEW tech (didn't exist before), create it from scratch
+            if (!_prototype.TryIndex<TechnologyPrototype>(tech.Key, out var proto))
+                continue;
 
             var control = new FancyResearchConsoleItem(proto, _sprite, tech.Value);
             DragContainer.AddChild(control);
 
-            // Set position for all tech, relating to _position
+            // Set position
             LayoutContainer.SetPosition(control, _position + proto.Position * 150 * _zoom);
             control.SelectAction += SelectTech;
 

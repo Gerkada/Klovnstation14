@@ -62,12 +62,23 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
         UpdateColor();
     }
 
-    private void UpdateColor()
+    public void UpdateColor()
     {
-        var panel = (StyleBoxFlat) Panel.PanelOverride!;
-        panel.BackgroundColor = Button.IsHovered ? HoveredColor : Color;
+    // 1. Recalculate the colors based on the CURRENT Availability state
+    // This ensures that when a tech unlocks, it actually turns green/yellow!
+    (Color, HoveredColor, BorderColor) = Availability switch
+    {
+        ResearchAvailability.Researched => (Color.DarkOliveGreen, Color.PaleGreen, Color.LimeGreen),
+        ResearchAvailability.Available => (Color.FromHex("#7c7d2a"), Color.FromHex("#ecfa52"), Color.FromHex("#e8fa25")),
+        ResearchAvailability.PrereqsMet => (Color.FromHex("#6b572f"), Color.FromHex("#fad398"), Color.FromHex("#cca031")),
+        ResearchAvailability.Unavailable => (Color.DarkRed, Color.PaleVioletRed, Color.Crimson),
+        _ => (Color.DarkRed, Color.PaleVioletRed, Color.Crimson)
+    };
 
-        panel.BorderColor = BorderColor;
+    // 2. Apply the new colors to the panel
+    var panel = (StyleBoxFlat) Panel.PanelOverride!;
+    panel.BackgroundColor = Button.IsHovered ? HoveredColor : Color;
+    panel.BorderColor = BorderColor;
     }
 
     protected override void ExitedTree()
