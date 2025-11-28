@@ -7,6 +7,7 @@
 // SPDX-FileCopyrightText: 2022 wrexbe
 // SPDX-FileCopyrightText: 2023 Nemanja
 // SPDX-FileCopyrightText: 2025 Gerkada
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 //
 // SPDX-License-Identifier: MPL-2.0
 
