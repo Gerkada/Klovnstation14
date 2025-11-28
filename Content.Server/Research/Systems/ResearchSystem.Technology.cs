@@ -1,9 +1,15 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 FaDeOkno <logkedr18@gmail.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Paul Ritter
+// SPDX-FileCopyrightText: 2022 metalgearsloth
+// SPDX-FileCopyrightText: 2023 Nemanja
+// SPDX-FileCopyrightText: 2024 Tayrtahn
+// SPDX-FileCopyrightText: 2025 Aiden
+// SPDX-FileCopyrightText: 2025 DrSmugleaf
+// SPDX-FileCopyrightText: 2025 FaDeOkno
+// SPDX-FileCopyrightText: 2025 Gerkada
+// SPDX-FileCopyrightText: 2025 coderabbitai[bot]
+// SPDX-FileCopyrightText: 2025 gluesniffler
+// SPDX-FileCopyrightText: 2025 pathetic meowmeow
+// SPDX-FileCopyrightText: 2025 themias
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 

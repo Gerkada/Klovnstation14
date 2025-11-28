@@ -1,3 +1,11 @@
+// SPDX-FileCopyrightText: 2023 TemporalOroboros
+// SPDX-FileCopyrightText: 2024 Nemanja
+// SPDX-FileCopyrightText: 2024 Simon
+// SPDX-FileCopyrightText: 2024 metalgearsloth
+// SPDX-FileCopyrightText: 2025 Gerkada
+//
+// SPDX-License-Identifier: MPL-2.0
+
 using Content.Shared.Research;
 using Content.Shared.Research.Components;
 using Content.Shared._KS14.Research.Components;

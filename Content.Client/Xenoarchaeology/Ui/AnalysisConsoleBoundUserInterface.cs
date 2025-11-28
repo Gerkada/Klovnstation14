@@ -1,3 +1,15 @@
+// SPDX-FileCopyrightText: 2023 Kara
+// SPDX-FileCopyrightText: 2023 TemporalOroboros
+// SPDX-FileCopyrightText: 2023 deltanedas
+// SPDX-FileCopyrightText: 2024 Hannah Giovanna Dawson
+// SPDX-FileCopyrightText: 2024 Nemanja
+// SPDX-FileCopyrightText: 2024 metalgearsloth
+// SPDX-FileCopyrightText: 2025 Fildrance
+// SPDX-FileCopyrightText: 2025 Gerkada
+// SPDX-FileCopyrightText: 2025 Tayrtahn
+//
+// SPDX-License-Identifier: MPL-2.0
+
 using Content.Shared.Research.Components;
 using Content.Shared._KS14.Research.Components;
 using Content.Shared.Xenoarchaeology.Equipment.Components;
