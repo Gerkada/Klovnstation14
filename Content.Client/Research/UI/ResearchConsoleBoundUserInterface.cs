@@ -61,7 +61,7 @@ public sealed class ResearchConsoleBoundUserInterface : BoundUserInterface
         if (!args.WasModified<TechnologyPrototype>())
             return;
 
-        if (State is not ResearchConsoleBoundInterfaceState rState)
+        if (State is not FancyResearchConsoleState rState)
             return;
 
         _consoleMenu?.UpdatePanels(rState);
@@ -72,7 +72,7 @@ public sealed class ResearchConsoleBoundUserInterface : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (state is not ResearchConsoleBoundInterfaceState castState)
+        if (state is not FancyResearchConsoleState castState)
             return;
         _consoleMenu?.UpdatePanels(castState);
         _consoleMenu?.UpdateInformationPanel(castState);

@@ -16,27 +16,20 @@ using Content.Shared._KS14.Research;
 
 namespace Content.Shared._KS14.Research.Components
 {
-    [NetSerializable, Serializable]
-    public enum ResearchConsoleUiKey : byte
-    {
-        Key,
-    }
-
     [Serializable, NetSerializable]
-    public sealed class ConsoleUnlockTechnologyMessage : BoundUserInterfaceMessage
+    public sealed class FancyResearchConsoleState : BoundUserInterfaceState
     {
-        public string Id;
+        public int Points;
 
-        public ConsoleUnlockTechnologyMessage(string id)
+        /// <summary>
+        /// Goobstation field - all researches and their availablities
+        /// </summary>
+        public Dictionary<string, ResearchAvailability> Researches;
+
+        public FancyResearchConsoleState(int points, Dictionary<string, ResearchAvailability> researches) // Goobstation R&D console rework = researches field
         {
-            Id = id;
+            Points = points;
+            Researches = researches; // Goobstation R&D console rework
         }
     }
-
-    [Serializable, NetSerializable]
-    public sealed class ConsoleServerSelectionMessage : BoundUserInterfaceMessage
-    {
-
-    }
-
 }

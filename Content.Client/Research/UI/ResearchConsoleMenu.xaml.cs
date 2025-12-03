@@ -64,7 +64,7 @@ public sealed partial class ResearchConsoleMenu : FancyWindow
         Entity = entity;
     }
 
-    public void UpdatePanels(ResearchConsoleBoundInterfaceState state)
+    public void UpdatePanels(FancyResearchConsoleState state)
     {
         TechnologyCardsContainer.Children.Clear();
 
@@ -95,7 +95,7 @@ public sealed partial class ResearchConsoleMenu : FancyWindow
         SyncTechnologyList(UnlockedCardsContainer, unlockedTech);
     }
 
-    public void UpdateInformationPanel(ResearchConsoleBoundInterfaceState state)
+    public void UpdateInformationPanel(FancyResearchConsoleState state)
     {
         var amountMsg = new FormattedMessage();
         amountMsg.AddMarkupOrThrow(Loc.GetString("research-console-menu-research-points-text",

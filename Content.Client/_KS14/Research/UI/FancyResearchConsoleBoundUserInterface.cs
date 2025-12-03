@@ -56,7 +56,7 @@ public sealed class FancyResearchConsoleBoundUserInterface : BoundUserInterface
         if (!args.WasModified<TechnologyPrototype>())
             return;
 
-        if (State is not ResearchConsoleBoundInterfaceState rState)
+        if (State is not FancyResearchConsoleState rState)
             return;
 
         _consoleMenu?.UpdatePanels(rState.Researches);
@@ -67,7 +67,7 @@ public sealed class FancyResearchConsoleBoundUserInterface : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (state is not ResearchConsoleBoundInterfaceState castState)
+        if (state is not FancyResearchConsoleState castState)
             return;
 
         // Goobstation checks added

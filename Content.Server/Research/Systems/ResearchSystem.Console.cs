@@ -159,7 +159,7 @@ public sealed partial class ResearchSystem
         }
 
         _uiSystem.SetUiState(uid, ResearchConsoleUiKey.Key,
-            new ResearchConsoleBoundInterfaceState(points, techList));
+            new FancyResearchConsoleState(points, techList));
             // Goobstation: R&D Console Rework End
     }
 

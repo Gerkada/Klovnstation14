@@ -6,10 +6,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
                       xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls;assembly=Content.Client"
                       xmlns:ks14="clr-namespace:Content.Client._KS14.Research.UI"
+                      x:Class="Content.Client._KS14.Research.UI.FancyResearchConsoleMenu"
                       Title="{Loc 'research-console-menu-title'}"
                       SetSize="1260 850">
     <BoxContainer Orientation="Vertical"
