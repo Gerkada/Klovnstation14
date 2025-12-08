@@ -153,8 +153,4 @@ public sealed partial class ResearchSystem
         return true;
     }
 
-    private void SyncClientWithServer(EntityUid uid, ResearchClientComponent? component = null)
-    {
-        UpdateClientInterface(uid, component);
-    }
 }
