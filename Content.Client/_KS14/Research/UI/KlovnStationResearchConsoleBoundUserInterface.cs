@@ -59,7 +59,7 @@ public sealed class KlovnStationResearchConsoleBoundUserInterface : BoundUserInt
         if (!args.WasModified<TechnologyPrototype>())
             return;
 
-        if (State is not FancyResearchConsoleState rState)
+        if (State is not ResearchConsoleBoundInterfaceState rState)
             return;
 
         _consoleMenu?.UpdatePanels(rState.Researches);
@@ -70,7 +70,7 @@ public sealed class KlovnStationResearchConsoleBoundUserInterface : BoundUserInt
     {
         base.UpdateState(state);
 
-        if (state is not FancyResearchConsoleState castState)
+        if (state is not ResearchConsoleBoundInterfaceState castState)
             return;
 
         if (_consoleMenu == null)

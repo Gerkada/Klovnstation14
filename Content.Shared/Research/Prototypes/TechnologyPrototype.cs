@@ -41,9 +41,17 @@ public sealed partial class TechnologyPrototype : IPrototype
 
     /// <summary>
     /// An icon used to visually represent the technology in UI.
+    /// If not specified and EntityIcon is provided, will use the entity's sprite automatically.
     /// </summary>
-    [DataField(required: true)]
-    public SpriteSpecifier Icon = default!;
+    [DataField] // Not required
+    public SpriteSpecifier? Icon = null; // Not required
+
+    /// <summary>
+    /// An entity prototype whose sprite will be used as the technology icon.
+    /// If specified, this takes precedence over Icon when Icon is not provided.
+    /// </summary>
+    [DataField]
+    public EntProtoId? EntityIcon = null;
 
     /// <summary>
     /// What research discipline this technology belongs to.
@@ -88,7 +96,7 @@ public sealed partial class TechnologyPrototype : IPrototype
     /// </summary>
     [DataField]
     public IReadOnlyList<GenericUnlock> GenericUnlocks = new List<GenericUnlock>();
-    
+
     /// <summary>
     /// Goobstation R&D console rework field
     /// Position of this tech in console menu

@@ -46,7 +46,14 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
         Availability = availability;
         Prototype = proto;
 
-        ResearchDisplay.Texture = sprite.Frame0(proto.Icon);
+        if (proto.EntityIcon.HasValue)
+        {
+            ResearchDisplay.Texture = sprite.GetPrototypeIcon(proto.EntityIcon.Value).Default;
+        }
+        else if (proto.Icon != null)
+        {
+            ResearchDisplay.Texture = sprite.Frame0(proto.Icon);
+        }
         Button.OnPressed += Selected;
         Button.OnDrawModeChanged += UpdateColor;
 

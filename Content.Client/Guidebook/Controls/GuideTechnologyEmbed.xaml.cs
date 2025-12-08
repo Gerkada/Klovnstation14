@@ -86,7 +86,14 @@ public sealed partial class GuideTechnologyEmbed : BoxContainer, IDocumentTag, I
 
         NameLabel.SetMarkup($"[bold]{Loc.GetString(technology.Name)}[/bold]");
         DescriptionLabel.SetMessage(_research.GetTechnologyDescription(technology, includePrereqs: true, disciplinePrototype: discipline));
-        TechTexture.Texture = _sprite.Frame0(technology.Icon);
+        if (technology.EntityIcon.HasValue)
+        {
+            TechTexture.Texture = _sprite.GetPrototypeIcon(technology.EntityIcon.Value).Default;
+        }
+        else if (technology.Icon != null)
+        {
+            TechTexture.Texture = _sprite.Frame0(technology.Icon);
+        }
 
         DisciplineColorBackground.PanelOverride = new StyleBoxFlat
         {
