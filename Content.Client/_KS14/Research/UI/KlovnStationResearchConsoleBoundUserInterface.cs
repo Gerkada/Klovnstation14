@@ -19,12 +19,12 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._KS14.Research.UI;
 
 [UsedImplicitly]
-public sealed class FancyResearchConsoleBoundUserInterface : BoundUserInterface
+public sealed class KlovnStationResearchConsoleBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
-    private FancyResearchConsoleMenu? _consoleMenu;  // Goobstation R&D Console rework - ResearchConsoleMenu -> FancyResearchConsoleMenu
+    private FancyResearchConsoleMenu? _consoleMenu;
 
-    public FancyResearchConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public KlovnStationResearchConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
 
@@ -34,9 +34,12 @@ public sealed class FancyResearchConsoleBoundUserInterface : BoundUserInterface
 
         var owner = Owner;
 
-        _consoleMenu = this.CreateWindow<FancyResearchConsoleMenu>();   // Goobstation R&D Console rework - ResearchConsoleMenu -> FancyResearchConsoleMenu
+        _consoleMenu = this.CreateWindow<FancyResearchConsoleMenu>();
         _consoleMenu.SetEntity(owner);
-        _consoleMenu.OnClose += () => _consoleMenu = null;
+        _consoleMenu.OnClose += () =>
+        {
+            _consoleMenu = null;
+        };
 
         _consoleMenu.OnTechnologyCardPressed += id =>
         {
@@ -70,13 +73,17 @@ public sealed class FancyResearchConsoleBoundUserInterface : BoundUserInterface
         if (state is not FancyResearchConsoleState castState)
             return;
 
-        // Goobstation checks added
-        // Thats for avoiding refresh spam when only points are updated
         if (_consoleMenu == null)
             return;
+
+        // Efficiently update without full panel rebuilds
         if (!_consoleMenu.List.SequenceEqual(castState.Researches))
+        {
             _consoleMenu.UpdatePanels(castState.Researches);
-        if (_consoleMenu.Points != castState.Points)
+        }
+        else if (_consoleMenu.Points != castState.Points) // Only update points if techs haven't changed
+        {
             _consoleMenu.UpdateInformationPanel(castState.Points);
+        }
     }
 }
