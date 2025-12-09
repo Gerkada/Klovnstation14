@@ -98,11 +98,12 @@ public sealed partial class TechnologyPrototype : IPrototype
     public IReadOnlyList<GenericUnlock> GenericUnlocks = new List<GenericUnlock>();
 
     /// <summary>
-    /// Goobstation R&D console rework field
-    /// Position of this tech in console menu
+    /// Goobstation RnD console rework field
+    /// Position of this tech in console menu.
+    /// Optional: Defaults to 0,0 for vanilla techs.
     /// </summary>
-    [DataField(required: true)]
-    public Vector2i Position { get; private set; }
+    [DataField("position", required: false)]
+    public Vector2i Position { get; private set; } = Vector2i.Zero;
 }
 
 [DataDefinition]
