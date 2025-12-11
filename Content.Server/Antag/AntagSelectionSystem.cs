@@ -282,18 +282,28 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         // weight by playtime since last rolled
         foreach (var se in pool)
         {
-            if (!_lastRolledAntagManager.TryGetLastRolled(se.UserId, out var lastRolledTime))
+            var overallTime = _playTimeManager.GetOverallPlaytime(se);
+            var lastRolledTime = TimeSpan.Zero;
+
+            // If we found a previous antag roll, use that time.
+            // If we didn't (TryGet returns false), we keep lastRolledTime as Zero.
+            // This ensures players who haven't played antag get weighted by their FULL playtime.
+            if (_lastRolledAntagManager.TryGetLastRolled(se.UserId, out var lastRolled) && lastRolled.HasValue)
             {
-                weights[se] = 0f;
-                continue;
+                lastRolledTime = lastRolled.Value;
             }
 
-            var overallTime = _playTimeManager.GetOverallPlaytime(se);
-            var weight = (overallTime - lastRolledTime.Value).TotalSeconds;
-            if (weight < 0)
-                weight = 0;
+            // Calculate the time delta.
+            var delta = overallTime - lastRolledTime;
 
-            weights[se] = (float) weight;
+            // SAFETY: Ensure we never result in a negative timespan (e.g. if overallTime < lastRolledTime due to DB resets).
+            // A negative weight causes RobustRandom.PickAndTake to throw an exception.
+            if (delta < TimeSpan.Zero)
+            {
+                delta = TimeSpan.Zero;
+            }
+
+            weights[se] = (float) delta.TotalSeconds;
         }
 
         return weights;

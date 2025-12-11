@@ -4,6 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Database;
+using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -148,14 +149,22 @@ public sealed class LastRolledAntagManager : IPostInjectInit
     /// </summary>
     private async Task SaveSessionAsync(NetUserId userId, TimeSpan savedLastRolledTime)
     {
-        var setTimeTask = _dbManager.SetLastRolledAntag(userId, savedLastRolledTime);
-        TrackPending(setTimeTask); // Track the Task<bool>
-        var success = await setTimeTask;
+        try
+        {
+            var setTimeTask = _dbManager.SetLastRolledAntag(userId, savedLastRolledTime);
+            TrackPending(setTimeTask); // Track the Task<bool>
+            var success = await setTimeTask;
 
-        if (success)
-            _sawmill.Debug($"Successfully saved LastRolledAntag for {userId} from {_lastRolledData.GetValueOrDefault(userId)} to {savedLastRolledTime}.");
-        else
-            _sawmill.Error($"Failed to save LastRolledAntag for {userId}. Player not found or other issue.");
+            if (success)
+                _sawmill.Debug($"Successfully saved LastRolledAntag for {userId} from {_lastRolledData.GetValueOrDefault(userId)} to {savedLastRolledTime}.");
+            else
+                _sawmill.Error($"Failed to save LastRolledAntag for {userId}. Player not found or other issue.");
+        }
+        catch (DbUpdateException)
+        {
+            // This can happen during integration tests, when a player is deleted.
+            _sawmill.Warning($"Failed to save LastRolledAntag for {userId} due to a DB update exception. This is likely due to the player being deleted.");
+        }
     }
 
     /// <summary>
