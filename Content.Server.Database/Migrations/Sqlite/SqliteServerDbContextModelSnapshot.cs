@@ -705,6 +705,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("last_read_rules");
 
+                    b.Property<TimeSpan?>("LastRolledAntag")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("last_rolled_antag");
+
                     b.Property<string>("LastSeenAddress")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -1553,6 +1557,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasForeignKey("PlayerUserId")
                         .HasPrincipalKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK_admin_watchlists_player_player_user_id");
 
                     b.HasOne("Content.Server.Database.Round", "Round")

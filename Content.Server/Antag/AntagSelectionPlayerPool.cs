@@ -2,10 +2,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
+using Content.Shared.Random.Helpers;
 
 namespace Content.Server.Antag;
 
-public sealed class AntagSelectionPlayerPool (List<List<ICommonSession>> orderedPools)
+public sealed class AntagSelectionPlayerPool(List<Dictionary<ICommonSession, float> /* antag weights */> orderedPools)
 {
     public bool TryPickAndTake(IRobustRandom random, [NotNullWhen(true)] out ICommonSession? session)
     {
@@ -16,7 +17,7 @@ public sealed class AntagSelectionPlayerPool (List<List<ICommonSession>> ordered
             if (pool.Count == 0)
                 continue;
 
-            session = random.PickAndTake(pool);
+            session = random.Pick(pool);
             break;
         }
 

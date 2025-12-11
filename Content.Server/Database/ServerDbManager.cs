@@ -192,6 +192,12 @@ namespace Content.Server.Database
             ImmutableTypedHwid? hwId);
         Task<PlayerRecord?> GetPlayerRecordByUserName(string userName, CancellationToken cancel = default);
         Task<PlayerRecord?> GetPlayerRecordByUserId(NetUserId userId, CancellationToken cancel = default);
+
+        /// <returns>A <see cref="Task{}"/> object returning True, if the given user's <see cref="Player.LastRolledAntag"/> was successfully set to the new value.</returns>
+        Task<bool> SetLastRolledAntag(NetUserId userId, TimeSpan to);
+
+        /// <returns>A <see cref="Task{}"/> object returning <see cref="TimeSpan.Zero"/> if the found user's <see cref="Player.LastRolledAntag"/> was null, or no user was found.</returns>
+        Task<TimeSpan> GetLastTimeAntagRolled(NetUserId userId);
         #endregion
 
         #region Connection Logs
@@ -646,6 +652,18 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetPlayerRecordByUserId(userId, cancel));
+        }
+
+        public Task<TimeSpan> GetLastTimeAntagRolled(NetUserId userId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetLastTimeAntagRolled(userId));
+        }
+
+        public Task<bool> SetLastRolledAntag(NetUserId userId, TimeSpan to)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetLastRolledAntag(userId, to));
         }
 
         public Task<int> AddConnectionLogAsync(
