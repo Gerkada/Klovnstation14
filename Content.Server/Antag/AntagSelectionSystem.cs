@@ -263,7 +263,9 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
                 continue;
             }
 
-            weights[se] = (float)(_playTimeManager.GetOverallPlaytime(se) - lastRolledTime.Value).TotalSeconds;
+            var overallTime = _playTimeManager.GetOverallPlaytime(se);
+            var weight = (overallTime - lastRolledTime.Value).TotalSeconds;
+            weights[se] = (float) Math.Max(0, weight);
         }
 
         return weights;
