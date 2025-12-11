@@ -159,7 +159,7 @@ public sealed class LastRolledAntagManager : IPostInjectInit
             }
             else
             {
-                // CHANGE THIS LINE: Use Warning instead of Error.
+                // Use Warning instead of Error.
                 // Integration tests delete players rapidly, causing "Player not found".
                 // An [ERRO] log causes the test suite to fail.
                 _sawmill.Warning($"Failed to save LastRolledAntag for {userId}. Player might have been deleted (normal during tests).");
