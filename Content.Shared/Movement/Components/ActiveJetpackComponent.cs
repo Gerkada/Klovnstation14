@@ -1,3 +1,10 @@
+// SPDX-FileCopyrightText: 2022 rolfero
+// SPDX-FileCopyrightText: 2023 DrSmugleaf
+// SPDX-FileCopyrightText: 2025 Gerkada
+// SPDX-FileCopyrightText: 2025 metalgearsloth
+//
+// SPDX-License-Identifier: MIT
+
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
