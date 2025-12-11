@@ -293,17 +293,35 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
                 lastRolledTime = lastRolled.Value;
             }
 
-            // Calculate the time delta.
-            var delta = overallTime - lastRolledTime;
+            TimeSpan delta;
+            try
+            {
+                // SAFETY: Calculate delta with overflow protection.
+                // In tests, these values can be MinValue/MaxValue, causing crashes.
+                delta = overallTime - lastRolledTime;
+            }
+            catch (OverflowException)
+            {
+                // If it overflows, it's either effectively infinite or effectively zero.
+                // If overallTime is huge, we treat it as max priority.
+                if (overallTime > lastRolledTime)
+                    delta = TimeSpan.MaxValue;
+                else
+                    delta = TimeSpan.Zero;
+            }
 
-            // SAFETY: Ensure we never result in a negative timespan (e.g. if overallTime < lastRolledTime due to DB resets).
-            // A negative weight causes RobustRandom.PickAndTake to throw an exception.
+            // SAFETY: Ensure we never result in a negative timespan.
             if (delta < TimeSpan.Zero)
             {
                 delta = TimeSpan.Zero;
             }
 
-            weights[se] = (float) delta.TotalSeconds;
+            // Final safety clamp for float conversion (float has lower precision/range than TimeSpan)
+            var totalSeconds = delta.TotalSeconds;
+            if (totalSeconds > float.MaxValue)
+                totalSeconds = float.MaxValue;
+
+            weights[se] = (float)totalSeconds;
         }
 
         return weights;
