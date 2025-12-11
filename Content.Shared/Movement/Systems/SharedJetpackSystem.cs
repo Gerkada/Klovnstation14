@@ -266,7 +266,6 @@ public abstract class SharedJetpackSystem : EntitySystem
 
     private void SetJetpackState(Entity<JetpackComponent> jetpack, EntityUid user, bool enabled, bool flyIfEnabled)
     {
-        Log.Debug($"Setting jetpack state to {(enabled ? "on" : "off")}, while {(flyIfEnabled ? "flying" : "not flying")}.");
         jetpack.Comp.Enabled = enabled;
         if (enabled)
         {
