@@ -24,6 +24,8 @@ public sealed class AntagSelectionPlayerPool(List<Dictionary<ICommonSession, flo
                 continue;
 
             session = random.Pick(pool);
+            // Manually remove the session so it can't be picked again
+            pool.Remove(session);
             break;
         }
 
