@@ -95,7 +95,12 @@ public sealed class LastRolledAntagManager : IPostInjectInit
     /// <param name="savedLastRolledTime">If null, defaults to the last-rolled time in the internal cache.</param>
     public void SaveSession(NetUserId userId, TimeSpan? savedLastRolledTime = null)
     {
-        savedLastRolledTime ??= _lastRolledData.GetValueOrDefault(userId);
+        if (savedLastRolledTime == null)
+        {
+            if (!_lastRolledData.TryGetValue(userId, out var cached))
+                return; // Do not save if we don't have data
+            savedLastRolledTime = cached;
+        }
         TrackPending(SaveSessionAsync(userId, savedLastRolledTime.Value));
     }
 
