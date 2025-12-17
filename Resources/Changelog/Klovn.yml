@@ -267,3 +267,9 @@ Entries:
       message: Updated various technology prerequisites to fit the new tree structure.
   id: 34
   time: '2025-12-17T18:02:33.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: Added syndicate contraband spawners for mappers.
+  id: 35
+  time: '2025-12-17T18:03:49.0000000+00:00'
