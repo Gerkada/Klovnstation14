@@ -37,4 +37,4 @@
   id: Argon
   name: reagents-argon
   desc: reagent-desc-argon
-  physicalDesc: A bright violet noble gas with high thermal capacity.
+  physicalDesc: reagent-physical-desc-argon
