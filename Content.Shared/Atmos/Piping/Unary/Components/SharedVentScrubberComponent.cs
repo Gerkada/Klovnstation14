@@ -6,6 +6,7 @@
 // SPDX-FileCopyrightText: 2022 wrexbe
 // SPDX-FileCopyrightText: 2023 Kara
 // SPDX-FileCopyrightText: 2025 Gerkada
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 // SPDX-FileCopyrightText: 2025 lzk
 // SPDX-FileCopyrightText: 2025 qwerltaz
 //
