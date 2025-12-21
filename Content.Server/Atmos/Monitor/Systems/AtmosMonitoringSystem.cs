@@ -11,6 +11,8 @@
 // SPDX-FileCopyrightText: 2024 Leon Friedrich
 // SPDX-FileCopyrightText: 2024 chromiumboy
 // SPDX-FileCopyrightText: 2024 osjarw
+// SPDX-FileCopyrightText: 2025 Gerkada
+// SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 // SPDX-FileCopyrightText: 2025 Palladinium
 // SPDX-FileCopyrightText: 2025 Pieter-Jan Briers
 // SPDX-FileCopyrightText: 2025 Southbridge

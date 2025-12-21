@@ -22,6 +22,8 @@
 // SPDX-FileCopyrightText: 2024 chromiumboy
 // SPDX-FileCopyrightText: 2024 router
 // SPDX-FileCopyrightText: 2025 ArtisticRoomba
+// SPDX-FileCopyrightText: 2025 Deltium
+// SPDX-FileCopyrightText: 2025 Gerkada
 // SPDX-FileCopyrightText: 2025 K-Dynamic
 // SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 // SPDX-FileCopyrightText: 2025 Syndicate Engineer

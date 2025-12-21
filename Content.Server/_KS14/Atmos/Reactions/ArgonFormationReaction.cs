@@ -1,4 +1,7 @@
+// SPDX-FileCopyrightText: 2025 Deltium
+// SPDX-FileCopyrightText: 2025 Gerkada
 // SPDX-FileCopyrightText: 2025 Syndicate Engineer
+// SPDX-FileCopyrightText: 2025 nabegator220
 // SPDX-FileCopyrightText: 2025 syndicate-engineer
 //
 // SPDX-License-Identifier: MIT
