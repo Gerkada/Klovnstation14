@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2025 Syndicate Engineer
 // SPDX-FileCopyrightText: 2025 syndicate-engineer
 //
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: MIT
 
 using Content.Server.Atmos;
 using Content.Server.Atmos.EntitySystems;
