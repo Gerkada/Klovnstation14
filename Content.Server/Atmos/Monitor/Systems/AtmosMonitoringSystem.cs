@@ -111,14 +111,19 @@ public sealed class AtmosMonitorSystem : EntitySystem
             component.PressureThreshold ??= new(proto);
         }
 
-        if (component.GasThresholdPrototypes == null)
-            return;
-
         component.GasThresholds ??= new();
-        foreach (var (gas, id) in component.GasThresholdPrototypes)
+        if (component.GasThresholdPrototypes != null)
         {
-            var proto = _prototypeManager.Index<AtmosAlarmThresholdPrototype>(id);
-            component.GasThresholds.TryAdd(gas, new(proto));
+            foreach (var (gas, id) in component.GasThresholdPrototypes)
+            {
+                var proto = _prototypeManager.Index<AtmosAlarmThresholdPrototype>(id);
+                component.GasThresholds.TryAdd(gas, new(proto));
+            }
+        }
+
+        foreach (var gas in Enum.GetValues<Gas>())
+        {
+            component.GasThresholds.TryAdd(gas, new());
         }
     }
 

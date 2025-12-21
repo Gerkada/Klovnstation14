@@ -45,6 +45,7 @@
       NitrousOxide: stationNO
       Frezon: danger
       Zipion: stationZipion
+      Argon: GasArgon
   - type: Tag
     tags:
       - AirSensor
