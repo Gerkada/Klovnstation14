@@ -23,15 +23,13 @@ namespace Content.Shared._KS14.Research.Components
     }
 
     [Serializable, NetSerializable]
-    public sealed class ConsoleUnlockTechnologyMessage : BoundUserInterfaceMessage
+    public sealed class ConsoleUnlockTechnologyMessage(string id) : BoundUserInterfaceMessage
     {
-        public string Id;
-
-        public ConsoleUnlockTechnologyMessage(string id)
-        {
-            Id = id;
-        }
+        public string Id = id;
     }
+
+    [Serializable, NetSerializable]
+    public sealed class ConsoleRediscoverTechnologyMessage : BoundUserInterfaceMessage;
 
     [Serializable, NetSerializable]
     public sealed class ConsoleServerSelectionMessage : BoundUserInterfaceMessage
@@ -40,8 +38,9 @@ namespace Content.Shared._KS14.Research.Components
     }
 
     [Serializable, NetSerializable]
-    public sealed class ResearchConsoleBoundInterfaceState : BoundUserInterfaceState
+    public sealed class ResearchConsoleBoundInterfaceState(int points, TimeSpan nextRediscover, int rediscoverCost) : BoundUserInterfaceState
     {
+<<<<<<< HEAD
         public int Points;
 
         /// <summary>
@@ -54,5 +53,12 @@ namespace Content.Shared._KS14.Research.Components
             Points = points;
             Researches = researches; // Goobstation R&D console rework
         }
+=======
+        public int Points = points;
+
+        public TimeSpan NextRediscover = nextRediscover;
+
+        public int RediscoverCost = rediscoverCost;
+>>>>>>> upstream/master
     }
 }
