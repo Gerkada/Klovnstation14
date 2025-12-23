@@ -11,6 +11,7 @@
 # SPDX-FileCopyrightText: 2024 Partmedia
 # SPDX-FileCopyrightText: 2025 ArtisticRoomba
 # SPDX-FileCopyrightText: 2025 Errant
+# SPDX-FileCopyrightText: 2025 Gerkada
 # SPDX-FileCopyrightText: 2025 Southbridge
 # SPDX-FileCopyrightText: 2025 github_actions[bot]
 # SPDX-FileCopyrightText: 2025 nabegator220
@@ -46,6 +47,7 @@
       Frezon: danger
 <<<<<<< HEAD
       Zipion: stationZipion
+      Argon: GasArgon
   - type: Tag
     tags:
       - AirSensor

@@ -281,3 +281,40 @@ Entries:
         mode enabled.
   id: 36
   time: '2025-12-17T18:05:15.0000000+00:00'
+- author: DecemberEpsilon
+  changes:
+    - type: Tweak
+      message: Tweaked armor values to fit more with KS gameplay.
+  id: 37
+  time: '2025-12-21T13:23:33.0000000+00:00'
+- author: DecemberEpsilon
+  changes:
+    - type: Tweak
+      message: Topicals are now faster to apply.
+    - type: Tweak
+      message: Topicals now come in stacks of 15.
+    - type: Tweak
+      message: Some advanced topicals are now easier to make.
+  id: 38
+  time: '2025-12-21T13:24:17.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: >-
+        Brought back Argon, a new noble gas that can be created from Frezon and
+        Plasma. At high concentrations, it will absorb other gases and stop all
+        atmospheric reactions.
+    - type: Tweak
+      message: >-
+        Corrected the default alarm thresholds for Argon and Zipion to match the
+        desired percentage values.
+    - type: Fix
+      message: >-
+        Fixed a crash related to the Air Alarm UI by ensuring default thresholds
+        are created for all gases.
+    - type: Fix
+      message: >-
+        Added Zipion and Argon to the default gas scrubber filter list so they
+        are scrubbed from the atmosphere by default.
+  id: 39
+  time: '2025-12-23T13:17:29.0000000+00:00'
