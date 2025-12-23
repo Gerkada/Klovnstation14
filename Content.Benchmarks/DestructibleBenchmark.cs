@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2025 ArtisticRoomba
 // SPDX-FileCopyrightText: 2025 Hannah Giovanna Dawson
 // SPDX-FileCopyrightText: 2025 Princess Cheeseballs
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 

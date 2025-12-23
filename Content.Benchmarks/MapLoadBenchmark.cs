@@ -11,6 +11,7 @@
 // SPDX-FileCopyrightText: 2025 K-Dynamic
 // SPDX-FileCopyrightText: 2025 Partmedia
 // SPDX-FileCopyrightText: 2025 Spessmann
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 

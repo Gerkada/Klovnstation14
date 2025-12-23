@@ -12,6 +12,7 @@
 // SPDX-FileCopyrightText: 2024 chavonadelal
 // SPDX-FileCopyrightText: 2025 Brandon Li
 // SPDX-FileCopyrightText: 2025 Red
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 
