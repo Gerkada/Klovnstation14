@@ -23,13 +23,15 @@ namespace Content.Shared._KS14.Research.Components
     }
 
     [Serializable, NetSerializable]
-    public sealed class ConsoleUnlockTechnologyMessage(string id) : BoundUserInterfaceMessage
+    public sealed class ConsoleUnlockTechnologyMessage : BoundUserInterfaceMessage
     {
-        public string Id = id;
-    }
+        public string Id;
 
-    [Serializable, NetSerializable]
-    public sealed class ConsoleRediscoverTechnologyMessage : BoundUserInterfaceMessage;
+        public ConsoleUnlockTechnologyMessage(string id)
+        {
+            Id = id;
+        }
+    }
 
     [Serializable, NetSerializable]
     public sealed class ConsoleServerSelectionMessage : BoundUserInterfaceMessage
@@ -38,7 +40,7 @@ namespace Content.Shared._KS14.Research.Components
     }
 
     [Serializable, NetSerializable]
-    public sealed class ResearchConsoleBoundInterfaceState(int points, TimeSpan nextRediscover, int rediscoverCost) : BoundUserInterfaceState
+    public sealed class ResearchConsoleBoundInterfaceState : BoundUserInterfaceState
     {
         public int Points;
 
