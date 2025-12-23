@@ -273,6 +273,11 @@ public abstract partial class SharedChatSystem
         var ev = new EmoteEvent(proto);
         RaiseLocalEvent(uid, ref ev);
 
+        // goob emote event edit start
+        if (proto.Event is { } specificEvent)
+            RaiseLocalEvent(uid, specificEvent);
+        // goob edit end
+
         return true;
     }
 
