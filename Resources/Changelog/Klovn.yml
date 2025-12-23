@@ -326,3 +326,9 @@ Entries:
       message: Salvagevend now has seismic charges in its contraband inventory.
   id: 40
   time: '2025-12-23T19:49:27.0000000+00:00'
+- author: nabegator220
+  changes:
+    - type: Tweak
+      message: Salvage now has more stuff to do in space.
+  id: 41
+  time: '2025-12-23T20:07:22.0000000+00:00'
