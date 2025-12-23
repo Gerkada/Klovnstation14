@@ -5,6 +5,7 @@
 // SPDX-FileCopyrightText: 2024 Pieter-Jan Briers
 // SPDX-FileCopyrightText: 2024 Winkarst
 // SPDX-FileCopyrightText: 2025 Brandon Li
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 
