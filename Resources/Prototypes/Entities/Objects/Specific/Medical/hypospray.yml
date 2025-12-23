@@ -614,7 +614,6 @@
         maxVol: 10
   - type: RefillableSolution
     solution: hypospray
-    refillTime: 0.75
     maxRefill: 5
   - type: ExaminableSolution
     solution: hypospray
