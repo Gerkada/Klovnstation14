@@ -346,3 +346,14 @@ Entries:
       message: New gibbing effects.
   id: 43
   time: '2025-12-24T23:14:14.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: >-
+        Added new reagent - klovnide. This reagent increases crit and death
+        threshold and can be created in chemistry lab by mixing some reagents,
+        including space salt from salt ore.
+    - type: Tweak
+      message: Decreased amount of salt ore.
+  id: 44
+  time: '2025-12-25T12:57:09.0000000+00:00'
