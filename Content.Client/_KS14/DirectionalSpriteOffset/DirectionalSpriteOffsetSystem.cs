@@ -20,6 +20,7 @@ public sealed class DirectionalSpriteOffsetSystem : EntitySystem
         UpdatesOutsidePrediction = true;
     }
 
+    // This makes more sense to be FrameUpdate but it doesn't matter and it wastes more performance.
     public override void Update(float dt)
     {
         // this could actually be AllEQE to be included for mapping but i think that's way too laggy
