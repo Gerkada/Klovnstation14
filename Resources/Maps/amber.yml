@@ -83063,7 +83063,7 @@ entities:
     - type: Transform
       pos: 31.391466,-35.205338
       parent: 2
-- proto: FoodDonutJellyScurret
+- proto: FoodDonutJelly
   entities:
   - uid: 3759
     components:

@@ -1478,10 +1478,6 @@
   changes:
   - message: A new poster.
     type: Add
-  - message: A new (very expensive) crate to order from cargo, worth 25,000 spesos
-      and containing a hydrated scurret. The hydrated scurret is a ghost role - a
-      non-antagonistic emotional support scurret.
-    type: Add
   id: 8698
   time: '2025-06-20T23:39:08.0000000+00:00'
   url: https://github.com/space-wizards/space-station-14/pull/38218
@@ -2012,9 +2008,6 @@
   url: https://github.com/space-wizards/space-station-14/pull/38634
 - author: Toast_Enjoyer, huaqas
   changes:
-  - message: The Purchaseable Scurret now comes in a livestock crate instead of a
-      plastic one. Wawa!
-    type: Fix
   id: 8768
   time: '2025-07-13T16:48:39.0000000+00:00'
   url: https://github.com/space-wizards/space-station-14/pull/38951
@@ -3119,9 +3112,6 @@
   url: https://github.com/space-wizards/space-station-14/pull/39964
 - author: FairlySadPanda
   changes:
-  - message: 'Scurrets can wear a few items on their backs: pet bags, mail bags and
-      spears'
-    type: Add
   - message: Corgis can now wear mail bags.
     type: Add
   id: 8902
@@ -3278,8 +3268,6 @@
   url: https://github.com/space-wizards/space-station-14/pull/39975
 - author: VoidMeticulous
   changes:
-  - message: Scurret petting rate lowered to once per 2.25 seconds
-    type: Tweak
   id: 8923
   time: '2025-09-04T15:41:45.0000000+00:00'
   url: https://github.com/space-wizards/space-station-14/pull/40097

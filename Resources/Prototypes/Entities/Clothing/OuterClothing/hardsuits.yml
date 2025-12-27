@@ -652,7 +652,6 @@
     - Hardsuit
     - WhitelistChameleon
     - CorgiWearable
-    - ScurretWearable
   - type: StaticPrice
     price: 5000
 
