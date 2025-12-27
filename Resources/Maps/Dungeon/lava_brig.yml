@@ -7487,20 +7487,6 @@ entities:
     - type: Transform
       pos: 26.5,30.5
       parent: 588
-- proto: CrateFunBoardGames
-  entities:
-  - uid: 1845
-    components:
-    - type: Transform
-      pos: 26.5,48.5
-      parent: 588
-- proto: CrateFunParty
-  entities:
-  - uid: 1876
-    components:
-    - type: Transform
-      pos: 25.5,43.5
-      parent: 588
 - proto: CrateHydroponicsSeedsExotic
   entities:
   - uid: 1660
@@ -9258,13 +9244,6 @@ entities:
     components:
     - type: Transform
       pos: 14.537998,42.878975
-      parent: 588
-- proto: PlushieNuke
-  entities:
-  - uid: 1850
-    components:
-    - type: Transform
-      pos: 22.519993,28.594225
       parent: 588
 - proto: PortableFlasher
   entities:
