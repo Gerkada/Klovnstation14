@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: 2024 deathride58
+# SPDX-FileCopyrightText: 2025 Gerkada
+# SPDX-FileCopyrightText: 2025 Hannah Giovanna Dawson
+#
+# SPDX-License-Identifier: MIT
+
 - type: palette
   id: KoboldColors
   name: KoboldColors
