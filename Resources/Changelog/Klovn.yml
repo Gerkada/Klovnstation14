@@ -369,3 +369,9 @@ Entries:
       message: Changed some visuals to look better
   id: 46
   time: '2025-12-25T17:16:42.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Remove
+      message: Scurrets are no longer accessible to players.
+  id: 47
+  time: '2025-12-28T00:03:58.0000000+00:00'
