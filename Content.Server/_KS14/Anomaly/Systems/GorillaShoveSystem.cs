@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Gerkada
-// SPDX-FileCopyrightText: 2025 github_actions[bot]
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Disposal.Unit;
 using Content.Shared.Disposal.Components;
 using Content.Server.Popups;
@@ -10,7 +5,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Power.Components;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Weapons.Melee.Components;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared._KS14.Anomaly.Components;
 using System.Linq;
 
@@ -27,28 +22,33 @@ public sealed class GorillaShoveSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<CorePoweredThrowerComponent, AttemptMeleeThrowOnHitEvent>(OnAttemptGorillaShove);
+        // Subscribe to MeleeHitEvent
+        SubscribeLocalEvent<GorillaGauntletComponent, MeleeHitEvent>(OnMeleeHit);
     }
 
-    private void OnAttemptGorillaShove(Entity<CorePoweredThrowerComponent> ent, ref AttemptMeleeThrowOnHitEvent args)
+    private void OnMeleeHit(Entity<GorillaGauntletComponent> ent, ref MeleeHitEvent args)
     {
-        // Basic validation
-        if (args.Handled || args.User is not { } user)
+        // Basic Validation
+        if (args.Handled || args.HitEntities.Count == 0)
             return;
 
+        var user = args.User;
+        // We only care about the first thing hit (you can't shove 2 anomalies at once)
+        var target = args.HitEntities.First();
+
         // Check target
-        if (!TryComp<GorillaDisposalComponent>(args.Target, out _))
+        if (!TryComp<GorillaDisposalComponent>(target, out _))
             return;
 
         // Check for Core in Gauntlet
-        if (!_itemSlots.TryGetSlot(ent.Owner, ent.Comp.CoreSlotId, out var slot) || slot.Item is not { } coreItem)
+        var slotId = "core_slot";
+        if (!_itemSlots.TryGetSlot(ent.Owner, slotId, out var slot) || slot.Item is not { } coreItem)
         {
             _popup.PopupEntity(Loc.GetString("gorilla-shove-gauntlet-not-active"), user, user);
             return;
         }
 
-        // Try to use charge FIRST.
-        // If this fails, the gauntlet is dead, so we stop everything immediately.
+        // Try to use charge
         if (!_battery.TryUseCharge(coreItem, 100))
         {
             _popup.PopupEntity(Loc.GetString("gorilla-shove-gauntlet-not-active"), user, user);
@@ -56,31 +56,27 @@ public sealed class GorillaShoveSystem : EntitySystem
         }
 
         // Find nearby disposal unit
-        var disposals = _lookup.GetEntitiesInRange<DisposalUnitComponent>(Transform(args.Target).Coordinates, 1.5f);
+        var disposals = _lookup.GetEntitiesInRange<DisposalUnitComponent>(Transform(target).Coordinates, 1.5f);
         var targetDisposal = disposals.FirstOrDefault();
 
         if (targetDisposal == null)
         {
-            // Refund the charge because we couldn't even try the action
             RefundCharge(coreItem, 100);
             _popup.PopupEntity(Loc.GetString("gorilla-shove-not-disposals"), user, user);
             return;
         }
 
         // Try shove
-        if (!_disposals.TryInsert(targetDisposal.Owner, args.Target, user))
+        if (!_disposals.TryInsert(targetDisposal.Owner, target, user))
         {
-            // Refund the charge if the insertion failed (e.g. unit full/pressurized)
             RefundCharge(coreItem, 100);
             return;
         }
 
         // Success
         args.Handled = true;
-        args.Cancelled = true;
     }
 
-    // Helper method to add charge back safely
     private void RefundCharge(EntityUid uid, float amount)
     {
         if (TryComp<BatteryComponent>(uid, out var component))
