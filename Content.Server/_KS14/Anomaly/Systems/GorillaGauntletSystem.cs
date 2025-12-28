@@ -7,6 +7,7 @@ using Content.Server.Disposal.Unit;
 using Content.Shared.Disposal.Components;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Power.Components;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Weapons.Melee.Components;
@@ -35,39 +36,56 @@ public sealed class GorillaGauntletSystem : EntitySystem
         if (args.Handled || args.User is not { } user)
             return;
 
-        // Is target a Gorilla Disposal Anomaly?
+        // Check target
         if (!TryComp<GorillaDisposalComponent>(args.Target, out _))
             return;
 
         // Check for Core in Gauntlet
-        if (!_itemSlots.TryGetSlot(ent.Owner, ent.Comp.CoreSlotId, out var slot) || !slot.HasItem)
+        if (!_itemSlots.TryGetSlot(ent.Owner, ent.Comp.CoreSlotId, out var slot) || slot.Item is not { } coreItem)
+        {
+            _popup.PopupEntity(Loc.GetString("gorilla-shove-gauntlet-not-active"), user, user);
+            return;
+        }
+
+        // Try to use charge FIRST.
+        // If this fails, the gauntlet is dead, so we stop everything immediately.
+        if (!_battery.TryUseCharge(coreItem, 100))
         {
             _popup.PopupEntity(Loc.GetString("gorilla-shove-gauntlet-not-active"), user, user);
             return;
         }
 
         // Find nearby disposal unit
-        // FIXED: Now uses the standard DisposalUnitComponent from Shared
         var disposals = _lookup.GetEntitiesInRange<DisposalUnitComponent>(Transform(args.Target).Coordinates, 1.5f);
         var targetDisposal = disposals.FirstOrDefault();
 
         if (targetDisposal == null)
         {
+            // Refund the charge because we couldn't even try the action
+            RefundCharge(coreItem, 100);
             _popup.PopupEntity(Loc.GetString("gorilla-shove-not-disposals"), user, user);
             return;
         }
 
         // Try shove
-        // Note: Owner check is redundant if targetDisposal is not null, but harmless.
         if (!_disposals.TryInsert(targetDisposal.Owner, args.Target, user))
+        {
+            // Refund the charge if the insertion failed (e.g. unit full/pressurized)
+            RefundCharge(coreItem, 100);
             return;
+        }
 
         // Success
         args.Handled = true;
-        args.Cancelled = true; // Stop the throw
+        args.Cancelled = true;
+    }
 
-        // Deduct charge
-        if (slot.Item is { } item)
-            _battery.TryUseCharge(item, 100);
+    // Helper method to add charge back safely
+    private void RefundCharge(EntityUid uid, float amount)
+    {
+        if (TryComp<BatteryComponent>(uid, out var component))
+        {
+            _battery.SetCharge(uid, component.CurrentCharge + amount, component);
+        }
     }
 }
