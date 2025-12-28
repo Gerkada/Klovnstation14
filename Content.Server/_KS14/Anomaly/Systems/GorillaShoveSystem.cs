@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2025 Gerkada
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
+//
+// SPDX-License-Identifier: MIT
+
 using Content.Server.Disposal.Unit;
 using Content.Shared.Disposal.Components;
 using Content.Server.Popups;
