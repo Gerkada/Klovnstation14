@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace Content.Server._KS14.Anomaly.Systems;
 
-public sealed class GorillaGauntletSystem : EntitySystem
+public sealed class GorillaShoveSystem : EntitySystem
 {
     [Dependency] private readonly BatterySystem _battery = default!;
     [Dependency] private readonly DisposalUnitSystem _disposals = default!;
