@@ -14,7 +14,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Containers;
+using Content.Shared.Item;
 using System.Linq;
 
 namespace Content.Server._KS14.Anomaly.Systems;
@@ -27,7 +27,6 @@ public sealed class GorillaShoveSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -91,6 +90,7 @@ public sealed class GorillaShoveSystem : EntitySystem
             _transform.Unanchor(target, xform);
         }
 
+        //Force Dynamic Physics
         if (TryComp<PhysicsComponent>(target, out var body))
         {
             _physics.SetBodyType(target, BodyType.Dynamic, body: body);
@@ -98,25 +98,33 @@ public sealed class GorillaShoveSystem : EntitySystem
             _physics.WakeBody(target, body: body);
         }
 
-        // Force insert
-        var container = _container.EnsureContainer<Container>(targetDisposal.Owner, "disposal");
+        // Add ItemComponent
+        // This makes the Anomaly "look" like trash to the Disposal Unit logic.
+        EnsureComp<ItemComponent>(target);
 
-        if (!_container.Insert(target, container))
+
+        // Teleport to Unit
+        // We put it exactly on top of the unit so TryInsert never fails the reach check.
+        var disposalXform = Transform(targetDisposal.Owner);
+        _transform.SetCoordinates(target, xform, disposalXform.Coordinates);
+
+        //Try insert
+        // Now that it's an "Item" and "Dynamic", standard TryInsert should work.
+        // We pass 'null' for user to bypass "Player Reach" checks.
+        if (!_disposals.TryInsert(targetDisposal.Owner, target, null))
         {
             // If this fails, something is fundamentally broken
-            _popup.PopupEntity("Force insert failed!", user, user);
+            _popup.PopupEntity("Shove failed! (Unit blocked/full?)", user, user);
             return;
         }
 
-        // Consume charge
-        // If the shove succeeded and the core is decayed, decrement the charge now.
+        // Success
         if (coreComp.IsDecayed)
         {
             coreComp.Charge--;
             Dirty(coreItem, coreComp);
         }
 
-        // Success
         args.Handled = true;
     }
 }
