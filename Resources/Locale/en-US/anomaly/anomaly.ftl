@@ -99,5 +99,4 @@ anomaly-behavior-strenght = [color=crimson]The pulsation power is significantly 
 anomaly-behavior-moving = [color=crimson]Coordinate instability was detected.[/color]
 
 gorilla-shove-not-disposals = You can only shove this into a disposals unit!
-gorilla-shove-no-gauntlet = You need a G.O.R.I.L.L.A. gauntlet to do that.
 gorilla-shove-gauntlet-not-active = The gauntlet isn't active!
