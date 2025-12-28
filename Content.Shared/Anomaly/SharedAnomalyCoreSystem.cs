@@ -12,7 +12,7 @@ namespace Content.Shared.Anomaly;
 /// <summary>
 /// This component reduces the value of the entity during decay
 /// </summary>
-public sealed class SharedAnomalyCoreSystem : EntitySystem
+public sealed partial class SharedAnomalyCoreSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;

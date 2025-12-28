@@ -40,6 +40,7 @@
   - type: Damageable
   - type: Appearance
   - type: AnimationPlayer
+  - type: GorillaDisposal # KS14
   - type: GuideHelp
     guides:
     - AnomalousResearch
