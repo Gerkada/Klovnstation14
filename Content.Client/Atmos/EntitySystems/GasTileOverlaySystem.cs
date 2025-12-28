@@ -15,7 +15,7 @@
 // SPDX-FileCopyrightText: 2025 TemporalOroboros
 // SPDX-FileCopyrightText: 2025 slarticodefast
 //
-// SPDX-License-Identifier: MPL-2.0
+// SPDX-License-Identifier: MIT
 
 using Content.Client.Atmos.Overlays;
 using Content.Client.Light;

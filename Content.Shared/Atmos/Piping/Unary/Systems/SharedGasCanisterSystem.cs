@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 // SPDX-FileCopyrightText: 2025 metalgearsloth
 //
-// SPDX-License-Identifier: MPL-2.0
+// SPDX-License-Identifier: MIT
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos.Components;

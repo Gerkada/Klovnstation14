@@ -30,7 +30,7 @@
 // SPDX-FileCopyrightText: 2025 slarticodefast
 // SPDX-FileCopyrightText: 2025 Łukasz Mędrek
 //
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: MIT
 
 using System.Numerics;
 using Content.Client.Stylesheets;

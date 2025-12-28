@@ -18,7 +18,7 @@
 // SPDX-FileCopyrightText: 2025 Tayrtahn
 // SPDX-FileCopyrightText: 2025 TemporalOroboros
 //
-// SPDX-License-Identifier: MPL-2.0
+// SPDX-License-Identifier: MIT
 
 using System.Numerics;
 using Content.Client.Atmos.Components;

@@ -47,7 +47,7 @@
 # SPDX-FileCopyrightText: 2025 nabegator220
 # SPDX-FileCopyrightText: 2025 slarticodefast
 #
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: MIT
 
 version: 1 # Not used right now, whatever.
 binds:
