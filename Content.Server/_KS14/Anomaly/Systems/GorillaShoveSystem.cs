@@ -10,6 +10,11 @@ using Content.Shared.Anomaly.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared._KS14.Anomaly.Components;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Containers;
 using System.Linq;
 
 namespace Content.Server._KS14.Anomaly.Systems;
@@ -20,6 +25,9 @@ public sealed class GorillaShoveSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -66,7 +74,8 @@ public sealed class GorillaShoveSystem : EntitySystem
         }
 
         // Find nearby disposal unit
-        var disposals = _lookup.GetEntitiesInRange<DisposalUnitComponent>(Transform(target).Coordinates, 1.5f);
+        var xform = Transform(target);
+        var disposals = _lookup.GetEntitiesInRange<DisposalUnitComponent>(xform.Coordinates, 1.5f);
         var targetDisposal = disposals.FirstOrDefault();
 
         if (targetDisposal == null)
@@ -76,10 +85,26 @@ public sealed class GorillaShoveSystem : EntitySystem
             return;
         }
 
-        // Try shove
-        if (!_disposals.TryInsert(targetDisposal.Owner, target, user))
+        //Prepare entity
+        if (xform.Anchored)
         {
-            // Shove failed (unit full, pressurized, etc). Do not consume charge.
+            _transform.Unanchor(target, xform);
+        }
+
+        if (TryComp<PhysicsComponent>(target, out var body))
+        {
+            _physics.SetBodyType(target, BodyType.Dynamic, body: body);
+            _physics.SetCanCollide(target, true, body: body);
+            _physics.WakeBody(target, body: body);
+        }
+
+        // Force insert
+        var container = _container.EnsureContainer<Container>(targetDisposal.Owner, "disposal");
+
+        if (!_container.Insert(target, container))
+        {
+            // If this fails, something is fundamentally broken
+            _popup.PopupEntity("Force insert failed!", user, user);
             return;
         }
 
