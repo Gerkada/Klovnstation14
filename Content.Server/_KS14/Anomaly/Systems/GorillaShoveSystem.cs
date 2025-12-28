@@ -6,8 +6,6 @@
 using Content.Server.Disposal.Unit;
 using Content.Shared.Disposal.Components;
 using Content.Server.Popups;
-using Content.Server.Power.EntitySystems;
-using Content.Server.Power.Components;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Weapons.Melee.Events;
@@ -18,7 +16,6 @@ namespace Content.Server._KS14.Anomaly.Systems;
 
 public sealed class GorillaShoveSystem : EntitySystem
 {
-    [Dependency] private readonly BatterySystem _battery = default!;
     [Dependency] private readonly DisposalUnitSystem _disposals = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -53,8 +50,16 @@ public sealed class GorillaShoveSystem : EntitySystem
             return;
         }
 
-        // Try to use charge
-        if (!_battery.TryUseCharge(coreItem, 100))
+        // Verify it is an Anomaly Core
+        if (!TryComp<AnomalyCoreComponent>(coreItem, out var coreComp))
+        {
+            _popup.PopupEntity(Loc.GetString("gorilla-shove-gauntlet-not-active"), user, user);
+            return;
+        }
+
+        // Check Charge logic:
+        // If the core is decayed, it has limited charges. If it is 0, we can't use it.
+        if (coreComp.IsDecayed && coreComp.Charge <= 0)
         {
             _popup.PopupEntity(Loc.GetString("gorilla-shove-gauntlet-not-active"), user, user);
             return;
@@ -66,7 +71,7 @@ public sealed class GorillaShoveSystem : EntitySystem
 
         if (targetDisposal == null)
         {
-            RefundCharge(coreItem, 100);
+            // No charge consumed yet, just return
             _popup.PopupEntity(Loc.GetString("gorilla-shove-not-disposals"), user, user);
             return;
         }
@@ -74,19 +79,19 @@ public sealed class GorillaShoveSystem : EntitySystem
         // Try shove
         if (!_disposals.TryInsert(targetDisposal.Owner, target, user))
         {
-            RefundCharge(coreItem, 100);
+            // Shove failed (unit full, pressurized, etc). Do not consume charge.
             return;
+        }
+
+        // Consume charge
+        // If the shove succeeded and the core is decayed, decrement the charge now.
+        if (coreComp.IsDecayed)
+        {
+            coreComp.Charge--;
+            Dirty(coreItem, coreComp);
         }
 
         // Success
         args.Handled = true;
-    }
-
-    private void RefundCharge(EntityUid uid, float amount)
-    {
-        if (TryComp<BatteryComponent>(uid, out var component))
-        {
-            _battery.SetCharge(uid, component.CurrentCharge + amount, component);
-        }
     }
 }
