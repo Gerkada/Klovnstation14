@@ -26,6 +26,7 @@ jobs:
     steps:
     - name: Send POST update request to watchdog
       # Output of curl is hidden and we only say if something ever happened or nothing ever happened (as usual).
+      # emoji goidacode gods btw
       run: |
         STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
           -X POST \
@@ -33,8 +34,8 @@ jobs:
           "http://${{ secrets.WATCHDOG_IP_AND_PORT }}/instances/${{ vars.WATCHDOG_INSTANCE_NAME }}/update")
 
         if [ "$STATUS_CODE" -eq 200 ]; then
-          echo "Status code of POST request ($STATUS_CODE) indicates success."
+          echo "✅ Status code of POST request ($STATUS_CODE) indicates success."
         else
-          echo "POST request failed with status code $STATUS_CODE."
+          echo "❌ POST request failed with status code $STATUS_CODE."
           exit 1
         fi
