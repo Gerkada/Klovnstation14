@@ -12,6 +12,7 @@
 // SPDX-FileCopyrightText: 2024 metalgearsloth
 // SPDX-FileCopyrightText: 2025 Gerkada
 // SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
 // SPDX-FileCopyrightText: 2025 nabegator220
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
