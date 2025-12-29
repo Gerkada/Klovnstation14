@@ -8,8 +8,8 @@ name: Watchdog Update Request
 
 on:
   schedule:
-    # runs every day at 18:00 UTC
-    - cron: '0 0 * * *'
+    # runs every day at 16:00 UTC
+    - cron: '0 16 * * *'
 
   # run on push to master (disabled)
   # push:
