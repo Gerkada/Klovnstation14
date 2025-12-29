@@ -211,59 +211,51 @@ public sealed class SharedGunExecutionSystem : EntitySystem
         var ammoUid = ev.Ammo[0].Entity;
 
         // Process ammo
-        // This MUST run on the client for the UI to see "Spent = true"
         switch (ev.Ammo[0].Shootable)
         {
+            // This case handles guns that eject a whole cartridge, like pistols.
             case CartridgeAmmoComponent cartridge:
-            {
                 if (cartridge.Spent)
                 {
                     _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
                     return;
                 }
 
-                var prototype = _prototypeManager.Index<EntityPrototype>(cartridge.Prototype);
-                prototype.TryGetComponent<ProjectileComponent>(out var projectileA, _componentFactory);
-
-                if (projectileA != null)
+                if (_prototypeManager.TryIndex(cartridge.Prototype, out EntityPrototype? proto) &&
+                    proto.TryGetComponent<ProjectileComponent>(out var projectile, _componentFactory))
                 {
-                    damage = projectileA.Damage;
+                    damage = projectile.Damage;
                     mainDamageType = GetDamage(damage, mainDamageType);
                 }
 
-                if (damage.GetTotal() < 5)
-                {
-                    _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
-                    return;
-                }
-
-                // Mark spent (Shared) - This updates the client UI
+                // Mark the cartridge as spent. The gun's ammo provider is responsible for ejecting it.
                 cartridge.Spent = true;
                 _appearanceSystem.SetData(ammoUid!.Value, AmmoVisuals.Spent, true);
-                Dirty(ammoUid.Value, cartridge);
+                Dirty(ammoUid!.Value, cartridge);
                 break;
-            }
-            case AmmoComponent:
-                TryComp<ProjectileComponent>(ammoUid, out var projectileB);
 
-                if (projectileB != null)
+            // This case handles revolvers (which provide a bullet) and energy weapons.
+            case AmmoComponent:
+                if (TryComp<ProjectileComponent>(ammoUid, out var proj))
                 {
-                    damage = projectileB.Damage;
+                    damage = proj.Damage;
                     mainDamageType = GetDamage(damage, mainDamageType);
                 }
 
-                if (damage.GetTotal() < 5)
-                {
-                    _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
-                    _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
-                    _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
-                    return;
-                }
-
-                // Clients can't delete entities, so we must gate this.
-                if (_net.IsServer && ammoUid != null)
-                    Del(ammoUid);
+                // The bullet from a revolver is temporary and should be deleted.
+                // Energy weapons don't have a physical entity.
+                if (ammoUid.HasValue)
+                    Del(ammoUid.Value);
                 break;
+        }
+
+        // Final damage check for all gun types
+        if (damage.GetTotal() < 5 && !HasComp<HitscanBatteryAmmoProviderComponent>(weapon))
+        {
+            _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
+            _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
+            _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
+            return;
         }
 
         if (HasComp<HitscanBatteryAmmoProviderComponent>(weapon))
