@@ -431,3 +431,11 @@ Entries:
       message: Changed announcement sound
   id: 55
   time: '2025-12-28T21:38:48.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Fix
+      message: >-
+        Portals made by the RD hand teleporter won't telefrag you anymore. All
+        other portals still do though, including bluespace anomalies.
+  id: 56
+  time: '2025-12-29T23:10:45.0000000+00:00'
