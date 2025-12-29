@@ -30,7 +30,8 @@ jobs:
         if curl -s -f -o /dev/null \
             -v \
             -X POST \
-            -u "${{ vars.WATCHDOG_INSTANCE_NAME }}:${{ secrets.WATCHDOG_INSTANCE_API_TOKEN }} http://${{ secrets.WATCHDOG_IP_AND_PORT }}/instances/${{ vars.WATCHDOG_INSTANCE_NAME }}/update"; then
+            -u ${{ vars.WATCHDOG_INSTANCE_NAME }}:${{ secrets.WATCHDOG_INSTANCE_API_TOKEN }} \
+            "http://${{ secrets.WATCHDOG_IP_AND_PORT }}/instances/${{ vars.WATCHDOG_INSTANCE_NAME }}/update"; then
           echo "Update request was successfully sent. This is not indicative of whether or not the server actually cares."
         else
           echo "Update request failed to sent. This is not indicative of whether or not the server actually cares."
