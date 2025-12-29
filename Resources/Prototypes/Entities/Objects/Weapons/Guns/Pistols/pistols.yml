@@ -103,6 +103,7 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 1000
+  - type: GunExecutionWhitelist
 
 - type: entity
   name: echis
@@ -189,7 +190,7 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 1500
-
+  - type: GunExecutionWhitelist
 - type: entity
   name: mk 58
   parent: [BaseWeaponPistol, BaseSecurityContraband]
@@ -215,6 +216,7 @@
       path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
   - type: StealTarget
     stealGroup: OfficerHandgun
+  - type: GunExecutionWhitelist
 
 - type: entity
   name: N1984
@@ -260,3 +262,4 @@
         whitelist:
           tags:
             - CartridgeMagnum
+  - type: GunExecutionWhitelist

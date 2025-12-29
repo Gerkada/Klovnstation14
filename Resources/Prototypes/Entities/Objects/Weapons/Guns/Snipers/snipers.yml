@@ -242,6 +242,7 @@
     proto: CartridgeMagnum
   - type: StaticPrice
     price: 0
+  - type: GunExecutionWhitelist
 
 - type: entity
   parent: WeaponPistolFlintlock

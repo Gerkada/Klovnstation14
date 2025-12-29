@@ -281,6 +281,13 @@ public sealed partial class GunComponent : Component
     // MNET14
     [AutoNetworkedField]
     public bool LastShotWasEmpty = false;
+
+    /// <summary>
+    /// Goobstation
+    /// How long should it take to execute with this gun
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float GunExecutionTime = 3.5f;
 }
 
 [Flags]
