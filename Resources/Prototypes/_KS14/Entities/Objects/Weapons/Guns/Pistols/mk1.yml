@@ -32,6 +32,7 @@
   - type: Construction
     graph: mk1Graph
     node: mk1
+  - type: GunExecutionWhitelist
 
 # TODO use this for mk1 construction when you can craft mags etc
 - type: entity
