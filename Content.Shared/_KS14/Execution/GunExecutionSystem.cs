@@ -187,112 +187,62 @@ public sealed class SharedGunExecutionSystem : EntitySystem
             || !TryComp<DamageableComponent>(victim, out var damageableComponent))
             return;
 
-        // Server only block
+        // Take ammo
+        // Run on both Client and Server to ensure prediction works
+        var fromCoordinates = Transform(attacker).Coordinates;
+        var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), fromCoordinates, attacker);
+        RaiseLocalEvent(weapon, ev);
 
-        // We only want to process the ammo removal and dirtying on the server.
-        // If the client runs this, it predicts the ammo is still there (since it can't delete entities),
-        // causing a visual desync where the ammo bar refuses to go down.
-        if (_net.IsServer)
+        // Signal to the gun system that its appearance needs updating
+        var updateEv = new GunNeedsAppearanceUpdateEvent();
+        RaiseLocalEvent(weapon, ref updateEv);
+
+        // Check for empty
+        if (ev.Ammo.Count <= 0)
         {
-            // Take some ammunition for the shot (one bullet)
-            var fromCoordinates = Transform(attacker).Coordinates;
-            var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), fromCoordinates, attacker);
-            RaiseLocalEvent(weapon, ev);
-
-            // Dirty everything involved in ammo counting.
-
-            // Dirty the Gun
-            Dirty(weapon, guncomp);
-
-            // Dirty the Magazine (if applicable)
-            if (TryComp<MagazineAmmoProviderComponent>(weapon, out var magProv))
-            {
-                Dirty(weapon, magProv);
-
-                // Use ItemSlots to find the mag reliably instead of guessing container strings
-                if (_itemSlots.TryGetSlot(weapon, "gun_magazine", out var slot) && slot.Item is { } magazine)
-                {
-                    if (TryComp<BallisticAmmoProviderComponent>(magazine, out var magBallistic))
-                        Dirty(magazine, magBallistic);
-                }
-            }
-            // Dirty Ballistic/Battery Providers
-            else if (TryComp<BallisticAmmoProviderComponent>(weapon, out var ballisticComp))
-            {
-                Dirty(weapon, ballisticComp);
-            }
-            else if (TryComp<HitscanBatteryAmmoProviderComponent>(weapon, out var batteryComp))
-            {
-                Dirty(weapon, batteryComp);
-            }
-
-            // Empty check (server side)
-            if (ev.Ammo.Count <= 0)
-            {
-                _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
-                _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
-                _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
-                return;
-            }
-
-            // Process Damage Logic (Still on Server)
-            ProcessExecutionEffects(ev, component, uid, attacker, victim, damageableComponent, weapon);
-        }
-        else
-        {
-            // Client side
-
-            // On the client, we just play the recoil prediction if applicable, but we do NOT touch ammo.
-            // The ammo update will arrive via the Server's Dirty() call.
-            if (direction != Vector2.Zero && _timing.IsFirstTimePredicted)
-                _recoil.KickCamera(attacker, direction);
+            _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
+            _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
+            _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
+            return;
         }
 
-        args.Handled = true;
-    }
-
-    // Helper method to keep OnDoafter clean and avoid duplicate logic
-    private void ProcessExecutionEffects(TakeAmmoEvent ev, GunComponent component, EntityUid uid,
-        EntityUid attacker, EntityUid victim, DamageableComponent damageableComponent, EntityUid weapon)
-    {
         var damage = new DamageSpecifier();
         string? mainDamageType = null;
         var ammoUid = ev.Ammo[0].Entity;
 
+        // Process ammo
+        // This MUST run on the client for the UI to see "Spent = true"
         switch (ev.Ammo[0].Shootable)
         {
             case CartridgeAmmoComponent cartridge:
+            {
+                if (cartridge.Spent)
                 {
-                    if (cartridge.Spent)
-                    {
-                        _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
-                        _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
-                        _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
-                        return;
-                    }
-
-                    var prototype = _prototypeManager.Index<EntityPrototype>(cartridge.Prototype);
-                    prototype.TryGetComponent<ProjectileComponent>(out var projectileA, _componentFactory);
-
-                    if (projectileA != null)
-                    {
-                        damage = projectileA.Damage;
-                        mainDamageType = GetDamage(damage, mainDamageType);
-                    }
-
-                    if (damage.GetTotal() < 5)
-                    {
-                        _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
-                        _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
-                        _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
-                        return;
-                    }
-
-                    cartridge.Spent = true;
-                    _appearanceSystem.SetData(ammoUid!.Value, AmmoVisuals.Spent, true);
-                    Dirty(ammoUid.Value, cartridge);
-                    break;
+                    _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
+                    return;
                 }
+
+                var prototype = _prototypeManager.Index<EntityPrototype>(cartridge.Prototype);
+                prototype.TryGetComponent<ProjectileComponent>(out var projectileA, _componentFactory);
+
+                if (projectileA != null)
+                {
+                    damage = projectileA.Damage;
+                    mainDamageType = GetDamage(damage, mainDamageType);
+                }
+
+                if (damage.GetTotal() < 5)
+                {
+                    _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
+                    return;
+                }
+
+                // Mark spent (Shared) - This updates the client UI
+                cartridge.Spent = true;
+                _appearanceSystem.SetData(ammoUid!.Value, AmmoVisuals.Spent, true);
+                Dirty(ammoUid.Value, cartridge);
+                break;
+            }
             case AmmoComponent:
                 TryComp<ProjectileComponent>(ammoUid, out var projectileB);
 
@@ -310,7 +260,8 @@ public sealed class SharedGunExecutionSystem : EntitySystem
                     return;
                 }
 
-                if (ammoUid != null)
+                // Clients can't delete entities, so we must gate this.
+                if (_net.IsServer && ammoUid != null)
                     Del(ammoUid);
                 break;
         }
@@ -318,26 +269,39 @@ public sealed class SharedGunExecutionSystem : EntitySystem
         if (HasComp<HitscanBatteryAmmoProviderComponent>(weapon))
             mainDamageType = "Heat";
 
+        // Effects and damage
         var prev = _combat.IsInCombatMode(attacker);
         _combat.SetInCombatMode(attacker, true);
 
-        if (attacker == victim)
+        // Play sound
+        // This is now outside the Server check so the client hears it immediately
+        _audio.PlayPredicted(component.SoundGunshot, uid, attacker);
+
+        // Damage and popus
+        // Damage must be authoritative.
+        if (_net.IsServer)
         {
-            _execution.ShowExecutionInternalPopup("suicide-popup-gun-complete-internal", attacker, victim, weapon);
-            _execution.ShowExecutionExternalPopup("suicide-popup-gun-complete-external", attacker, victim, weapon);
-            _audio.PlayPredicted(component.SoundGunshot, uid, attacker);
-            _suicide.ApplyLethalDamage((victim, damageableComponent), mainDamageType);
+            if (attacker == victim)
+            {
+                _execution.ShowExecutionInternalPopup("suicide-popup-gun-complete-internal", attacker, victim, weapon);
+                _execution.ShowExecutionExternalPopup("suicide-popup-gun-complete-external", attacker, victim, weapon);
+                _suicide.ApplyLethalDamage((victim, damageableComponent), mainDamageType);
+            }
+            else
+            {
+                _execution.ShowExecutionInternalPopup("execution-popup-gun-complete-internal", attacker, victim, weapon);
+                _execution.ShowExecutionExternalPopup("execution-popup-gun-complete-external", attacker, victim, weapon);
+                _suicide.ApplyLethalDamage((victim, damageableComponent), mainDamageType);
+            }
         }
         else
         {
-            // Recoil is handled client-side in the else block of the main function,
-            // but we can trigger it here for server-authoritative setups if needed.
-            _execution.ShowExecutionInternalPopup("execution-popup-gun-complete-internal", attacker, victim, weapon);
-            _execution.ShowExecutionExternalPopup("execution-popup-gun-complete-external", attacker, victim, weapon);
-            _audio.PlayPredicted(component.SoundGunshot, uid, attacker);
-            _suicide.ApplyLethalDamage((victim, damageableComponent), mainDamageType);
+            // Client-side prediction for recoil
+            if (direction != Vector2.Zero && _timing.IsFirstTimePredicted)
+                _recoil.KickCamera(attacker, direction);
         }
 
         _combat.SetInCombatMode(attacker, prev);
+        args.Handled = true;
     }
 }

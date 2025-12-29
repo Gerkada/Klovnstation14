@@ -96,6 +96,12 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, CycleModeEvent>(OnCycleMode);
         SubscribeLocalEvent<GunComponent, HandSelectedEvent>(OnGunSelected);
         SubscribeLocalEvent<GunComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<GunComponent, GunNeedsAppearanceUpdateEvent>(OnNeedsAppearanceUpdate);
+    }
+
+    private void OnNeedsAppearanceUpdate(EntityUid uid, GunComponent component, ref GunNeedsAppearanceUpdateEvent args)
+    {
+        UpdateAmmoCount(uid);
     }
 
     private void OnMapInit(Entity<GunComponent> gun, ref MapInitEvent args)
