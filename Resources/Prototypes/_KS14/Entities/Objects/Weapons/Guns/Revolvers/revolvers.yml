@@ -39,8 +39,8 @@
         - CartridgeMagnum
         - SpeedLoaderMagnum
     capacity: 6
-    proto: null
-    chambers: [ null, null, null, null, null, null ]
+    proto: CartridgeMagnum
+    chambers: [ True, null, null, null, null, null ] # Spawns with one bullet for Russian Roulette
     ammoSlots: [ null, null, null, null, null, null ]
     soundEject:
       path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
@@ -48,13 +48,4 @@
       path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
   - type: StaticPrice
     price: 500
-  - type: EmitSoundOnPickup
-    sound:
-      collection: RevolversPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: RevolversDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: RevolversDrop
   - type: GunExecutionWhitelist
