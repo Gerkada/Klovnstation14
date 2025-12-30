@@ -368,15 +368,19 @@ public abstract partial class SharedGunSystem
         // Normal behaviour for guns.
         if (component.AutoCycle)
         {
-            if (TryTakeChamberEntity(uid, out chamberEnt))
+            if (!TryTakeChamberEntity(uid, out chamberEnt))
             {
-                args.Ammo.Add((chamberEnt.Value, EnsureShootable(chamberEnt.Value)));
+                // Chamber is empty, so try to cycle a round into it.
+                CycleCartridge(uid, component, args.User);
+
+                // Now try to take from the chamber again.
+                if (!TryTakeChamberEntity(uid, out chamberEnt))
+                {
+                    // Still no ammo, so the gun is truly empty.
+                    return;
+                }
             }
-            // No ammo returned.
-            else
-            {
-                return;
-            }
+            args.Ammo.Add((chamberEnt.Value, EnsureShootable(chamberEnt.Value)));
 
             var magEnt = GetMagazineEntity(uid);
 

@@ -105,9 +105,14 @@ public sealed class SharedGunExecutionSystem : EntitySystem
 
     private bool CanExecuteWithGun(EntityUid weapon, EntityUid victim, EntityUid user)
     {
-        if (!_execution.CanBeExecuted(victim, user)
-            || TryComp<GunComponent>(weapon, out var gun)
-            && !_gunSystem.CanShoot(gun))
+        // Rifles can execute anyone.
+        if (!HasComp<UnrestrictedExecutionComponent>(weapon))
+        {
+            if (!_execution.CanBeExecuted(victim, user))
+                return false;
+        }
+
+        if (TryComp<GunComponent>(weapon, out var gun) && !_gunSystem.CanShoot(gun))
             return false;
 
         return true;
