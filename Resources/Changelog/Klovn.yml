@@ -439,3 +439,9 @@ Entries:
         other portals still do though, including bluespace anomalies.
   id: 56
   time: '2025-12-29T23:10:45.0000000+00:00'
+- author: nabegator220
+  changes:
+    - type: Fix
+      message: Fixed TC price inconsistencies.
+  id: 57
+  time: '2025-12-30T16:35:26.0000000+00:00'
