@@ -16,4 +16,8 @@ public record struct GunExecutedEvent(
     EntityUid User,
     EntityUid Target,
     DamageSpecifier? Damage = null,
-    string? MainDamageType = null);
+    string? MainDamageType = null)
+{
+    public bool Cancelled = false;
+    public string? FailureReason = null;
+}

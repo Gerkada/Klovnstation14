@@ -22,6 +22,14 @@ public sealed class ProjectileExecutionSystem : EntitySystem
     {
         args.Damage = component.Damage;
 
+        if (args.Damage == null || args.Damage.GetTotal() < 5)
+        {
+            args.Cancelled = true;
+            args.FailureReason = "execution-popup-gun-weak-ammo";
+            // Don't delete the temporary entity, let the main system handle it
+            return;
+        }
+
         // The projectile entity is temporary and should be deleted.
         Del(uid);
     }

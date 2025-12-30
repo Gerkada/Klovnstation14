@@ -4,6 +4,7 @@
 
 using Content.Shared._KS14.Execution;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Damage;
@@ -36,8 +37,17 @@ public sealed class BatteryExecutionSystem : SharedBatteryExecutionSystem
     {
         if (_batterySystem.TryUseCharge(uid, component.FireCost))
         {
-            args.Damage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>(HeatDamageType), 100);
-            args.MainDamageType = HeatDamageType;
+            if (_prototypeManager.TryIndex(component.Prototype, out HitscanPrototype? proto) && proto != null)
+            {
+                args.Damage = proto.Damage;
+                args.MainDamageType = HeatDamageType; // Assume hitscan is heat
+
+                if (args.Damage == null || args.Damage.GetTotal() < 5)
+                {
+                    args.Cancelled = true;
+                    args.FailureReason = "execution-popup-gun-weak-ammo";
+                }
+            }
         }
     }
 
@@ -49,6 +59,12 @@ public sealed class BatteryExecutionSystem : SharedBatteryExecutionSystem
                 proto.TryGetComponent<ProjectileComponent>(out var projectile, _componentFactory))
             {
                 args.Damage = projectile.Damage;
+
+                if (args.Damage.GetTotal() < 5)
+                {
+                    args.Cancelled = true;
+                    args.FailureReason = "execution-popup-gun-weak-ammo";
+                }
             }
         }
     }

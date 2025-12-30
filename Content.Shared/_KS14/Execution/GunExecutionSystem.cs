@@ -228,12 +228,13 @@ public sealed class SharedGunExecutionSystem : EntitySystem
         damage = gunExecutedEvent.Damage ?? new DamageSpecifier();
         mainDamageType = GetDamage(damage, gunExecutedEvent.MainDamageType);
 
-        // Final damage check
-        if (damage.GetTotal() < 5)
+        // Check if the execution was cancelled by one of the ammo systems (e.g. for being non-lethal)
+        if (gunExecutedEvent.Cancelled)
         {
             _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
-            _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
-            _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
+            var reason = gunExecutedEvent.FailureReason ?? "execution-popup-gun-empty";
+            _execution.ShowExecutionInternalPopup(reason, attacker, victim, weapon);
+            _execution.ShowExecutionExternalPopup(reason, attacker, victim, weapon);
             return;
         }
 

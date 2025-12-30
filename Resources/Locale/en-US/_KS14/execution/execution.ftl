@@ -3,6 +3,7 @@ execution-popup-gun-initial-external = {$attacker} readies the muzzle of {THE($w
 execution-popup-gun-complete-internal = You blast {$victim} in the head!
 execution-popup-gun-complete-external = {$attacker} blasts {$victim} in the head!
 execution-popup-gun-empty = {CAPITALIZE(THE($weapon))} clicks.
+execution-popup-gun-weak-ammo = You can't execute with this ammunition!
 
 suicide-popup-gun-initial-internal = You place the muzzle of {THE($weapon)} in your mouth.
 suicide-popup-gun-initial-external = {$attacker} places the muzzle of {THE($weapon)} in {POSS-ADJ($attacker)} mouth.
