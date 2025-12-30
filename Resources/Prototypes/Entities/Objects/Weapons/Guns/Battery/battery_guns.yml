@@ -329,6 +329,8 @@
   parent: [BaseLaserRifle, BaseSecurityContraband]
   id: WeaponLaserCarbine
   description: Favoured by Nanotrasen Security for being cheap and easy to use.
+  components:
+  - type: GunExecutionWhitelist
 
 - type: entity
   name: practice laser carbine
