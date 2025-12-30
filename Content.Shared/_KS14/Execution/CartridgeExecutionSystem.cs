@@ -29,12 +29,23 @@ public sealed class CartridgeExecutionSystem : EntitySystem
     private void OnCartridgeExecuted(EntityUid uid, CartridgeAmmoComponent component, ref GunExecutedEvent args)
     {
         if (component.Spent)
+        {
+            args.Cancelled = true;
             return;
+        }
 
         if (_prototypeManager.TryIndex(component.Prototype, out EntityPrototype? proto) &&
             proto.TryGetComponent<ProjectileComponent>(out var projectile, _componentFactory))
         {
             args.Damage = projectile.Damage;
+        }
+
+        if (args.Damage == null || args.Damage.GetTotal() < 5)
+        {
+            args.Cancelled = true;
+            args.FailureReason = "execution-popup-gun-weak-ammo";
+            // Don't mark as spent, it wasn't a real shot
+            return;
         }
 
         component.Spent = true;
