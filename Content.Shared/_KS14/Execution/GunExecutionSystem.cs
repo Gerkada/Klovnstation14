@@ -211,47 +211,25 @@ public sealed class SharedGunExecutionSystem : EntitySystem
         string? mainDamageType = null;
         var ammoUid = ev.Ammo[0].Entity;
 
-        // Process ammo
-        switch (ev.Ammo[0].Shootable)
+        // Raise an event on the ammo to get its damage and handle its consumption.
+        var gunExecutedEvent = new GunExecutedEvent(attacker, victim);
+
+        // If the TakeAmmoEvent returns an entity, we raise the event on that entity.
+        if (ammoUid.HasValue)
         {
-            // This case handles guns that eject a whole cartridge, like pistols.
-            case CartridgeAmmoComponent cartridge:
-                if (cartridge.Spent)
-                {
-                    _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
-                    return;
-                }
-
-                if (_prototypeManager.TryIndex(cartridge.Prototype, out EntityPrototype? proto) &&
-                    proto.TryGetComponent<ProjectileComponent>(out var projectile, _componentFactory))
-                {
-                    damage = projectile.Damage;
-                    mainDamageType = GetDamage(damage, mainDamageType);
-                }
-
-                // Mark the cartridge as spent. The gun's ammo provider is responsible for ejecting it.
-                cartridge.Spent = true;
-                _appearanceSystem.SetData(ammoUid!.Value, AmmoVisuals.Spent, true);
-                Dirty(ammoUid!.Value, cartridge);
-                break;
-
-            // This case handles revolvers (which provide a bullet) and energy weapons.
-            case AmmoComponent:
-                if (TryComp<ProjectileComponent>(ammoUid, out var proj))
-                {
-                    damage = proj.Damage;
-                    mainDamageType = GetDamage(damage, mainDamageType);
-                }
-
-                // The bullet from a revolver is temporary and should be deleted.
-                // Energy weapons don't have a physical entity.
-                if (ammoUid.HasValue)
-                    Del(ammoUid.Value);
-                break;
+            RaiseLocalEvent(ammoUid.Value, ref gunExecutedEvent);
+        }
+        // If not (e.g. for battery weapons), we raise it on the gun itself.
+        else
+        {
+            RaiseLocalEvent(weapon, ref gunExecutedEvent);
         }
 
-        // Final damage check for all gun types
-        if (damage.GetTotal() < 5 && !HasComp<HitscanBatteryAmmoProviderComponent>(weapon))
+        damage = gunExecutedEvent.Damage ?? new DamageSpecifier();
+        mainDamageType = GetDamage(damage, gunExecutedEvent.MainDamageType);
+
+        // Final damage check
+        if (damage.GetTotal() < 5)
         {
             _audio.PlayPredicted(component.SoundEmpty, uid, attacker);
             _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
