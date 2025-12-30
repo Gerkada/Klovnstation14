@@ -99,6 +99,7 @@
   id: WeaponRifleAk
   description: A somewhat battered combat rifle of a design originating from old Earth. Favored by criminals, militias, and terrorists due to its famed reliability and easy-to-manufacture design. Feeds from .30 rifle magazines.
   components:
+  - type: GunExecutionWhitelist
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/ak.rsi
     layers:
@@ -191,6 +192,7 @@
   id: WeaponRifleLecter
   description: "Popular gas-operated combat rifle used heavily by Nanotrasen and SolGov. Operating in semi or fully automatic, its accuracy, stopping power, and reliability make it excel in all manner of environments.\nFeeds from .20 rifle magazines."
   components:
+  - type: GunExecutionWhitelist
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi
     layers:
@@ -242,6 +244,7 @@
     An unreasonably expensive military grade assault rifle with integrated optic.
     Uses .20 rifle ammo.
   components:
+  - type: GunExecutionWhitelist
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/XL8.rsi
   - type: Clothing
@@ -266,6 +269,7 @@
   id: WeaponRifleEstoc
   description: "A designated marksman rifle firing in 3-round bursts. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from .20 rifle magazines."
   components:
+  - type: GunExecutionWhitelist
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
     layers:
