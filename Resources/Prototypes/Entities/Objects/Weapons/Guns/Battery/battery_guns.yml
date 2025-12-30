@@ -252,6 +252,7 @@
     storedOffset: 0,-5
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser
+  - type: GunExecutionWhitelist
     fireCost: 62.5
   - type: MagazineVisuals
     magState: mag
@@ -284,6 +285,7 @@
     sprite: Objects/Weapons/Guns/Battery/makeshift.rsi
   - type: HitscanBatteryAmmoProvider
     proto: RedLaser
+  - type: GunExecutionWhitelist
     fireCost: 62.5
   - type: Battery
     maxCharge: 500
@@ -372,6 +374,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: HitscanBatteryAmmoProvider
     proto: Pulse
+  - type: GunExecutionWhitelist
     fireCost: 200
   - type: Battery
     maxCharge: 2000
@@ -410,6 +413,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: HitscanBatteryAmmoProvider
     proto: Pulse
+  - type: GunExecutionWhitelist
     fireCost: 200
   - type: Battery
     maxCharge: 5000
@@ -446,6 +450,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: HitscanBatteryAmmoProvider
     proto: Pulse
+  - type: GunExecutionWhitelist
     fireCost: 100
   - type: Battery
     maxCharge: 40000
@@ -482,6 +487,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
     proto: RedHeavyLaser
+  - type: GunExecutionWhitelist
     fireCost: 100
   - type: Tag
     tags:
@@ -543,6 +549,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: HitscanBatteryAmmoProvider
     proto: XrayLaser
+  - type: GunExecutionWhitelist
     fireCost: 100
   - type: MagazineVisuals
     magState: mag
@@ -738,6 +745,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser
+  - type: GunExecutionWhitelist
     fireCost: 100
   - type: BatterySelfRecharger
     autoRecharge: true
@@ -786,6 +794,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser
+  - type: GunExecutionWhitelist
     fireCost: 100
   - type: BatterySelfRecharger
     autoRecharge: true
@@ -882,6 +891,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_clown.ogg
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser
+  - type: GunExecutionWhitelist
     fireCost: 100
   - type: BatterySelfRecharger
     autoRecharge: true
@@ -1000,3 +1010,4 @@
   components:
   - type: HitscanBatteryAmmoProvider
     proto: RedHeavyLaser
+  - type: GunExecutionWhitelist
