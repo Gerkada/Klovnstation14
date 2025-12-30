@@ -240,6 +240,7 @@
   id: WeaponLaserGun
   description: A weapon using light amplified by the stimulated emission of radiation.
   components:
+  - type: GunExecutionWhitelist
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/laser_retro.rsi
     layers:
@@ -252,7 +253,6 @@
     storedOffset: 0,-5
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser
-  - type: GunExecutionWhitelist
     fireCost: 62.5
   - type: MagazineVisuals
     magState: mag
