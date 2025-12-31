@@ -17,7 +17,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Client.Light;
+namespace Content.Client._KS14.CanisterOverlay;
 
 // Obviously does not support any kind of prototype hot-reloading
 public sealed class CanisterOverlay : Overlay
@@ -30,6 +30,7 @@ public sealed class CanisterOverlay : Overlay
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IClyde _clyde = default!;
 
+    private readonly AtmosphereSystem _atmosphereSystem = default!;
     private readonly TransformSystem _transformSystem = default!;
     private readonly SpriteSystem _spriteSystem = default!;
     private readonly GasTileOverlaySystem _gasTileOverlaySystem = default!;
@@ -63,6 +64,7 @@ public sealed class CanisterOverlay : Overlay
 
         IoCManager.InjectDependencies(this);
 
+        _atmosphereSystem = _entityManager.System<AtmosphereSystem>();
         _transformSystem = _entityManager.System<TransformSystem>();
         _spriteSystem = _entityManager.System<SpriteSystem>();
         _gasTileOverlaySystem = _entityManager.System<GasTileOverlaySystem>();
@@ -73,7 +75,7 @@ public sealed class CanisterOverlay : Overlay
 
         for (var i = 0; i < _visibleGasCount; i++)
         {
-            var gasPrototype = _prototypeManager.Index<GasPrototype>(_gasTileOverlaySystem.VisibleGasId[i].ToString());
+            var gasPrototype = _atmosphereSystem.GetGas(_gasTileOverlaySystem.VisibleGasId[i]);
             _visibleGasMolesVisibleMin[i] = gasPrototype.GasMolesVisible;
             _visibleGasMolesVisibleMax[i] = gasPrototype.GasMolesVisibleMax;
         }
@@ -117,8 +119,8 @@ public sealed class CanisterOverlay : Overlay
         var maskTexture = _spriteSystem.GetState(WindowMaskSpriteSpecifier).Frame0;
 
         // because canisters always have the same rotation as the camera, we use the camera's rotation
-        // TODO LCDC: maybe this should be negative maybe it shouldnt IDFK.
-        var rotationMatrix = Matrix3Helpers.CreateRotation(viewport.Eye?.Rotation ?? Angle.Zero);
+        // TODO LCDC: maybe this shouldnt be negative maybe it should IDFK.
+        var rotationMatrix = Matrix3Helpers.CreateRotation(-viewport.Eye?.Rotation ?? Angle.Zero);
 
         // Draw on the stencil target
         _drawDataCache.Clear();
@@ -155,15 +157,15 @@ public sealed class CanisterOverlay : Overlay
             return;
         }
 
-        //var maskShader = _prototypeManager.Index(StencilMaskShader).Instance();
-        //worldHandle.UseShader(maskShader);
+        var maskShader = _prototypeManager.Index(StencilMaskShader).Instance();
+        worldHandle.UseShader(maskShader);
 
         // Draw stencil target onto stencil mask so we can actually use it
         worldHandle.DrawTextureRect(resources.MaskTarget.Texture, args.WorldBounds);
 
         // Finally, draw gas textures on pixels that are white on our stencil mask
-        //var stencilEqualDrawShader = _prototypeManager.Index(StencilEqualDrawShader).Instance();
-        //worldHandle.UseShader(stencilEqualDrawShader);
+        var stencilEqualDrawShader = _prototypeManager.Index(StencilEqualDrawShader).Instance();
+        worldHandle.UseShader(stencilEqualDrawShader);
         foreach (var (canisterComponent, canisterMatrix) in _drawDataCache)
         {
             worldHandle.SetTransform(canisterMatrix);
