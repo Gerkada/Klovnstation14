@@ -31,6 +31,6 @@ public sealed class ProjectileExecutionSystem : EntitySystem
         }
 
         // The projectile entity is temporary and should be deleted.
-        Del(uid);
+        QueueDel(uid);
     }
 }
