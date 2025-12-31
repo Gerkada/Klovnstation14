@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._KS14.ReadyManifest.UI;
 using Content.Client.ContextMenu.UI;
 using Content.Client.Examine;
 using Content.Client.PDA;
@@ -1829,6 +1830,26 @@ namespace Content.Client.Stylesheets
                 Element<PanelContainer>()
                     .Class(StyleClassInset)
                     .Prop(PanelContainer.StylePropertyPanel, insetBack),
+
+                // KS14 start - ready manifest
+
+                Element<Label>()
+                    .Class(ReadyManifestJobListing.StyleClassReadyIndicatorNoReady)
+                    .Prop(Label.StylePropertyFontColor, Color.Red),
+
+                Element<Label>()
+                    .Class(ReadyManifestJobListing.StyleClassReadyIndicatorLowReady)
+                    .Prop(Label.StylePropertyFontColor, Color.Red),
+
+                Element<Label>()
+                    .Class(ReadyManifestJobListing.StyleClassReadyIndicatorMediumReady)
+                    .Prop(Label.StylePropertyFontColor, Color.Orange),
+
+                Element<Label>()
+                    .Class(ReadyManifestJobListing.StyleClassReadyIndicatorHighReady)
+                    .Prop(Label.StylePropertyFontColor, Color.LightGreen),
+
+                // KS14 end - ready manifest
             }).ToList());
         }
     }
