@@ -461,7 +461,15 @@ Entries:
     - type: Add
       message: >-
         Added the plasma cutter, available to salvage in their lockers. It is
-        refilled by inserting plasma sheets or raw plasma ore into it. An advanced
-        variant exists and is researchable in T2 Mass Excavation.
+        refilled by inserting plasma sheets or raw plasma ore into it. An
+        advanced variant exists and is researchable in T2 Mass Excavation.
   id: 59
   time: '2025-12-31T00:46:31.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: >-
+        You can now punch anomalies inside of disposal units. Requires a
+        G.O.R.I.L.L.A. gauntlet. 
+  id: 60
+  time: '2025-12-31T01:08:31.0000000+00:00'
