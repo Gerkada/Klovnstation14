@@ -10,7 +10,7 @@ namespace Content.Shared._KS14.Execution;
 
 /// <summary>
 /// Handles the GunExecutedEvent for projectile-based ammunition,
-/// such as bullets provided by a revolver.
+/// such as bullets provided by a revolver (since they provide a projectile and not cartridge, so that the cartridge stays in the revolver.)
 /// </summary>
 public sealed class ProjectileExecutionSystem : EntitySystem
 {
@@ -19,16 +19,12 @@ public sealed class ProjectileExecutionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ProjectileComponent, GunExecutedEvent>(OnProjectileExecuted);
-        SubscribeLocalEvent<ProjectileComponent, GunFinishedExecutionEvent>(OnProjectileFinishedExecution);
     }
 
     private void OnProjectileExecuted(Entity<ProjectileComponent> entity, ref GunExecutedEvent args)
     {
         args.Damage = entity.Comp.Damage;
-    }
 
-    private void OnProjectileFinishedExecution(Entity<ProjectileComponent> entity, ref GunFinishedExecutionEvent args)
-    {
         // Necessary to delete immediately instead of queuing
         Del(entity.Owner);
     }

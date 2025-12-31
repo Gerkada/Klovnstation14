@@ -229,7 +229,8 @@ public sealed class SharedGunExecutionSystem : EntitySystem
         _suicide.ApplyLethalDamage((victim, damageableComponent), damage);
 
         // Client-side prediction for recoil
-        if (direction != Vector2.Zero)
+        if (_net.IsClient && // because KickCamera on server networks it to be called on client
+            direction != Vector2.Zero)
             _recoil.KickCamera(attacker, direction);
 
         //_combat.SetInCombatMode(attacker, prev);

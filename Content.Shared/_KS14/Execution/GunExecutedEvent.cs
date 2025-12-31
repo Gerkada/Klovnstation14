@@ -7,7 +7,7 @@ using Content.Shared.Damage;
 namespace Content.Shared._KS14.Execution;
 
 /// <summary>
-/// Raised on an ammo entity (for guns that take physical ammo) or gun entity (for guns that don't take physical ammo, e.g. laser guns) 
+/// Raised on an ammo entity (for guns that take physical ammo) or gun entity (for guns that don't take physical ammo, e.g. battery guns) 
 /// when it is consumed by the GunExecutionSystem.
 /// Systems that manage specific ammo types should subscribe to this and
 /// populate the Damage field.
