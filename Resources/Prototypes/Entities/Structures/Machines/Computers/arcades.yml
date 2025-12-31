@@ -140,6 +140,15 @@
     - GunpetInstrument
     - BirdToyInstrument
     - MysteryFigureBox
+    # KS14 - Removed slop
+    - PlushieNuke
+    - PlushieCarp
+    - PlushieMagicarp
+    - PlushieHolocarp
+    - PlushieRainbowCarp
+    - PlushieRatvar
+    - PlushieNar
+    # KS14 - Removed slop
     - PlasticBanana
     - RevolverCapGun
     - SnapPopBox

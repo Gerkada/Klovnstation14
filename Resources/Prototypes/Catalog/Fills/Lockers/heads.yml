@@ -109,6 +109,7 @@
     - id: MedalCase
     - id: NukeDisk
     - id: PinpointerNuclear
+    - id: PlushieNuke
       prob: 0.1
     - id: RubberStampCaptain
     - id: SpaceCash1000

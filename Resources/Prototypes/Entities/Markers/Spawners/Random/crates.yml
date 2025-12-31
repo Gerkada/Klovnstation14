@@ -55,6 +55,7 @@
   id: LowValueFunCrateTable
   table: !type:GroupSelector
     children:
+    # KS14 - Removed slop
     - id: CrateCandles
     - id: CrateFunArtSupplies
     - id: CrateFunFoamGuns

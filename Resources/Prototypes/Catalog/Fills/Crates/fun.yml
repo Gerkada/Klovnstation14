@@ -51,6 +51,25 @@
 #
 # SPDX-License-Identifier: MIT
 
+- type: entityTable # KS14 - Removed most plushies
+  id: AllPlushiesTable
+  table: !type:GroupSelector
+    children:
+    - id: PlushieNar
+      weight: 0.5
+    - id: PlushieRatvar
+      weight: 0.5
+    - id: PlushieNuke
+    - !type:GroupSelector
+      children:
+      - id: PlushieCarp
+      - id: PlushieHolocarp
+        weight: 0.25
+      - id: PlushieMagicarp
+        weight: 0.25
+      - id: PlushieRainbowCarp
+        weight: 0.15
+
 - type: entityTable
   id: AllPottedPlantsTable
   table: !type:GroupSelector
@@ -93,6 +112,8 @@
         tableId: AllPottedPlantsTable
         rolls: !type:ConstantNumberSelector
           value: 5
+
+# KS14 - Removed slop
 
 - type: entity
   parent: CrateGenericSteel

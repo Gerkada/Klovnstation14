@@ -172,6 +172,7 @@
     - id: ClothingHeadHatCardborg
       prob: 0.01
       orGroup: Clothes
+    # KS14: Removed slop
     - id: ClothingUniformJumpskirtOfLife
 
 - type: entityTable
@@ -196,6 +197,8 @@
     - id: ClothingBeltChampion
       prob: 0.01
       orGroup: Swag
+    #plushies
+    # KS14: Removed slop plushies
     #useful
     - id: AmeJar
     - id: Omnitool

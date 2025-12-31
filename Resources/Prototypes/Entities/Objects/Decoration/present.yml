@@ -81,8 +81,7 @@
         orGroup: GiftPool
       - id: JetpackMiniFilled
         orGroup: GiftPool
-      - id: ToyAmongPequeno
-        orGroup: GiftPool
+      # KS14: Removed slop
       - id: ClothingNeckCloakMoth
         orGroup: GiftPool
       - id: TennisBall
@@ -181,6 +180,8 @@
         orGroup: GiftPool
       - id: ViolaInstrument
         orGroup: GiftPool
+      - id: ClothingNeckCloakTrans
+        orGroup: GiftPool
       - id: ClothingNeckCloakAdmin
         orGroup: GiftPool
       - id: ToyFigurineSkeleton
@@ -207,6 +208,7 @@
         orGroup: GiftPool
       - id: ClothingShoeSlippersDuck
         orGroup: GiftPool
+      # KS14: Removed slop
       - id: ClothingBeltUtilityFilled
         orGroup: GiftPool
       - id: WeaponFlareGun

@@ -39,16 +39,13 @@
 # SPDX-FileCopyrightText: 2025 DeusMaldPr
 # SPDX-FileCopyrightText: 2025 IProduceWidgets
 # SPDX-FileCopyrightText: 2025 Julian Giebel
-# SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 # SPDX-FileCopyrightText: 2025 Momo
 # SPDX-FileCopyrightText: 2025 Smugman
 # SPDX-FileCopyrightText: 2025 Southbridge
 # SPDX-FileCopyrightText: 2025 T
 # SPDX-FileCopyrightText: 2025 Unkn0wn_Gh0st
 # SPDX-FileCopyrightText: 2025 centcomofficer24
-# SPDX-FileCopyrightText: 2025 github_actions[bot]
 # SPDX-FileCopyrightText: 2025 lzk
-# SPDX-FileCopyrightText: 2025 nabegator220
 # SPDX-FileCopyrightText: 2025 slarticodefast
 #
 # SPDX-License-Identifier: MIT
@@ -84,6 +81,7 @@
       - id: ClothingHeadHelmetCosmonaut
       - id: ClothingHeadHelmetBasic
       - id: ClothingShoeSlippersDuck
+      # KS14 - Removed slop
       - id: ClothingHeadHatSquid
       # Animal Masks
       - !type:GroupSelector
@@ -150,6 +148,7 @@
       children:
       - id: ClothingNeckCloakHerald
       - id: ClothingHeadHelmetTemplar
+      # KS14 - Removed clokes
       - id: ToySkeleton
       - id: Basketball
       - id: Football
@@ -177,6 +176,7 @@
       - id: ClothingUniformJumpsuitPirate
       - id: ClothingShoesBootsCowboyFancy
       - id: ClothingHeadHatCowboyBountyHunter
+      # KS14 - Removed pins
     # Rare Group
     - !type:GroupSelector
       weight: 2

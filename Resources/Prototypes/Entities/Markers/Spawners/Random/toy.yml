@@ -36,8 +36,14 @@
     - type: RandomSpawner
       rarePrototypes:
         - FoamBlade
+        - PlushieGhost
       rareChance: 0.03
       prototypes:
+        - PlushieNuke
+        - PlushieNar
+        - PlushieCarp
+        - PlushieRatvar
+        - PlushieLamp
         - ToyAmongPequeno
         - ToyMouse
       chance: 0.5

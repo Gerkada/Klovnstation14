@@ -51,6 +51,9 @@
     back:
     - ClothingMultipleHeadphones
 
+# Toys
+# KS14 - Removed slop
+
 - type: loadout
   id: ThreeCandles
   dummyEntity: LoadoutDummyCandles
@@ -115,6 +118,9 @@
     back:
     - CigarGold
   groupBy: "smokeables"
+
+# Pins
+# KS14 - Removed pins
 
 # Canes
 # The white cane is intentionally not included here. Thats for the blind.

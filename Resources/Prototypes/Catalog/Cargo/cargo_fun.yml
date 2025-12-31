@@ -142,6 +142,8 @@
   category: cargoproduct-category-name-fun
   group: market
 
+# KS14 - Removed plushies
+
 - type: cargoProduct
   id: FunBoardGames
   icon:

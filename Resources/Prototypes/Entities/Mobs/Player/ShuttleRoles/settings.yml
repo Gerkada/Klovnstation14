@@ -411,7 +411,7 @@
     - type: GhostRole
       name: job-name-chaplain
     - type: Loadout
-      prototypes: [ VisitorChaplain ]
+      prototypes: [ VisitorChaplain, VisitorChaplainAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
 
 - type: randomHumanoidSettings
