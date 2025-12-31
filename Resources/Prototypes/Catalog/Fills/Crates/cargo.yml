@@ -195,7 +195,7 @@
     - id: ClothingHeadHatChameleon
     - id: ClothingBeltChampion
       prob: 0.01
-      orGroup: Swag
+      # orGroup: Swag
     #plushies
     # KS14: Removed slop plushies
 
