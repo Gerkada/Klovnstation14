@@ -122,14 +122,14 @@ namespace Content.Server.GameTicking
 
                 case SessionStatus.Disconnected:
                 {
-                    // KS14 start - ready manifest
+                    // Harmony start - ready manifest
                     if (_playerGameStatuses.TryGetValue(session.UserId, out var playerGameStatus) &&
                         playerGameStatus == PlayerGameStatus.ReadyToPlay)
                         _playerGameStatuses[session.UserId] = PlayerGameStatus.NotReadyToPlay;
 
                     var playerDisconnected = new PlayerDisconnectedEvent();
                     RaiseLocalEvent(ref playerDisconnected);
-                    // KS14 end - ready manifest
+                    // Harmony end - ready manifest
 
                     _chatManager.SendAdminAnnouncement(Loc.GetString("player-leave-message", ("name", args.Session.Name)));
                     if (mindId != null)
@@ -227,10 +227,10 @@ namespace Content.Server.GameTicking
             RaiseNetworkEvent(new RequestWindowAttentionEvent());
         }
 
-        // KS14 start - ready manifest
+        // Harmony start - ready manifest
         [ByRefEvent]
         public struct PlayerDisconnectedEvent;
-        // KS14 end - ready manifest
+        // Harmony end - ready manifest
     }
 
     public sealed class PlayerJoinedLobbyEvent : EntityEventArgs

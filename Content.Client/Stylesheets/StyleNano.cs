@@ -1831,7 +1831,7 @@ namespace Content.Client.Stylesheets
                     .Class(StyleClassInset)
                     .Prop(PanelContainer.StylePropertyPanel, insetBack),
 
-                // KS14 start - ready manifest
+                // Harmony start - ready manifest
 
                 Element<Label>()
                     .Class(ReadyManifestJobListing.StyleClassReadyIndicatorNoReady)
@@ -1849,7 +1849,7 @@ namespace Content.Client.Stylesheets
                     .Class(ReadyManifestJobListing.StyleClassReadyIndicatorHighReady)
                     .Prop(Label.StylePropertyFontColor, Color.LightGreen),
 
-                // KS14 end - ready manifest
+                // Harmony end - ready manifest
             }).ToList());
         }
     }

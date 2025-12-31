@@ -110,6 +110,7 @@ namespace Content.Client.Lobby
             Lobby?.SwitchState(LobbyGui.LobbyGuiState.CharacterSetup);
         }
 
+        // Harmony start - ready manifest
         private void OnManifestPressed(BaseButton.ButtonEventArgs args)
         {
             if (_gameTicker.IsGameStarted)
@@ -117,6 +118,7 @@ namespace Content.Client.Lobby
 
             _readyManifestSystem.RequestReadyManifest();
         }
+        // Harmony end - ready manifest
 
         private void OnReadyPressed(BaseButton.ButtonEventArgs args)
         {
@@ -195,7 +197,7 @@ namespace Content.Client.Lobby
                 Lobby!.ReadyButton.ToggleMode = false;
                 Lobby!.ReadyButton.Pressed = false;
                 Lobby!.ObserveButton.Disabled = false;
-                Lobby!.ManifestButton.Disabled = true;
+                Lobby!.ManifestButton.Disabled = true; // Harmony
             }
             else
             {
@@ -205,7 +207,7 @@ namespace Content.Client.Lobby
                 Lobby!.ReadyButton.ToggleMode = true;
                 Lobby!.ReadyButton.Disabled = false;
                 Lobby!.ObserveButton.Disabled = true;
-                Lobby!.ManifestButton.Disabled = false;
+                Lobby!.ManifestButton.Disabled = false; // Harmony
             }
 
             if (_gameTicker.ServerInfoBlob != null)
