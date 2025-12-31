@@ -170,7 +170,7 @@
     - id: ClothingMaskGasMerc
     - id: ClothingHeadHatCardborg
       prob: 0.01
-      orGroup: Clothes
+      # orGroup: Clothes
     # KS14: Removed slop
     - id: ClothingUniformJumpskirtOfLife
 

@@ -215,7 +215,7 @@
       - !type:NestedSelector
         tableId: ClownOtherJobTable
         weight: 6
-      - id: SprayFlowerPin
+      # KS14: Removed pin
       - id: ClothingHeadHatMagician
       - id: ClothingHeadSafari
       - id: ClothingHeadHatPirate

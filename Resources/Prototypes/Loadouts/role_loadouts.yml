@@ -34,7 +34,7 @@
   - CaptainOuterClothing
   - Survival
   - Trinkets
-  - CaptainJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -49,7 +49,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - HoPJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 # Silicons
@@ -78,7 +78,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - PassengerJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -104,7 +104,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - ServiceWorkerJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -119,7 +119,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - ChefJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -131,7 +131,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - LibrarianJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -144,7 +144,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - LawyerJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -161,7 +161,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - ChaplainJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -190,7 +190,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - BotanistJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -207,7 +207,7 @@
   - Glasses
   - SurvivalClown
   - Trinkets
-  - ClownJobTrinkets
+  # KS14: Removed slop loadout
 
 - type: roleLoadout
   id: JobMime
@@ -223,7 +223,7 @@
   - Glasses
   - SurvivalMime
   - Trinkets
-  - MimeJobTrinkets
+  # KS14: Removed slop loadout
 
 - type: roleLoadout
   id: JobMusician
@@ -236,7 +236,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - MusicianJobTrinkets
+  # KS14: Removed slop loadout
   - Instruments
   - GroupSpeciesBreathTool
 
@@ -254,7 +254,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - QuartermasterJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -270,7 +270,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - CargoTechnicianJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -283,7 +283,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - SalvageSpecialistJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 # Engineering
@@ -299,7 +299,7 @@
   - ChiefEngineerShoes
   - SurvivalExtended
   - Trinkets
-  - ChiefEngineerJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -310,7 +310,7 @@
   - StationEngineerBackpack
   - SurvivalExtended
   - Trinkets
-  - TechnicalAssistantJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -325,7 +325,7 @@
   - StationEngineerID
   - SurvivalExtended
   - Trinkets
-  - StationEngineerJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -338,7 +338,7 @@
   - AtmosphericTechnicianShoes
   - SurvivalExtended
   - Trinkets
-  - AtmosphericTechnicianJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 # Science
@@ -356,7 +356,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - ResearchDirectorJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -374,7 +374,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - ScientistJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -386,7 +386,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - ResearchAssistantJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 # Security
@@ -455,7 +455,7 @@
   - SecurityBackpack
   - SurvivalSecurity
   - Trinkets
-  - SecurityCadetJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathToolSecurity
 
 # Medical
@@ -474,7 +474,7 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - ChiefMedicalOfficerJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathToolMedical
 
 - type: roleLoadout
@@ -492,7 +492,7 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - MedicalDoctorJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathToolMedical
 
 - type: roleLoadout
@@ -504,7 +504,7 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - MedicalInternJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathToolMedical
 
 - type: roleLoadout
@@ -519,7 +519,7 @@
   - MedicalShoes
   - SurvivalMedical
   - Trinkets
-  - ChemistJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathToolMedical
 
 - type: roleLoadout
@@ -536,7 +536,7 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - ParamedicJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathToolMedical
 
 # Wildcards
@@ -549,7 +549,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - ReporterJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -561,7 +561,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - PsychologistJobTrinkets
+  # KS14: Removed slop loadout
   - GroupSpeciesBreathTool
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs

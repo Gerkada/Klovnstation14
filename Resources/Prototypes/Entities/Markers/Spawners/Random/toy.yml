@@ -200,7 +200,7 @@
     - id: DiceBag
     - id: SpectralLocator
     - id: BarberScissors
-    - id: SprayFlowerPin
+    # KS14: Removed pin
     - id: ClothingShoesSkates
     - id: CrazyGlue
     - id: CrazyLube
