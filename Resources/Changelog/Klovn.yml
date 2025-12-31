@@ -456,3 +456,11 @@ Entries:
         russian roulette games!
   id: 58
   time: '2025-12-30T16:37:13.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: >-
+        Added the plasma cutter, available to salvage in salvage vendors. It is
+        refilled by using plasma sheets or raw plasma ore on it.
+  id: 59
+  time: '2025-12-31T00:46:31.0000000+00:00'
