@@ -13,7 +13,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Chat;
-using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Verbs;
@@ -27,6 +26,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using System.Numerics;
 using Content.Shared.FixedPoint;
+using Content.Shared.Damage.Components;
 
 namespace Content.Shared._KS14.Execution;
 

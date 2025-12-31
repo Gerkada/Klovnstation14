@@ -1,4 +1,5 @@
 using Content.Server._KS14.Antag; // KS14
+using Content.Server._KS14.IoC; // KS14
 using Content.Server.Acz;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -82,6 +83,8 @@ namespace Content.Server.Entry
         public override void PreInit()
         {
             ServerContentIoC.Register(Dependencies);
+            KsServerContentIoC.Register(Dependencies); // KS14
+
             foreach (var callback in TestingCallbacks)
             {
                 var cast = (ServerModuleTestingCallbacks)callback;
