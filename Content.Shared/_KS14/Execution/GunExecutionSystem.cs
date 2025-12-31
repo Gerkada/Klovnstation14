@@ -5,6 +5,7 @@
 // SPDX-FileCopyrightText: 2025 Aiden
 // SPDX-FileCopyrightText: 2025 Aviu00
 // SPDX-FileCopyrightText: 2025 Gerkada
+// SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 // SPDX-FileCopyrightText: 2025 Piras314
 // SPDX-FileCopyrightText: 2025 Solstice
 // SPDX-FileCopyrightText: 2025 github_actions[bot]
