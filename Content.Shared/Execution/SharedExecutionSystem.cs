@@ -115,9 +115,10 @@ public sealed class SharedExecutionSystem : EntitySystem
         if (!TryComp<MobStateComponent>(victim, out var mobState))
             return false;
 
+        // KS14: Youre now allowed to execute the dead
         // You're not allowed to execute dead people (no fun allowed)
-        if (_mobState.IsDead(victim, mobState))
-            return false;
+        // if (_mobState.IsDead(victim, mobState))
+        //     return false;
 
         // You must be able to attack people to execute
         if (!_actionBlocker.CanAttack(attacker, victim))

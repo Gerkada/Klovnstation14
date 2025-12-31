@@ -1,29 +1,26 @@
 // SPDX-FileCopyrightText: 2025 Gerkada
 //
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 
 using Content.Shared._KS14.Execution;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Projectiles;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._KS14.Execution;
 
+// TODO LCDC: predictedbattery oneday
+
 /// <summary>
 /// Server-side handler for GunExecutedEvent on battery-powered weapons.
 /// </summary>
-public sealed class BatteryExecutionSystem : SharedBatteryExecutionSystem
+public sealed class BatteryExecutionSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly BatterySystem _batterySystem = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
-
-    private const string HeatDamageType = "Heat";
 
     public override void Initialize()
     {
@@ -35,37 +32,24 @@ public sealed class BatteryExecutionSystem : SharedBatteryExecutionSystem
 
     private void OnHitscanBatteryExecuted(EntityUid uid, HitscanBatteryAmmoProviderComponent component, ref GunExecutedEvent args)
     {
-        if (_batterySystem.TryUseCharge(uid, component.FireCost))
-        {
-            if (_prototypeManager.TryIndex(component.Prototype, out HitscanPrototype? proto) && proto != null)
-            {
-                args.Damage = proto.Damage;
-                args.MainDamageType = HeatDamageType; // Assume hitscan is heat
+        if (!_batterySystem.TryUseCharge(uid, component.FireCost))
+            return;
 
-                if (args.Damage == null || args.Damage.GetTotal() < 5)
-                {
-                    args.Cancelled = true;
-                    args.FailureReason = "execution-popup-gun-weak-ammo";
-                }
-            }
-        }
+        if (!_prototypeManager.TryIndex(component.Prototype, out HitscanPrototype? proto))
+            return;
+
+        args.Damage = proto.Damage;
     }
 
     private void OnProjectileBatteryExecuted(EntityUid uid, ProjectileBatteryAmmoProviderComponent component, ref GunExecutedEvent args)
     {
-        if (_batterySystem.TryUseCharge(uid, component.FireCost))
-        {
-            if (_prototypeManager.TryIndex(component.Prototype, out var proto) &&
-                proto.TryGetComponent<ProjectileComponent>(out var projectile, _componentFactory))
-            {
-                args.Damage = projectile.Damage;
+        if (!_batterySystem.TryUseCharge(uid, component.FireCost))
+            return;
 
-                if (args.Damage.GetTotal() < 5)
-                {
-                    args.Cancelled = true;
-                    args.FailureReason = "execution-popup-gun-weak-ammo";
-                }
-            }
-        }
+        if (!_prototypeManager.TryIndex(component.Prototype, out var proto) ||
+            !proto.TryGetComponent<ProjectileComponent>(out var projectile, _componentFactory))
+            return;
+
+        args.Damage = projectile.Damage;
     }
 }

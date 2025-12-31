@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2025 Gerkada
 // SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 //
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 
 using Content.Shared.Projectiles;
 
@@ -16,22 +16,19 @@ public sealed class ProjectileExecutionSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<ProjectileComponent, GunExecutedEvent>(OnProjectileExecuted);
+        SubscribeLocalEvent<ProjectileComponent, GunFinishedExecutionEvent>(OnProjectileFinishedExecution);
     }
 
-    private void OnProjectileExecuted(EntityUid uid, ProjectileComponent component, ref GunExecutedEvent args)
+    private void OnProjectileExecuted(Entity<ProjectileComponent> entity, ref GunExecutedEvent args)
     {
-        args.Damage = component.Damage;
+        args.Damage = entity.Comp.Damage;
+    }
 
-        if (args.Damage == null || args.Damage.GetTotal() < 5)
-        {
-            args.Cancelled = true;
-            args.FailureReason = "execution-popup-gun-weak-ammo";
-            // Don't delete the temporary entity, let the main system handle it
-            return;
-        }
-
-        // The projectile entity is temporary and should be deleted.
-        QueueDel(uid);
+    private void OnProjectileFinishedExecution(Entity<ProjectileComponent> entity, ref GunFinishedExecutionEvent args)
+    {
+        // Necessary to delete immediately instead of queuing
+        Del(entity.Owner);
     }
 }
