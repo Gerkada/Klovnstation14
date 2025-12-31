@@ -10,6 +10,4 @@ namespace Content.Shared._KS14.Execution;
 /// without the normal incapacitation restrictions.
 /// </summary>
 [RegisterComponent]
-public sealed partial class UnrestrictedExecutionComponent : Component
-{
-}
+public sealed partial class UnrestrictedExecutionComponent : Component;
