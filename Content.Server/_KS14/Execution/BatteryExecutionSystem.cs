@@ -17,7 +17,7 @@ namespace Content.Server._KS14.Execution;
 /// <summary>
 /// Server-side handler for GunExecutedEvent on battery-powered weapons.
 /// </summary>
-public sealed class BatteryExecutionSystem : SharedBatteryExecutionSystem
+public sealed class BatteryExecutionSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly BatterySystem _batterySystem = default!;
