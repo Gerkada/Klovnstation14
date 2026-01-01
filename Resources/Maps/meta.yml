@@ -17366,14 +17366,6 @@ entities:
     - type: Transform
       pos: 103.5,-1.5
       parent: 5350
-  - uid: 25956
-    components:
-    - type: MetaData
-      name: Telecomms APC
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 104.5,-14.5
-      parent: 5350
   - uid: 27589
     components:
     - type: MetaData
@@ -17435,6 +17427,14 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -12.5,14.5
+      parent: 5350
+  - uid: 25956
+    components:
+    - type: MetaData
+      name: Telecomms APC
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 104.5,-14.5
       parent: 5350
 - proto: ArrivalsShuttleTimer
   entities:
