@@ -85,10 +85,10 @@
         ents: []
   - type: StaticPrice
     price: 500
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/gun/ballistics/rifle/rifle_pickup1.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/gun/ballistics/rifle/rifle_drop1.ogg
 
@@ -250,7 +250,7 @@
     proto: CartridgeMagnum
   - type: StaticPrice
     price: 0
-  - type: GunExecutionWhitelist
+  - type: GunExecutionWhitelist # Goob->KS14 port: gun execution
 
 - type: entity
   parent: WeaponPistolFlintlock

@@ -18,7 +18,6 @@
 // SPDX-License-Identifier: MIT
 
 using Content.Client.Atmos.Overlays;
-using Content.Client.Light;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.EntitySystems;
@@ -27,10 +26,8 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.GameStates;
-
-using Content.Client.Light;
-using Robust.Client.Graphics;
 using Robust.Shared.Utility;
+using Content.Client._KS14.CanisterOverlay; // KS14
 
 
 namespace Content.Client.Atmos.EntitySystems

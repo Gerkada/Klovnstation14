@@ -36,10 +36,10 @@
         path: /Audio/Machines/Nuke/general_beep.ogg
         params:
           volume: -2
-    - type: EmitSoundOnPickup
+    - type: EmitSoundOnPickup # KS14: pickup/drop sounds
       sound:
         path: /Audio/_KS14/Handling/component_pickup.ogg
-    - type: EmitSoundOnDrop
+    - type: EmitSoundOnDrop # KS14: pickup/drop sounds
       sound:
         path: /Audio/_KS14/Handling/component_drop.ogg
 

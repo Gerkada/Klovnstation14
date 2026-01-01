@@ -45,10 +45,10 @@
   - type: Tag
     tags:
     - SurgeryTool
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/tools/wirecutter_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/tools/screwdriver_drop.ogg
 
@@ -141,6 +141,17 @@
     state: shiv
   - type: Item
     heldPrefix: shiv
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.375,-0.15,0.35,0.12"
+        density: 20 # derived from base_item
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+
 
 - type: entity
   name: advanced scalpel

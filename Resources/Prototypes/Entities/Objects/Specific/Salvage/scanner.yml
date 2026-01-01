@@ -38,10 +38,10 @@
       params:
         maxDistance: 1
   - type: MiningScanner
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/component_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/component_drop.ogg
 
@@ -53,7 +53,7 @@
   - type: ToggleCellDraw
   - type: PowerCellDraw
     drawRate: 2.4 # ~5 minutes on a medium power cell.
-    useRate: 0
+    useCharge: 0
 
 - type: entity
   id: MineralScannerEmpty
@@ -97,7 +97,7 @@
   - type: ToggleCellDraw
   - type: PowerCellDraw
     drawRate: 1.2 # ~10 minutes on a medium power cell.
-    useRate: 0
+    useCharge: 0
 
 - type: entity
   id: AdvancedMineralScannerEmpty

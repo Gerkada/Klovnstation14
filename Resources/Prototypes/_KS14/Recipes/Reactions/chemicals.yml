@@ -29,7 +29,7 @@
     Plasma:
       amount: 1
   effects:
-  - !type:ExplosionReactionEffect # insanely explosive
+  - !type:Explosion # insanely explosive
     explosionType: HardBomb
     intensityPerUnit: 4
     maxTotalIntensity: 250

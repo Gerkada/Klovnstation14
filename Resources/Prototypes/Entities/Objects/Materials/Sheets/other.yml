@@ -27,10 +27,10 @@
     solutions:
       paper:
         canReact: false
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/metal_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/metal_drop.ogg
 
@@ -67,10 +67,10 @@
         reagents:
         - ReagentId: Cellulose
           Quantity: 3
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/paper_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/paper_drop.ogg
 
@@ -119,10 +119,6 @@
         - ReagentId: Plasma
           Quantity: 10
         canReact: false
-  - type: Tag
-    tags:
-    - Sheet
-    - ConstructionMaterial
 
 - type: entity
   parent: SheetPlasma
@@ -186,10 +182,10 @@
         - ReagentId: Phosphorus
           Quantity: 5
         canReact: false
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/plastic_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/plastic_drop.ogg
 
@@ -303,10 +299,10 @@
           - ReagentId: Fat
             Quantity: 3
           canReact: false
-    - type: EmitSoundOnPickup
+    - type: EmitSoundOnPickup # KS14: pickup/drop sounds
       sound:
         path: /Audio/_KS14/Handling/materials/skin_pick_up.ogg
-    - type: EmitSoundOnDrop
+    - type: EmitSoundOnDrop # KS14: pickup/drop sounds
       sound:
         path: /Audio/_KS14/Handling/materials/skin_drop.ogg
 

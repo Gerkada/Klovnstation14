@@ -38,10 +38,10 @@
       layers:
         - state: extraction_point
           map: [ "foldedLayer" ]
-    - type: EmitSoundOnPickup
+    - type: EmitSoundOnPickup # KS14: pickup/drop sounds
       sound:
         path: /Audio/_KS14/Handling/component_pickup.ogg
-    - type: EmitSoundOnDrop
+    - type: EmitSoundOnDrop # KS14: pickup/drop sounds
       sound:
         path: /Audio/_KS14/Handling/component_drop.ogg
 

@@ -22,10 +22,10 @@
   - type: Tag
     tags:
     - ConstructionMaterial
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/iron_rod_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/metal_drop.ogg
 
@@ -87,10 +87,6 @@
   name: metal rod
   suffix: 10
   components:
-  - type: Tag
-    tags:
-    - RodMetal1
-    - ConstructionMaterial
   - type: Sprite
     state: rods
   - type: Stack
@@ -102,10 +98,6 @@
   name: metal rod
   suffix: Single
   components:
-  - type: Tag
-    tags:
-    - RodMetal1
-    - ConstructionMaterial
   - type: Sprite
     state: rods
   - type: Stack

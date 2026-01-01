@@ -3,8 +3,10 @@
 //
 // SPDX-License-Identifier: MPL-2.0
 
-using System.Linq;
 using Content.Shared.Materials;
+using Content.Shared.Power;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._KS14.ChargeByMaterialStorage;
@@ -12,16 +14,34 @@ namespace Content.Shared._KS14.ChargeByMaterialStorage;
 /// <summary>
 ///     Handles <see cref="ChargeByMaterialStorageComponent"/>. 
 /// </summary>
-public abstract class SharedChargeByMaterialStorageSystem : EntitySystem
+public sealed class SharedChargeByMaterialStorageSystem : EntitySystem
 {
     [Dependency] private readonly SharedMaterialStorageSystem _materialStorageSystem = default!;
+    [Dependency] private readonly SharedBatterySystem _batterySystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ChargeByMaterialStorageComponent, ComponentStartup>(OnStartup);
+        // Necessary as batterysystem updates charge of batteries to starting value at mapinit, and we depend on that, so make it be after
+        SubscribeLocalEvent<ChargeByMaterialStorageComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(SharedBatterySystem) });
+
+        SubscribeLocalEvent<ChargeByMaterialStorageComponent, ChargeChangedEvent>(OnChargeChanged);
         SubscribeLocalEvent<ChargeByMaterialStorageComponent, MaterialAmountChangedEvent>(OnMaterialAmountChanged);
+    }
+
+    private void OnChargeChanged(Entity<ChargeByMaterialStorageComponent> entity, ref ChargeChangedEvent args)
+    {
+        if (!entity.Comp.AdjustStorageLimitAccordingToBatteryCharge)
+            return;
+
+        if (!TryComp<MaterialStorageComponent>(entity, out var materialStorageComponent))
+            return;
+
+        var remainingCharge = args.MaxCharge - args.CurrentCharge;
+        materialStorageComponent.StorageLimit = (int)MathF.Ceiling(remainingCharge / entity.Comp.GainRatio);
+        Dirty(entity.Owner, materialStorageComponent);
     }
 
     /// <summary>
@@ -51,9 +71,20 @@ public abstract class SharedChargeByMaterialStorageSystem : EntitySystem
         return activeStoredMaterials;
     }
 
-    protected virtual void OnStartup(Entity<ChargeByMaterialStorageComponent> entity, ref ComponentStartup args)
+    private void OnStartup(Entity<ChargeByMaterialStorageComponent> entity, ref ComponentStartup args)
     {
         entity.Comp.CachedStoredMaterials = GetActiveStoredMaterials(entity);
+    }
+
+    private void OnMapInit(Entity<ChargeByMaterialStorageComponent> entity, ref MapInitEvent args)
+    {
+        if (!entity.Comp.AdjustStorageLimitAccordingToBatteryCharge ||
+            !TryComp<MaterialStorageComponent>(entity, out var materialStorageComponent) ||
+            !TryComp<BatteryComponent>(entity, out var batteryComponent))
+            return;
+
+        materialStorageComponent.StorageLimit = (int)MathF.Ceiling((batteryComponent.MaxCharge - _batterySystem.GetCharge((entity.Owner, batteryComponent))) / entity.Comp.GainRatio);
+        Dirty(entity.Owner, materialStorageComponent);
     }
 
     // Top 10 dictionary allocation spams of all time
@@ -88,7 +119,15 @@ public abstract class SharedChargeByMaterialStorageSystem : EntitySystem
         entity.Comp.CachedStoredMaterials = new(materialStorageComponent.Storage);
     }
 
-    // Empty on client because nothing ever happens on client
-    // TODO LCDC: PredictedBatteryComponent when apstrim merge
-    protected abstract void ChangeCharge(Entity<ChargeByMaterialStorageComponent> entity, float charge);
+    private void ChangeCharge(Entity<ChargeByMaterialStorageComponent> entity, float addedCharge)
+    {
+        if (!TryComp<BatteryComponent>(entity, out var batteryComponent))
+            return;
+
+        var batteryEntity = new Entity<BatteryComponent?>(entity.Owner, batteryComponent);
+        if (_batterySystem.GetCharge(batteryEntity) + addedCharge > batteryComponent.MaxCharge)
+            return;
+
+        _batterySystem.ChangeCharge(batteryEntity, addedCharge);
+    }
 }

@@ -35,9 +35,12 @@
   - type: PhysicalComposition
     materialComposition:
       Plastic: 100
-  - type: EmitSoundOnPickup
+  - type: Tag
+    tags:
+    - GeigerCounter
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/tools/multitool_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/tools/multitool_drop.ogg

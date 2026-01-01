@@ -16,10 +16,11 @@ PlushieSlime: null
 PlushieSnake: null
 PlushieExperiment: null
 PlushieLizard: null
+PlushieLizardMirrored: null # DIfferent from below
+PlushieLizardInversed: null # Different from above
 PlushieSpaceLizard: null
-PlushieLizardMirrored: null
-PlushieLizardInversed: null
 PlushieVox: null
+PlushieVulp: null
 PlushieRouny: null
 PlushieSharkBlue: null
 PlushieSharkGrey: null
@@ -28,7 +29,7 @@ PlushieDiona: null
 PlushieXeno: null
 PlushieHampter: null
 PlushieMoth: null
-PlushieArachind: null
+PlushieArachind: null # [SIC]; yes, this prototype is actually spelt 'Arachind' and not 'Arachnid'
 PlushieAtmosian: null
 PlushiePenguin: null
 #crates
@@ -59,7 +60,6 @@ ClothingNeckCloakIntersex: null
 ClothingNeckCloakLesbian: null
 ClothingNeckCloakPan: null
 ClothingNeckCloakTrans: null
-ClothingHeadHatXmasCrown: null
 BedsheetRainbow: null
 ClothingHeadHatFlowerWreath: null
 ClothingUniformColorRainbow: null

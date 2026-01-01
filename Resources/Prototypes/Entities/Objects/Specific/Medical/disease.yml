@@ -41,10 +41,10 @@
   # - Virology (when it's back)
     - Botany
     - Chemicals
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/cardboard_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/cardboard_drop.ogg
 

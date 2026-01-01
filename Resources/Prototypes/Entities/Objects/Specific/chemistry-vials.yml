@@ -106,10 +106,10 @@
   - type: Spillable
     solution: beaker
   - type: DnaSubstanceTrace
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_drop.ogg
 

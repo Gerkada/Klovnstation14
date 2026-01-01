@@ -63,10 +63,10 @@
     prototype: CarpetCard
     doAfter: 0.5
     removeOnInteract: true
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/cardboard_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/cardboard_drop.ogg
 
@@ -271,10 +271,10 @@
         reagents:
         - ReagentId: Cellulose
           Quantity: 10
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/wood_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/wood_drop.ogg
 
@@ -347,7 +347,7 @@
       - HEAD
   - type: PointLight
     radius: 1.2
-    energy: 1.5
+    energy: 2.7
     color: "#4faffb"
     slots:
 
@@ -370,10 +370,10 @@
   - type: Tag
     tags:
     - HideCorgi
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       collection: ClothPickup
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       collection: ClothDrop
 
@@ -414,10 +414,10 @@
     tags:
     - RawMaterial
     - Diamond
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/metal_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/metal_drop.ogg
 
@@ -773,10 +773,10 @@
           Quantity: 3
   - type: Item
     heldPrefix: bones
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/wood_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/wood_drop.ogg
 

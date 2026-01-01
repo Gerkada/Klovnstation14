@@ -95,10 +95,10 @@
       path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
   - type: StaticPrice
     price: 500
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/gun/ballistics/pistol/pistol_pickup1.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/gun/ballistics/pistol/pistol_drop1.ogg
 
@@ -129,7 +129,7 @@
   - type: Appearance
   - type: StaticPrice
     price: 1500
-  - type: GunExecutionWhitelist
+  - type: GunExecutionWhitelist # Goob->KS14 port: gun execution
 
 - type: entity
   name: Inspector
@@ -149,7 +149,7 @@
     ammoSlots: [ null, null, null, null, null, null ]
   - type: StealTarget
     stealGroup: OfficerHandgun
-  - type: GunExecutionWhitelist
+  - type: GunExecutionWhitelist # Goob->KS14 port: gun execution
 
 - type: entity
   name: Mateba
@@ -167,7 +167,7 @@
     fireRate: 3
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
-  - type: GunExecutionWhitelist
+  - type: GunExecutionWhitelist # Goob->KS14 port: gun execution
 
 - type: entity
   parent: WeaponRevolverMateba
@@ -200,7 +200,7 @@
         volume: 2.25
   - type: StaticPrice
     price: 1500 # Botany can shit these out like candy, but let's see how it goes
-  - type: GunExecutionWhitelist
+  - type: GunExecutionWhitelist # Goob->KS14 port: gun execution
 
 - type: entity
   parent: WeaponRevolverPython
@@ -208,10 +208,6 @@
   suffix: armor-piercing
   components:
   - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-        - CartridgeMagnum
-        - SpeedLoaderMagnum
     proto: CartridgeMagnumAP
 
 
@@ -236,7 +232,7 @@
     capacity: 5
     chambers: [ True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null ]
-  - type: GunExecutionWhitelist
+  - type: GunExecutionWhitelist # Goob->KS14 port: gun execution
 
 - type: entity
   parent: WeaponRevolverPirate

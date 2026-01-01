@@ -112,6 +112,7 @@
     - HeadTop
     - HeadSide
     - FacialHair
+    - Hair
     markingsDisplacement:
       Hair:
         sizeMaps:

@@ -1,7 +1,8 @@
 - type: entity
   parent: MagazineLightRifleBox # It goes in a saw, its funny.
   id: MagazineFoamBox
-  name: ammunition box (foam)
+  name: "L6 SAW magazine box (foam dart)"
+  description: Box containing a 100-round belt of linked... foam darts?
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -10,9 +11,3 @@
         - BulletFoam
     proto: BulletFoam
     capacity: 100
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_KS14/Handling/gun/ballistics/magazine/magazine_pickup1.ogg
-  - type: EmitSoundOnDrop
-    sound:
-      path: /Audio/_KS14/Handling/gun/ballistics/magazine/magazine_drop1.ogg

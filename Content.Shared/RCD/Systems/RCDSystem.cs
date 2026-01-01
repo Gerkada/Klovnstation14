@@ -19,7 +19,6 @@
 // SPDX-License-Identifier: MIT
 
 using Content.Shared.Administration.Logs;
-using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Construction;
 using Content.Shared.Database;
@@ -73,6 +72,13 @@ public sealed class RCDSystem : EntitySystem
 
     private HashSet<EntityUid> _intersectingEntities = new();
 
+    // Goob
+    /// <summary>
+    ///     Affects how much of original price of something constructed
+    ///         by RCD, should be returned when deconstructing it.
+    /// </summary>
+    public const int DeconstructCostReturnDivisor = 2;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -109,11 +115,14 @@ public sealed class RCDSystem : EntitySystem
         if (!component.AvailablePrototypes.Contains(args.ProtoId))
             return;
 
-        if (!_protoManager.HasIndex(args.ProtoId))
+        if (!_protoManager.Resolve<RCDPrototype>(args.ProtoId, out var prototype))
             return;
 
         // Set the current RCD prototype to the one supplied
         component.ProtoId = args.ProtoId;
+
+        _adminLogger.Add(LogType.RCD, LogImpact.Low, $"{args.Actor} set RCD mode to: {prototype.Mode} : {prototype.Prototype}");
+
         Dirty(uid, component);
     }
 
@@ -311,12 +320,19 @@ public sealed class RCDSystem : EntitySystem
         _audio.PlayPredicted(component.SuccessSound, uid, args.User);
         // Goobstation - start
         var prototype = _protoManager.Index(component.ProtoId);
-        if (prototype.Mode == RcdMode.Deconstruct)
-            _sharedCharges.AddCharges(uid, args.Cost / 2);
+        if (prototype.Mode == RcdMode.Deconstruct) // on decon, return half the cost
+            _sharedCharges.AddCharges(uid, GetRefundedCost(args.Cost));
         else
             _sharedCharges.AddCharges(uid, -args.Cost);
         // Goobstation - end
     }
+
+    // Goobstation
+    /// <summary>
+    ///     Returns, given the cost taken to construct something,
+    ///         how many charges should be refunded after deconstructing it.
+    /// </summary>
+    public static int GetRefundedCost(int cost) => cost / DeconstructCostReturnDivisor;
 
     private void OnRCDconstructionGhostRotationEvent(RCDConstructionGhostRotationEvent ev, EntitySessionEventArgs session)
     {

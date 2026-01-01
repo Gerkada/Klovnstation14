@@ -30,17 +30,16 @@
 - type: gameMapPool
   id: DefaultMapPool
   maps:
-  # - Amber
   - Bagel
   - Box
-  # - Elkridge
   - Fland
   - Marathon
-  # - Oasis
+  # - Oasis # KS14: remove map
   - Packed
-  # - Plasma
+  # - Plasma # KS14: remove map
   - Reach
-  # - Exo
+  # - Exo # KS14: remove map
   - Saltern # KS14: bring saltern back
-  - Meta
-  - Omega
+  - Snowball
+  - Meta # KS14: bring meta back
+  - Omega # KS14: bring omega back

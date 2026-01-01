@@ -52,4 +52,4 @@
       path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
   - type: StaticPrice
     price: 500
-  - type: GunExecutionWhitelist
+  - type: GunExecutionWhitelist # Goob->KS14 port: gun execution

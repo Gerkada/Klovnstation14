@@ -49,10 +49,10 @@
   - type: PhysicalComposition
     materialComposition:
       Glass: 25
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_drop.ogg
 
@@ -83,10 +83,10 @@
   - type: PhysicalComposition
     materialComposition:
       Glass: 10 # Trace amounts of glass I guess. Important for overriding inheritance
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_drop.ogg
 
@@ -128,12 +128,40 @@
   - type: PhysicalComposition
     materialComposition:
       Plastic: 25
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/plastic_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/plastic_drop.ogg
+
+# Strong plastic
+- type: entity
+  abstract: true
+  parent: DrinkBaseMaterialPlastic
+  id: DrinkBaseMaterialStrongPlastic
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger: # Overkill threshold
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 20 # can take a few more hits than basic plastic
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalCrunch # TODO a plastic break collection
+      - !type:SpillBehavior { }
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
 
 # Fragile cardboard
 - type: entity
@@ -173,10 +201,10 @@
   - type: PhysicalComposition
     materialComposition:
       Cardboard: 25
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/plastic_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/plastic_drop.ogg
 
@@ -218,10 +246,10 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 25
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_drop.ogg
 
@@ -254,10 +282,10 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 300
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/plastic_pick_up.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/materials/plastic_drop.ogg
 
@@ -305,9 +333,9 @@
   - type: PhysicalComposition
     materialComposition:
       Gold: 25
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/drinkglass_drop.ogg

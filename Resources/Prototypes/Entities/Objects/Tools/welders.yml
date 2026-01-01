@@ -144,10 +144,10 @@
     price: 40
   - type: IgnitionSource
     temperature: 700
-  - type: EmitSoundOnPickup
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/tools/weldingtool_pickup.ogg
-  - type: EmitSoundOnDrop
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
     sound:
       path: /Audio/_KS14/Handling/tools/weldingtool_drop.ogg
 

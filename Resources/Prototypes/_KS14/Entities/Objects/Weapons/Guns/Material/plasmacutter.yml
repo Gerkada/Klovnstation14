@@ -66,7 +66,7 @@
     consumeAddedMaterials: true
     adjustStorageLimitAccordingToBatteryCharge: true
     gainRatio: 100 # 1 sheet is 100cm3, and 1 sheet should refill 10kJ (full battery)
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletPlasmaCutter
     fireCost: 500  # 20 shots
 
@@ -118,7 +118,7 @@
     fireRate: 1.5
     soundGunshot:
       path: /Audio/_KS14/Weapons/Guns/Gunshots/plasmacutter.ogg
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletPlasmaCutter
     fireCost: 250  # 40 shots (x2 of basic plascutter)
   - type: PhysicalComposition
