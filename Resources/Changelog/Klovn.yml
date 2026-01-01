@@ -513,3 +513,9 @@ Entries:
         you the number of people ready for each role.
   id: 65
   time: '2026-01-01T12:24:49.0000000+00:00'
+- author: DecemberEpsilon
+  changes:
+    - type: Add
+      message: Added pickup sounds! And some new inventory item-dependant open sounds.
+  id: 66
+  time: '2026-01-01T12:31:37.0000000+00:00'
