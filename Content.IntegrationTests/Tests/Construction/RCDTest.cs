@@ -52,6 +52,7 @@ public sealed class RCDTest : InteractionTest
         Assert.That(settingPlating.Prototype, Is.Not.Null, "RCDPrototype has a null spawning prototype.");
         Assert.That(ProtoMan.TryIndex(RCDSettingFloorSteel, out var settingFloorSteel), $"RCDPrototype not found: {RCDSettingFloorSteel}.");
         Assert.That(settingFloorSteel.Prototype, Is.Not.Null, "RCDPrototype has a null spawning prototype.");
+        Assert.That(ProtoMan.TryIndex(RCDSettingDeconstruct, out var settingDeconstruct), $"RCDPrototype not found: {RCDSettingDeconstruct}."); // KS14
         Assert.That(ProtoMan.TryIndex(RCDSettingDeconstructTile, out var settingDeconstructTile), $"RCDPrototype not found: {RCDSettingDeconstructTile}.");
         Assert.That(ProtoMan.TryIndex(RCDSettingDeconstructLattice, out var settingDeconstructLattice), $"RCDPrototype not found: {RCDSettingDeconstructLattice}.");
 
@@ -199,7 +200,7 @@ public sealed class RCDTest : InteractionTest
 
         // Check that the cost of the deconstruction was subtracted from the current charges.
         newCharges = sCharges.GetCurrentCharges(ToServer(rcd));
-        Assert.That(initialCharges + RCDSystem.GetRefundedCost(settingDeconstructTile.Cost) /* KS14/Goobstation */, Is.EqualTo(newCharges), "RCD has wrong amount of charges after deconstructing something.");
+        Assert.That(initialCharges + RCDSystem.GetRefundedCost(settingDeconstruct.Cost) /* KS14/Goobstation */, Is.EqualTo(newCharges), "RCD has wrong amount of charges after deconstructing something.");
         initialCharges = newCharges;
 
         // Deconstruct the plating.
@@ -209,7 +210,7 @@ public sealed class RCDTest : InteractionTest
 
         // Check that the cost of the deconstruction was subtracted from the current charges.
         newCharges = sCharges.GetCurrentCharges(ToServer(rcd));
-        Assert.That(initialCharges + RCDSystem.GetRefundedCost(settingDeconstructTile.Cost) /* KS14/Goobstation */, Is.EqualTo(newCharges), "RCD has wrong amount of charges after deconstructing something.");
+        Assert.That(initialCharges + RCDSystem.GetRefundedCost(settingDeconstruct.Cost) /* KS14/Goobstation */, Is.EqualTo(newCharges), "RCD has wrong amount of charges after deconstructing something.");
         initialCharges = newCharges;
 
         // Deconstruct the lattice.
@@ -219,7 +220,7 @@ public sealed class RCDTest : InteractionTest
 
         // Check that the cost of the deconstruction was subtracted from the current charges.
         newCharges = sCharges.GetCurrentCharges(ToServer(rcd));
-        Assert.That(initialCharges + RCDSystem.GetRefundedCost(settingDeconstructLattice.Cost) /* KS14/Goobstation */, Is.EqualTo(newCharges), "RCD has wrong amount of charges after deconstructing something.");
+        Assert.That(initialCharges + RCDSystem.GetRefundedCost(settingDeconstruct.Cost) /* KS14/Goobstation */, Is.EqualTo(newCharges), "RCD has wrong amount of charges after deconstructing something.");
 
         // Wait for the visual effect to disappear.
         await RunSeconds(3);
