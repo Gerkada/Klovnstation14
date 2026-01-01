@@ -525,3 +525,9 @@ Entries:
       message: Fixed migrations.
   id: 67
   time: '2026-01-01T14:55:20.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Tweak
+      message: Max number of uplink discounts you can have now is 8.
+  id: 68
+  time: '2026-01-01T18:03:20.0000000+00:00'
