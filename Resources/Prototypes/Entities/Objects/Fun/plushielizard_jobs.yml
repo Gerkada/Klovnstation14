@@ -220,9 +220,10 @@
     sound: null
   - type: Edible
     useSound: null
-  - type: MeleeWeapon
-    wideAnimationRotation: 180
-    soundHit: null
+  # KS14: this causes testfails so who cares
+  # - type: MeleeWeapon
+  #   wideAnimationRotation: 180
+  #   soundHit: null
 
 - type: entity
   parent: BasePlushieLizardJob
