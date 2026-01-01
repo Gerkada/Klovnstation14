@@ -6,6 +6,7 @@ BookSpaceLaw: null
 #2025-12-23  Remove slop
 #plushies
 PlushieBee: null
+PlushieRGBee: null
 PlushieSlime: null
 PlushieSnake: null
 PlushieExperiment: null
@@ -21,7 +22,8 @@ PlushieDiona: null
 PlushieXeno: null
 PlushieHampter: null
 PlushieMoth: null
-PlushieArachnid: null
+PlushieArachind: null
+PlushieAtmosian: null
 PlushiePenguin: null
 #crates
 CrateFunPlushie: null

@@ -23,7 +23,7 @@ public sealed class MapMigrationSystem : EntitySystem
     [Dependency] private readonly IResourceManager _resMan = default!;
 
     private const string MigrationFile = "/migration.yml";
-    private const string MigrationFileKs = "/migration.yml_ks14"; // KS14
+    private const string MigrationFileKs14 = "/migration_ks14.yml"; // KS14
 
     public override void Initialize()
     {
@@ -42,7 +42,7 @@ public sealed class MapMigrationSystem : EntitySystem
                 DebugTools.Assert(_protoMan.HasIndex<EntityPrototype>(newId), $"{newId} is not an entity prototype.");
         }
 
-        if (!TryReadFile(MigrationFileKs, out var mappingsKs))
+        if (!TryReadFile(MigrationFileKs14, out var mappingsKs)) // KS14
             return;
 
         // Verify that all of the entries map to valid entity prototypes.
@@ -92,6 +92,6 @@ public sealed class MapMigrationSystem : EntitySystem
     private void OnBeforeReadEvent(BeforeEntityReadEvent ev)
     {
         ProcessEvent(ref ev, MigrationFile);
-        ProcessEvent(ref ev, MigrationFileKs);
+        ProcessEvent(ref ev, MigrationFileKs14); // KS14
     }
 }
