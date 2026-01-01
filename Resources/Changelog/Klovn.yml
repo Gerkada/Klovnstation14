@@ -497,3 +497,11 @@ Entries:
       message: Removed alot of slop
   id: 63
   time: '2025-12-31T19:05:54.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: >-
+        Pressing E on unlocked borgs with an open wire panel will now open the
+        borg UI instead of the stripping UI.
+  id: 64
+  time: '2026-01-01T01:44:00.0000000+00:00'
