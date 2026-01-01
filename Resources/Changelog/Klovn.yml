@@ -505,3 +505,11 @@ Entries:
         borg UI instead of the stripping UI.
   id: 64
   time: '2026-01-01T01:44:00.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: >-
+        A ready manifest is now available in the pre-round lobby. It will show
+        you the number of people ready for each role.
+  id: 65
+  time: '2026-01-01T12:24:49.0000000+00:00'
