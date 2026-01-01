@@ -97,6 +97,12 @@
                   max: 2
     - type: StaticPrice
       price: 100
+    - type: EmitSoundOnPickup # KS14: pickup/drop sounds
+      sound:
+        path: /Audio/_KS14/Handling/shield/plastic_shield_pick_up.ogg
+    - type: EmitSoundOnDrop # KS14: pickup/drop sounds
+      sound:
+        path: /Audio/_KS14/Handling/shield/plastic_shield_drop.ogg
 
 - type: entity
   name: base repairable shield

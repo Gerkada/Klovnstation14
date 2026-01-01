@@ -49,6 +49,12 @@
   - type: PhysicalComposition
     materialComposition:
       Glass: 25
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/drinkglass_pickup.ogg
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/drinkglass_drop.ogg
 
 # Porcelain (like glass but no shard)
 - type: entity
@@ -77,6 +83,12 @@
   - type: PhysicalComposition
     materialComposition:
       Glass: 10 # Trace amounts of glass I guess. Important for overriding inheritance
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/drinkglass_pickup.ogg
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/drinkglass_drop.ogg
 
 # Fragile plastic
 - type: entity
@@ -116,6 +128,12 @@
   - type: PhysicalComposition
     materialComposition:
       Plastic: 25
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/materials/plastic_pick_up.ogg
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/materials/plastic_drop.ogg
 
 # Strong plastic
 - type: entity
@@ -183,6 +201,12 @@
   - type: PhysicalComposition
     materialComposition:
       Cardboard: 25
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/materials/plastic_pick_up.ogg
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/materials/plastic_drop.ogg
 
 # Weak metal
 - type: entity
@@ -222,6 +246,12 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 25
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/drinkglass_pickup.ogg
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/drinkglass_drop.ogg
 
 # strong metal
 - type: entity
@@ -252,6 +282,12 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 300
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/materials/plastic_pick_up.ogg
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/materials/plastic_drop.ogg
 
 # Flimsy gold
 - type: entity
@@ -297,3 +333,9 @@
   - type: PhysicalComposition
     materialComposition:
       Gold: 25
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/drinkglass_pickup.ogg
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/drinkglass_drop.ogg

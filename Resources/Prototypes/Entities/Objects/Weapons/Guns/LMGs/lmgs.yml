@@ -63,6 +63,12 @@
     price: 500
   - type: UseDelay
     delay: 1
+  - type: EmitSoundOnPickup # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/gun/ballistics/rifle/rifle_pickup1.ogg
+  - type: EmitSoundOnDrop # KS14: pickup/drop sounds
+    sound:
+      path: /Audio/_KS14/Handling/gun/ballistics/rifle/rifle_drop1.ogg
 
 - type: entity
   name: L6 SAW

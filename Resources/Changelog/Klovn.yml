@@ -497,3 +497,31 @@ Entries:
       message: Removed alot of slop
   id: 63
   time: '2025-12-31T19:05:54.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: >-
+        Pressing E on unlocked borgs with an open wire panel will now open the
+        borg UI instead of the stripping UI.
+  id: 64
+  time: '2026-01-01T01:44:00.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: >-
+        A ready manifest is now available in the pre-round lobby. It will show
+        you the number of people ready for each role.
+  id: 65
+  time: '2026-01-01T12:24:49.0000000+00:00'
+- author: DecemberEpsilon
+  changes:
+    - type: Add
+      message: Added pickup sounds! And some new inventory item-dependant open sounds.
+  id: 66
+  time: '2026-01-01T12:31:37.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Fix
+      message: Fixed migrations.
+  id: 67
+  time: '2026-01-01T14:55:20.0000000+00:00'
