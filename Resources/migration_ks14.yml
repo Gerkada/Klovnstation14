@@ -10,8 +10,9 @@ PlushieSlime: null
 PlushieSnake: null
 PlushieExperiment: null
 PlushieLizard: null
+PlushieLizardMirrored: null # DIfferent from below
+PlushieLizardInversed: null # Different from above
 PlushieSpaceLizard: null
-PlushieLizardInversed: null
 PlushieVox: null
 PlushieRouny: null
 PlushieSharkBlue: null
