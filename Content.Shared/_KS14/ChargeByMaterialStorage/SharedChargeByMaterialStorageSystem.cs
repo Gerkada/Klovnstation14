@@ -23,9 +23,11 @@ public sealed class SharedChargeByMaterialStorageSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChargeByMaterialStorageComponent, ChargeChangedEvent>(OnChargeChanged);
-
         SubscribeLocalEvent<ChargeByMaterialStorageComponent, ComponentStartup>(OnStartup);
+        // Necessary as batterysystem updates charge of batteries to starting value at mapinit, and we depend on that, so make it be after
+        SubscribeLocalEvent<ChargeByMaterialStorageComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(SharedBatterySystem) });
+
+        SubscribeLocalEvent<ChargeByMaterialStorageComponent, ChargeChangedEvent>(OnChargeChanged);
         SubscribeLocalEvent<ChargeByMaterialStorageComponent, MaterialAmountChangedEvent>(OnMaterialAmountChanged);
     }
 
@@ -72,13 +74,16 @@ public sealed class SharedChargeByMaterialStorageSystem : EntitySystem
     private void OnStartup(Entity<ChargeByMaterialStorageComponent> entity, ref ComponentStartup args)
     {
         entity.Comp.CachedStoredMaterials = GetActiveStoredMaterials(entity);
+    }
 
+    private void OnMapInit(Entity<ChargeByMaterialStorageComponent> entity, ref MapInitEvent args)
+    {
         if (!entity.Comp.AdjustStorageLimitAccordingToBatteryCharge ||
             !TryComp<MaterialStorageComponent>(entity, out var materialStorageComponent) ||
             !TryComp<BatteryComponent>(entity, out var batteryComponent))
             return;
 
-        materialStorageComponent.StorageLimit = (int)MathF.Ceiling((batteryComponent.MaxCharge - batteryComponent.StartingCharge) / entity.Comp.GainRatio);
+        materialStorageComponent.StorageLimit = (int)MathF.Ceiling((batteryComponent.MaxCharge - _batterySystem.GetCharge((entity.Owner, batteryComponent))) / entity.Comp.GainRatio);
         Dirty(entity.Owner, materialStorageComponent);
     }
 
