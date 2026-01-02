@@ -370,6 +370,8 @@
         - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
+  - type: TriggerOnCollide
+    fixtureID: projectile
   - type: StaminaDamageOnCollide
     damage: 33
   - type: Projectile
@@ -411,6 +413,8 @@
         - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
+  - type: TriggerOnCollide
+    fixtureID: projectile
   - type: StaminaDamageOnCollide
     damage: 1
   - type: Projectile
@@ -1221,6 +1225,8 @@
         - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
+  - type: TriggerOnCollide
+    fixtureID: projectile
   - type: StaminaDamageOnCollide
     damage: 15
   - type: Projectile
