@@ -617,7 +617,7 @@ public abstract partial class SharedStunSystem
 
     private void OnRefreshKnockedSpeed(Entity<KnockedDownComponent> entity, ref RefreshMovementSpeedModifiersEvent args)
     {
-        // args.ModifySpeed(entity.Comp.SpeedModifier);
+        args.ModifySpeed(entity.Comp.SpeedModifier);
     }
 
     private void OnKnockedTileFriction(Entity<KnockedDownComponent> entity, ref TileFrictionEvent args)
@@ -627,8 +627,8 @@ public abstract partial class SharedStunSystem
 
     private void OnRefreshFriction(Entity<KnockedDownComponent> entity, ref RefreshFrictionModifiersEvent args)
     {
-        // args.ModifyFriction(entity.Comp.FrictionModifier);
-        // args.ModifyAcceleration(entity.Comp.FrictionModifier);
+        args.ModifyFriction(entity.Comp.FrictionModifier);
+        args.ModifyAcceleration(entity.Comp.FrictionModifier);
     }
 
     #endregion
