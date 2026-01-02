@@ -413,21 +413,25 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
                 //totalVolume = takenStackUnits * volumePerStackUnit;
 
                 if (takenStackUnits >= stackComponent!.Count)
-                    PredictedQueueDel(toInsert);
+                    QueueDel(toInsert);
                 else
                     _heap.SetCount(toInsert, stackComponent!.Count - takenStackUnits, component: stackComponent);
 
                 maximumMultiplier = takenStackUnits;
             }
             else
-                PredictedQueueDel(toInsert);
+                QueueDel(toInsert);
         }
         else if (!CanTakeVolume(receiver, totalVolume, storage, localOnly: true))
             return false;
 
         foreach (var (mat, vol) in composition.MaterialComposition)
         {
-            TryChangeMaterialAmount(receiver, mat, Math.Min(vol * maximumMultiplier, storage.StorageLimit!.Value - oldTotalVolume), storage);
+            var amount = vol * maximumMultiplier;
+            if (storage.StorageLimit is {} limit)
+                amount = Math.Min(amount, limit - oldTotalVolume);
+
+            TryChangeMaterialAmount(receiver, mat, amount, storage);
         }
 
         var insertingComp = EnsureComp<InsertingMaterialStorageComponent>(receiver);
