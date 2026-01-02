@@ -58,7 +58,9 @@ public sealed class StandingStateSystem : EntitySystem
     private void OnTileFriction(Entity<StandingStateComponent> entity, ref TileFrictionEvent args)
     {
         if (!entity.Comp.Standing)
-            args.Modifier *= entity.Comp.DownFrictionMod;
+        {
+            // args.Modifier *= entity.Comp.DownFrictionMod;
+        }
     }
 
     private void OnEndClimb(Entity<StandingStateComponent> entity, ref EndClimbEvent args)
