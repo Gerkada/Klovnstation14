@@ -71,40 +71,36 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
 
         var startDegrees = baseAngle.Degrees;
 
-        // 2. Calculate the target "Upright" angle.
-        // We want to land on a multiple of 360 (which is 0 degrees visual).
-        // We add 720 to ensure we do at least 2 full flips.
-        // Math.Ceiling ensures that if we are at 10 degrees, we go forward to 360, not back to 0.
+        // 2. Calculate target (Always land Upright + 720 degrees spin)
         var targetDegrees = Math.Ceiling(startDegrees / 360) * 360 + 720;
 
-        // If we are exactly at 0, the math above gives 720 (2 spins).
-        // If we are at 90, math gives 360 + 720 = 1080 (2.75 spins).
-        // This ensures we ALWAYS land upright.
-
-        // 3. Generate intermediate keyframes
-        // We need points every 120 degrees so the engine knows which way to spin.
-        var keyFrames = new List<AnimationTrackProperty.KeyFrame>();
+        // 3. Setup Math variables
+        var totalDist = targetDegrees - startDegrees;
         var totalDuration = 0.8f;
+        var keyFrames = new List<AnimationTrackProperty.KeyFrame>();
 
+        // Add Start Frame
         keyFrames.Add(new AnimationTrackProperty.KeyFrame(baseAngle, 0f));
 
-        var current = startDegrees;
-        var stepSize = 120; // 120 degree steps
-        var steps = (int)((targetDegrees - startDegrees) / stepSize);
+        // 4. Generate Intermediate Frames
+        // FIX: Use a while loop to ensure we cover the distance smoothly.
+        // We calculate the time for each frame based on the percentage of distance covered.
+        // This guarantees constant velocity, preventing the "slow down" effect.
 
-        // Interpolate time based on how far we have to go
-        for (var i = 1; i <= steps; i++)
+        var current = startDegrees;
+        var stepSize = 120; // Maximum step size for "Shortest Path" interpolation
+
+        while (current + stepSize < targetDegrees)
         {
             current += stepSize;
-            var timeRatio = (float)i / steps; // 0.1, 0.2 ... 1.0
 
-            // If the last step overshoots, clamp it (though math shouldn't allow it)
-            if (current > targetDegrees) current = targetDegrees;
+            // Calculate Fraction: (Distance So Far / Total Distance)
+            var fraction = (float)((current - startDegrees) / totalDist);
 
-            keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(current), totalDuration * timeRatio));
+            keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(current), totalDuration * fraction));
         }
 
-        // Add final frame to be perfectly sure
+        // 5. Final Frame (The finish line)
         keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(targetDegrees), totalDuration));
 
         var animation = new Animation
