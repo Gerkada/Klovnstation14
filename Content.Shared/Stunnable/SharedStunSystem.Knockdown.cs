@@ -66,9 +66,9 @@ public abstract partial class SharedStunSystem
         SubscribeLocalEvent<CrawlerComponent, KnockedDownRefreshEvent>(OnKnockdownRefresh);
         SubscribeLocalEvent<CrawlerComponent, DamageChangedEvent>(OnDamaged);
         SubscribeLocalEvent<KnockedDownComponent, WeightlessnessChangedEvent>(OnWeightlessnessChanged);
-        SubscribeLocalEvent<KnockedDownComponent, DidEquipHandEvent>(OnHandEquipped);
-        SubscribeLocalEvent<KnockedDownComponent, DidUnequipHandEvent>(OnHandUnequipped);
-        SubscribeLocalEvent<KnockedDownComponent, HandCountChangedEvent>(OnHandCountChanged);
+        // SubscribeLocalEvent<KnockedDownComponent, DidEquipHandEvent>(OnHandEquipped);
+        // SubscribeLocalEvent<KnockedDownComponent, DidUnequipHandEvent>(OnHandUnequipped);
+        // SubscribeLocalEvent<KnockedDownComponent, HandCountChangedEvent>(OnHandCountChanged);
         SubscribeLocalEvent<GravityAffectedComponent, KnockDownAttemptEvent>(OnKnockdownAttempt);
         SubscribeLocalEvent<GravityAffectedComponent, GetStandUpTimeEvent>(OnGetStandUpTime);
 
@@ -525,6 +525,7 @@ public abstract partial class SharedStunSystem
         RemCompDeferred<KnockedDownComponent>(entity);
     }
 
+    /*
     private void OnHandEquipped(Entity<KnockedDownComponent> entity, ref DidEquipHandEvent args)
     {
         if (GameTiming.ApplyingState)
@@ -532,7 +533,9 @@ public abstract partial class SharedStunSystem
 
         RefreshKnockedMovement(entity);
     }
+    */
 
+    /*
     private void OnHandUnequipped(Entity<KnockedDownComponent> entity, ref DidUnequipHandEvent args)
     {
         if (GameTiming.ApplyingState)
@@ -540,7 +543,9 @@ public abstract partial class SharedStunSystem
 
         RefreshKnockedMovement(entity);
     }
+    */
 
+    /*
     private void OnHandCountChanged(Entity<KnockedDownComponent> entity, ref HandCountChangedEvent args)
     {
         if (GameTiming.ApplyingState)
@@ -548,6 +553,7 @@ public abstract partial class SharedStunSystem
 
         RefreshKnockedMovement(entity);
     }
+    */
 
     private void OnKnockdownAttempt(Entity<GravityAffectedComponent> entity, ref KnockDownAttemptEvent args)
     {
