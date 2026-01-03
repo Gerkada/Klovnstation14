@@ -1,17 +1,24 @@
-using Content.Shared.Emoting;
-using Content.Shared.Chat.Prototypes; // Add this
-using Robust.Shared.Prototypes;       // Add this
-using Robust.Shared.Serialization;    // Add this
+// SPDX-FileCopyrightText: 2024 username
+// SPDX-FileCopyrightText: 2025 Aiden
+// SPDX-FileCopyrightText: 2025 FrauzJ
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Chat.Prototypes;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._Goobstation.Emoting;
 
 public abstract class SharedAnimatedEmotesSystem : EntitySystem
 {
-    // You can keep the old GetState logic if you want,
-    // but we are bypassing it for the animation trigger now.
+    // We don't need OnGetState anymore if we are using Events for animations.
 }
 
-// FIX: New Network Event
+/// <summary>
+/// Event sent from Server to Client to trigger an animation immediately.
+/// </summary>
 [Serializable, NetSerializable]
 public sealed class RequestEmoteAnimationEvent(NetEntity user, ProtoId<EmotePrototype> emoteId) : EntityEventArgs
 {

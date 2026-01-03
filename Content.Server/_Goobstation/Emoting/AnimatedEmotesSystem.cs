@@ -1,15 +1,11 @@
 // SPDX-FileCopyrightText: 2024 Piras314
-// SPDX-FileCopyrightText: 2024 username
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden
 // SPDX-FileCopyrightText: 2025 FrauzJ
-// SPDX-FileCopyrightText: 2025 Misandry
 // SPDX-FileCopyrightText: 2025 github_actions[bot]
-// SPDX-FileCopyrightText: 2025 gus
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared._Goobstation.Emoting;
+using Content.Server.Chat.Systems;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chat;
 using Robust.Shared.Prototypes;
@@ -31,7 +27,8 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 
     public void PlayEmoteAnimation(EntityUid uid, ProtoId<EmotePrototype> protoId)
     {
-        // Raises the network event to clients so they play the animation
+        // FIX: Raise a Network Event.
+        // This guarantees the client receives it every time, allowing repeated animations.
         RaiseNetworkEvent(new RequestEmoteAnimationEvent(GetNetEntity(uid), protoId));
     }
 }

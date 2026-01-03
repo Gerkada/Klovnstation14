@@ -7,6 +7,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System;
+using System.Collections.Generic;
 using Content.Shared._White.Animations;
 using Content.Shared.Popups;
 using Robust.Client.Animations;
@@ -35,6 +37,7 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
     private void OnNetworkEvent(FlipOnHitEvent ev)
     {
         var uid = GetEntity(ev.User);
+        // Prevent double-playing for the local player (Prediction vs Server)
         if (_player.LocalEntity == uid)
             return;
 
@@ -48,8 +51,7 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
 
         RemComp<FlippingComponent>(ent);
 
-        // SAFETY: Force them to stand upright when done,
-        // just in case the animation math was off by 0.001 degrees.
+        // Reset rotation to exactly zero to prevent slight offsets
         if (TryComp<SpriteComponent>(ent, out var sprite))
         {
             sprite.Rotation = Angle.Zero;
@@ -62,6 +64,14 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
             return;
 
         EnsureComp<AnimationPlayerComponent>(user);
+
+        // FIX: Check if the animation is already running.
+        // The engine crashes if we try to Play() while the key "flip" is active.
+        if (_animationSystem.HasRunningAnimation(user, FlippingComponent.AnimationKey))
+        {
+            _animationSystem.Stop(user, FlippingComponent.AnimationKey);
+        }
+
         EnsureComp<FlippingComponent>(user);
 
         // 1. Get current rotation
@@ -82,25 +92,18 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
         // Add Start Frame
         keyFrames.Add(new AnimationTrackProperty.KeyFrame(baseAngle, 0f));
 
-        // 4. Generate Intermediate Frames
-        // FIX: Use a while loop to ensure we cover the distance smoothly.
-        // We calculate the time for each frame based on the percentage of distance covered.
-        // This guarantees constant velocity, preventing the "slow down" effect.
-
+        // 4. Generate Intermediate Frames (While loop for constant speed)
         var current = startDegrees;
-        var stepSize = 120; // Maximum step size for "Shortest Path" interpolation
+        var stepSize = 120; // 120 degree steps for shortest-path interpolation
 
         while (current + stepSize < targetDegrees)
         {
             current += stepSize;
-
-            // Calculate Fraction: (Distance So Far / Total Distance)
             var fraction = (float)((current - startDegrees) / totalDist);
-
             keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(current), totalDuration * fraction));
         }
 
-        // 5. Final Frame (The finish line)
+        // 5. Final Frame
         keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(targetDegrees), totalDuration));
 
         var animation = new Animation

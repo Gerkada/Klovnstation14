@@ -1,36 +1,29 @@
-using Content.Shared.Chat.Prototypes;
+// SPDX-FileCopyrightText: 2024 username
+// SPDX-FileCopyrightText: 2025 FrauzJ
+// SPDX-FileCopyrightText: 2025 github_actions[bot]
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Goobstation.Emoting;
 
-// Event definitions
+// --- EVENT DEFINITIONS (Used by Prototypes) ---
 [Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationFlipEmoteEvent : EntityEventArgs { }
 [Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationSpinEmoteEvent : EntityEventArgs { }
 [Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationJumpEmoteEvent : EntityEventArgs { }
 [Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationTweakEmoteEvent : EntityEventArgs { }
 [Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationFlexEmoteEvent : EntityEventArgs { }
 
-// Component definition
+// --- COMPONENT DEFINITION ---
 /// <summary>
 ///     Marks entities that can use animated emotes.
+///     The actual animation logic is handled via Network Events, not component state.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class AnimatedEmotesComponent : Component
 {
-    [DataField]
-    public ProtoId<EmotePrototype>? Emote;
-}
-
-// Network state
-[Serializable, NetSerializable]
-public sealed partial class AnimatedEmotesComponentState : ComponentState
-{
-    public ProtoId<EmotePrototype>? Emote;
-
-    public AnimatedEmotesComponentState(ProtoId<EmotePrototype>? emote)
-    {
-        Emote = emote;
-    }
+    // We don't need to store the 'Emote' here anymore.
+    // The Server sends a transient event, and the Client plays it immediately.
 }
