@@ -48,7 +48,8 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
 
         RemComp<FlippingComponent>(ent);
 
-        // FIX: Force reset to Zero when done, just in case.
+        // SAFETY: Force them to stand upright when done,
+        // just in case the animation math was off by 0.001 degrees.
         if (TryComp<SpriteComponent>(ent, out var sprite))
         {
             sprite.Rotation = Angle.Zero;
@@ -61,36 +62,54 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
             return;
 
         EnsureComp<AnimationPlayerComponent>(user);
-
-        if (_animationSystem.HasRunningAnimation(user, FlippingComponent.AnimationKey))
-        {
-            _animationSystem.Stop(user, FlippingComponent.AnimationKey);
-        }
-
         EnsureComp<FlippingComponent>(user);
 
-        // FIX: Always use Zero as the base.
-        // Do NOT read sprite.Rotation, or you will inherit the rotation
-        // from a previous, interrupted animation (getting stuck sideways).
-        var degrees = 0.0;
+        // 1. Get current rotation
+        var baseAngle = Angle.Zero;
+        if (EntityManager.TryGetComponent(user, out SpriteComponent? sprite))
+            baseAngle = sprite.Rotation;
 
+        var startDegrees = baseAngle.Degrees;
+
+        // 2. Calculate the target "Upright" angle.
+        // We want to land on a multiple of 360 (which is 0 degrees visual).
+        // We add 720 to ensure we do at least 2 full flips.
+        // Math.Ceiling ensures that if we are at 10 degrees, we go forward to 360, not back to 0.
+        var targetDegrees = Math.Ceiling(startDegrees / 360) * 360 + 720;
+
+        // If we are exactly at 0, the math above gives 720 (2 spins).
+        // If we are at 90, math gives 360 + 720 = 1080 (2.75 spins).
+        // This ensures we ALWAYS land upright.
+
+        // 3. Generate intermediate keyframes
+        // We need points every 120 degrees so the engine knows which way to spin.
         var keyFrames = new List<AnimationTrackProperty.KeyFrame>();
-        var startTime = 0f;
-        var spinDuration = 0.2f;
+        var totalDuration = 0.8f;
 
-        // 4 Spins
-        for (var i = 0; i < 4; i++)
+        keyFrames.Add(new AnimationTrackProperty.KeyFrame(baseAngle, 0f));
+
+        var current = startDegrees;
+        var stepSize = 120; // 120 degree steps
+        var steps = (int)((targetDegrees - startDegrees) / stepSize);
+
+        // Interpolate time based on how far we have to go
+        for (var i = 1; i <= steps; i++)
         {
-            keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 120), startTime + (spinDuration * 0.33f)));
-            keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 240), startTime + (spinDuration * 0.66f)));
-            keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees), startTime + spinDuration));
+            current += stepSize;
+            var timeRatio = (float)i / steps; // 0.1, 0.2 ... 1.0
 
-            startTime += spinDuration;
+            // If the last step overshoots, clamp it (though math shouldn't allow it)
+            if (current > targetDegrees) current = targetDegrees;
+
+            keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(current), totalDuration * timeRatio));
         }
+
+        // Add final frame to be perfectly sure
+        keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(targetDegrees), totalDuration));
 
         var animation = new Animation
         {
-            Length = TimeSpan.FromMilliseconds(800),
+            Length = TimeSpan.FromSeconds(totalDuration),
             AnimationTracks =
             {
                 new AnimationTrackComponentProperty
