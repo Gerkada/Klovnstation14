@@ -11,7 +11,7 @@ using Content.Shared._White.Animations;
 using Content.Shared.Popups;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
-using Robust.Client.Player; // Needed to check Local Player
+using Robust.Client.Player;
 using Robust.Shared.Animations;
 using Robust.Shared.Timing;
 
@@ -35,10 +35,6 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
     private void OnNetworkEvent(FlipOnHitEvent ev)
     {
         var uid = GetEntity(ev.User);
-
-        // FIX 1: Prevent "Double Animation" (Prediction + Network).
-        // If this event is for ME, and I am the one playing, I already predicted it via OnHit.
-        // So ignore the server's "Echo".
         if (_player.LocalEntity == uid)
             return;
 
@@ -50,8 +46,13 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
         if (args.Key != FlippingComponent.AnimationKey)
             return;
 
-        // Clean up component after animation
         RemComp<FlippingComponent>(ent);
+
+        // FIX: Force reset to Zero when done, just in case.
+        if (TryComp<SpriteComponent>(ent, out var sprite))
+        {
+            sprite.Rotation = Angle.Zero;
+        }
     }
 
     protected override void PlayAnimation(EntityUid user)
@@ -59,41 +60,29 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
         if (TerminatingOrDeleted(user))
             return;
 
-        // Ensure capability to play animations
         EnsureComp<AnimationPlayerComponent>(user);
 
-        // Stop existing animation to restart it (allows spamming)
         if (_animationSystem.HasRunningAnimation(user, FlippingComponent.AnimationKey))
         {
             _animationSystem.Stop(user, FlippingComponent.AnimationKey);
         }
 
-        // Add the component to mark us as flipping
         EnsureComp<FlippingComponent>(user);
 
-        var baseAngle = Angle.Zero;
-        if (EntityManager.TryGetComponent(user, out SpriteComponent? sprite))
-            baseAngle = sprite.Rotation;
-
-        var degrees = baseAngle.Degrees;
-
-        // FIX 2: Correct Rotation Math.
-        // We cannot use "360" or "720" because Angle wraps to 0.
-        // We must use 120-degree steps (Shortest Path) to force a full rotation.
-        // This loop generates 4 full spins (0.2s per spin).
+        // FIX: Always use Zero as the base.
+        // Do NOT read sprite.Rotation, or you will inherit the rotation
+        // from a previous, interrupted animation (getting stuck sideways).
+        var degrees = 0.0;
 
         var keyFrames = new List<AnimationTrackProperty.KeyFrame>();
         var startTime = 0f;
         var spinDuration = 0.2f;
 
-        // We do 4 spins
+        // 4 Spins
         for (var i = 0; i < 4; i++)
         {
-            // Step 1: 0 -> 120
             keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 120), startTime + (spinDuration * 0.33f)));
-            // Step 2: 120 -> 240
             keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 240), startTime + (spinDuration * 0.66f)));
-            // Step 3: 240 -> 0 (360)
             keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees), startTime + spinDuration));
 
             startTime += spinDuration;
