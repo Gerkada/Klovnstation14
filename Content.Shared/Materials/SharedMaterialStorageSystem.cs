@@ -414,14 +414,14 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
                 //totalVolume = takenStackUnits * volumePerStackUnit;
 
                 if (takenStackUnits >= stackComponent!.Count)
-                    QueueDel(toInsert);
+                    PredictedQueueDel(toInsert);
                 else
                     _heap.SetCount(toInsert, stackComponent!.Count - takenStackUnits, component: stackComponent);
 
                 maximumMultiplier = takenStackUnits;
             }
             else
-                QueueDel(toInsert);
+                PredictedQueueDel(toInsert);
         }
         else if (!CanTakeVolume(receiver, totalVolume, storage, localOnly: true))
             return false;
