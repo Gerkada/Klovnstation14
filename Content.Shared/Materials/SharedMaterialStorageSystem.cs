@@ -9,6 +9,7 @@
 // SPDX-FileCopyrightText: 2025 Nemanja
 // SPDX-FileCopyrightText: 2025 Winkarst
 // SPDX-FileCopyrightText: 2025 github_actions[bot]
+// SPDX-FileCopyrightText: 2026 Gerkada
 //
 // SPDX-License-Identifier: MIT
 

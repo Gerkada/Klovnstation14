@@ -2,8 +2,10 @@
 // SPDX-FileCopyrightText: 2024 Preston Smith
 // SPDX-FileCopyrightText: 2024 Spatison
 // SPDX-FileCopyrightText: 2025 Aiden
+// SPDX-FileCopyrightText: 2025 FrauZj
 // SPDX-FileCopyrightText: 2025 FrauzJ
 // SPDX-FileCopyrightText: 2025 github_actions[bot]
+// SPDX-FileCopyrightText: 2026 Gerkada
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 

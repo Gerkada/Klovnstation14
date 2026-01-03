@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2025 FrauZj
+// SPDX-FileCopyrightText: 2026 Gerkada
+//
+// SPDX-License-Identifier: MIT
+
 using Content.Shared._White.Animations;
 using Robust.Shared.Player;
 
