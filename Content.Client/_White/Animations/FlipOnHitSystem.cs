@@ -8,8 +8,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared._White.Animations;
+using Content.Shared.Popups;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Robust.Client.Player; // Needed to check Local Player
 using Robust.Shared.Animations;
 using Robust.Shared.Timing;
 
@@ -19,13 +21,28 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animationSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<FlippingComponent, AnimationCompletedEvent>(OnAnimationComplete);
-        SubscribeAllEvent<FlipOnHitEvent>(ev => PlayAnimation(GetEntity(ev.User)));
+        SubscribeAllEvent<FlipOnHitEvent>(OnNetworkEvent);
+    }
+
+    private void OnNetworkEvent(FlipOnHitEvent ev)
+    {
+        var uid = GetEntity(ev.User);
+
+        // FIX 1: Prevent "Double Animation" (Prediction + Network).
+        // If this event is for ME, and I am the one playing, I already predicted it via OnHit.
+        // So ignore the server's "Echo".
+        if (_player.LocalEntity == uid)
+            return;
+
+        PlayAnimation(uid);
     }
 
     private void OnAnimationComplete(Entity<FlippingComponent> ent, ref AnimationCompletedEvent args)
@@ -33,7 +50,8 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
         if (args.Key != FlippingComponent.AnimationKey)
             return;
 
-        PlayAnimation(ent);
+        // Clean up component after animation
+        RemComp<FlippingComponent>(ent);
     }
 
     protected override void PlayAnimation(EntityUid user)
@@ -41,22 +59,45 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
         if (TerminatingOrDeleted(user))
             return;
 
-        // FIX: Ensure the player has the animation component
+        // Ensure capability to play animations
         EnsureComp<AnimationPlayerComponent>(user);
 
+        // Stop existing animation to restart it (allows spamming)
         if (_animationSystem.HasRunningAnimation(user, FlippingComponent.AnimationKey))
         {
-            EnsureComp<FlippingComponent>(user);
-            return;
+            _animationSystem.Stop(user, FlippingComponent.AnimationKey);
         }
 
-        RemComp<FlippingComponent>(user);
+        // Add the component to mark us as flipping
+        EnsureComp<FlippingComponent>(user);
 
         var baseAngle = Angle.Zero;
         if (EntityManager.TryGetComponent(user, out SpriteComponent? sprite))
             baseAngle = sprite.Rotation;
 
         var degrees = baseAngle.Degrees;
+
+        // FIX 2: Correct Rotation Math.
+        // We cannot use "360" or "720" because Angle wraps to 0.
+        // We must use 120-degree steps (Shortest Path) to force a full rotation.
+        // This loop generates 4 full spins (0.2s per spin).
+
+        var keyFrames = new List<AnimationTrackProperty.KeyFrame>();
+        var startTime = 0f;
+        var spinDuration = 0.2f;
+
+        // We do 4 spins
+        for (var i = 0; i < 4; i++)
+        {
+            // Step 1: 0 -> 120
+            keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 120), startTime + (spinDuration * 0.33f)));
+            // Step 2: 120 -> 240
+            keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 240), startTime + (spinDuration * 0.66f)));
+            // Step 3: 240 -> 0 (360)
+            keyFrames.Add(new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees), startTime + spinDuration));
+
+            startTime += spinDuration;
+        }
 
         var animation = new Animation
         {
@@ -68,15 +109,7 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
                     ComponentType = typeof(SpriteComponent),
                     Property = nameof(SpriteComponent.Rotation),
                     InterpolationMode = AnimationInterpolationMode.Linear,
-                    KeyFrames =
-                    {
-                        // Explicitly defined rotation path to prevent "shortest path" zero-movement
-                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees), 0f),
-                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 360), 0.2f),
-                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 720), 0.2f),
-                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 1080), 0.2f),
-                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(degrees + 1440), 0.2f),
-                    }
+                    KeyFrames = keyFrames
                 }
             }
         };
