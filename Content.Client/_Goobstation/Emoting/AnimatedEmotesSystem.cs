@@ -1,69 +1,102 @@
-// SPDX-FileCopyrightText: 2024 username
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden
-// SPDX-FileCopyrightText: 2025 FrauzJ
-// SPDX-FileCopyrightText: 2025 Ilya246
-// SPDX-FileCopyrightText: 2025 JohnOakman
-// SPDX-FileCopyrightText: 2025 Misandry
-// SPDX-FileCopyrightText: 2025 MoutardOMiel
-// SPDX-FileCopyrightText: 2025 github_actions[bot]
-// SPDX-FileCopyrightText: 2025 gus
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using System.Linq;
 using System.Numerics;
+using Content.Client.Animations;
+using Content.Client.DamageState;
 using Content.Shared._Goobstation.Emoting;
+using Content.Shared.Chat.Prototypes;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 using Robust.Shared.Animations;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Client._Goobstation.Emoting;
 
-public sealed partial class AnimatedEmotesSystem : EntitySystem
+public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 {
     [Dependency] private readonly AnimationPlayerSystem _anim = default!;
+    [Dependency] private readonly IPrototypeManager _prot = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<AnimatedEmotesComponent, AnimationFlipEmoteEvent>(OnFlip);
-        SubscribeLocalEvent<AnimatedEmotesComponent, AnimationSpinEmoteEvent>(OnSpin);
-        SubscribeLocalEvent<AnimatedEmotesComponent, AnimationJumpEmoteEvent>(OnJump);
+        // Subscribe to the new Network Event
+        SubscribeNetworkEvent<RequestEmoteAnimationEvent>(OnEmoteEvent);
     }
 
-    private static readonly Animation FlipAnimation = new()
+    private void OnEmoteEvent(RequestEmoteAnimationEvent args)
     {
-        Length = TimeSpan.FromMilliseconds(500),
-        AnimationTracks =
+        var uid = GetEntity(args.User);
+        if (!_prot.TryIndex(args.EmoteId, out var emote))
+            return;
+
+        // FIX: Ensure the entity has the capability to play animations
+        EnsureComp<AnimationPlayerComponent>(uid);
+
+        // Identify and raise the specific local event for the animation logic
+        if (emote.Event != null)
+        {
+            switch (emote.Event)
             {
-                new AnimationTrackComponentProperty
-                {
+                case AnimationFlipEmoteEvent flip:
+                    OnFlip(uid, flip); // Call handler directly or RaiseLocal
+                    break;
+                case AnimationSpinEmoteEvent spin:
+                    OnSpin(uid, spin);
+                    break;
+                case AnimationJumpEmoteEvent jump:
+                    OnJump(uid, jump);
+                    break;
+            }
+        }
+    }
+
+    public void PlayEmote(EntityUid uid, Animation anim, string animationKey = "emoteAnimKeyId")
+    {
+        if (_anim.HasRunningAnimation(uid, animationKey))
+            _anim.Stop(uid, animationKey);
+
+        _anim.Play(uid, anim, animationKey);
+    }
+
+    // --- Animation Logic (Keyframes fixed for full rotation) ---
+
+    private void OnFlip(EntityUid uid, AnimationFlipEmoteEvent args)
+    {
+        var a = new Animation
+        {
+            Length = TimeSpan.FromMilliseconds(500),
+            AnimationTracks = {
+                new AnimationTrackComponentProperty {
                     ComponentType = typeof(SpriteComponent),
                     Property = nameof(SpriteComponent.Rotation),
                     InterpolationMode = AnimationInterpolationMode.Linear,
-                    KeyFrames =
-                    {
+                    KeyFrames = {
                         new AnimationTrackProperty.KeyFrame(Angle.Zero, 0f),
-                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(180), 0.25f),
-                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(360), 0.25f),
+                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(90), 0.125f),
+                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(180), 0.125f),
+                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(270), 0.125f),
+                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(360), 0.125f),
                     }
                 }
             }
-    };
+        };
+        PlayEmote(uid, a);
+    }
 
-    private static readonly Animation SpinAnimation = new()
+    private void OnSpin(EntityUid uid, AnimationSpinEmoteEvent args)
     {
-        Length = TimeSpan.FromMilliseconds(600),
-        AnimationTracks =
-            {
-                new AnimationTrackComponentProperty
-                {
+        var a = new Animation
+        {
+            Length = TimeSpan.FromMilliseconds(600),
+            AnimationTracks = {
+                new AnimationTrackComponentProperty {
                     ComponentType = typeof(TransformComponent),
                     Property = nameof(TransformComponent.LocalRotation),
                     InterpolationMode = AnimationInterpolationMode.Linear,
-                    KeyFrames =
-                    {
+                    KeyFrames = {
                         new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(0), 0f),
                         new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(90), 0.075f),
                         new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(180), 0.075f),
@@ -76,46 +109,28 @@ public sealed partial class AnimatedEmotesSystem : EntitySystem
                     }
                 }
             }
-    };
+        };
+        PlayEmote(uid, a, "emoteAnimSpin");
+    }
 
-    private static readonly Animation JumpAnimation = new()
+    private void OnJump(EntityUid uid, AnimationJumpEmoteEvent args)
     {
-        Length = TimeSpan.FromMilliseconds(250),
-        AnimationTracks =
-            {
-                new AnimationTrackComponentProperty
-                {
+        var a = new Animation
+        {
+            Length = TimeSpan.FromMilliseconds(250),
+            AnimationTracks = {
+                new AnimationTrackComponentProperty {
                     ComponentType = typeof(SpriteComponent),
                     Property = nameof(SpriteComponent.Offset),
                     InterpolationMode = AnimationInterpolationMode.Cubic,
-                    KeyFrames =
-                    {
+                    KeyFrames = {
                         new AnimationTrackProperty.KeyFrame(Vector2.Zero, 0f),
-                        new AnimationTrackProperty.KeyFrame(new Vector2(0, .20f), 0.125f),
+                        new AnimationTrackProperty.KeyFrame(new Vector2(0, 0.5f), 0.125f),
                         new AnimationTrackProperty.KeyFrame(Vector2.Zero, 0.125f),
                     }
                 }
             }
-    };
-
-    public void PlayEmote(EntityUid uid, Animation anim, string animationKey = "emoteAnimKeyId")
-    {
-        if (_anim.HasRunningAnimation(uid, animationKey))
-            return;
-
-        _anim.Play(uid, anim, animationKey);
-    }
-
-    private void OnFlip(Entity<AnimatedEmotesComponent> ent, ref AnimationFlipEmoteEvent args)
-    {
-        PlayEmote(ent, FlipAnimation, animationKey: "emoteAnimFlip");
-    }
-    private void OnSpin(Entity<AnimatedEmotesComponent> ent, ref AnimationSpinEmoteEvent args)
-    {
-        PlayEmote(ent, SpinAnimation, animationKey: "emoteAnimSpin");
-    }
-    private void OnJump(Entity<AnimatedEmotesComponent> ent, ref AnimationJumpEmoteEvent args)
-    {
-        PlayEmote(ent, JumpAnimation, animationKey: "emoteAnimJump");
+        };
+        PlayEmote(uid, a);
     }
 }

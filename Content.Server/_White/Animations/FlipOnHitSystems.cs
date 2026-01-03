@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aviu00
-// SPDX-FileCopyrightText: 2024 Preston Smith
-// SPDX-FileCopyrightText: 2024 Spatison
-// SPDX-FileCopyrightText: 2025 Aiden
-// SPDX-FileCopyrightText: 2025 FrauzJ
-// SPDX-FileCopyrightText: 2025 github_actions[bot]
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared._White.Animations;
 using Robust.Shared.Player;
 
@@ -18,8 +9,11 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
     {
         var filter = Filter.Pvs(user, entityManager: EntityManager);
 
-        if (TryComp<ActorComponent>(user, out var actor))
-            filter.RemovePlayer(actor.PlayerSession);
+        // FIX: Do NOT remove the player.
+        // We want the server to force the animation on the client to guarantee it plays,
+        // even if client-side prediction failed.
+        // if (TryComp<ActorComponent>(user, out var actor))
+        //    filter.RemovePlayer(actor.PlayerSession);
 
         RaiseNetworkEvent(new FlipOnHitEvent(GetNetEntity(user)), filter);
     }
