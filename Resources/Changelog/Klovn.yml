@@ -565,3 +565,9 @@ Entries:
       message: Fixed paper labels on canisters giving epic fail sprites.
   id: 71
   time: '2026-01-04T18:19:56.0000000+00:00'
+- author: nabegator220
+  changes:
+    - type: Add
+      message: Added gun prediction, it is now way less aids to shoot guns.
+  id: 72
+  time: '2026-01-05T18:35:27.0000000+00:00'
