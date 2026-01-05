@@ -571,3 +571,11 @@ Entries:
       message: Added gun prediction, it is now way less aids to shoot guns.
   id: 72
   time: '2026-01-05T18:35:27.0000000+00:00'
+- author: DeusMaldPr
+  changes:
+    - type: Add
+      message: Two posters
+    - type: Add
+      message: Raiders
+  id: 73
+  time: '2026-01-05T19:56:08.0000000+00:00'
