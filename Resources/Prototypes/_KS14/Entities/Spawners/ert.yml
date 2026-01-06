@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Gerkada
+#
+# SPDX-License-Identifier: MPL-2.0
+
 # Lone ERT Operative spawner
 - type: entity
   id: SpawnPointLoneERT

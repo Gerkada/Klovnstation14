@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Gerkada
+//
+// SPDX-License-Identifier: MPL-2.0
+
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
