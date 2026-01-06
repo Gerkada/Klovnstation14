@@ -1,15 +1,11 @@
-// SPDX-FileCopyrightText: 2026 Gerkada
-//
-// SPDX-License-Identifier: MPL-2.0
-
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
-using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.GameTicking.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Utility;
+using Robust.Shared.Serialization.Manager.Attributes;
 using System;
 using Content.Server.Chat.Systems;
 using Robust.Shared.Localization;
@@ -17,9 +13,12 @@ using Robust.Shared.Maths;
 
 namespace Content.Server._KS14.GameTicking.Rules;
 
+// 1. Store the path here instead of relying on LoadMapRule
 [RegisterComponent]
 public sealed partial class LoneERTRuleComponent : Component
 {
+    [DataField("path")]
+    public ResPath? Path;
 }
 
 public sealed class LoneERTSystem : GameRuleSystem<LoneERTRuleComponent>
@@ -33,32 +32,32 @@ public sealed class LoneERTSystem : GameRuleSystem<LoneERTRuleComponent>
     {
         base.Added(uid, component, gameRule, args);
 
-        if (!TryComp<LoadMapRuleComponent>(uid, out var mapRule)) return;
-
-        if (mapRule.GridPath == null)
+        // 2. Read from our custom component, NOT LoadMapRule
+        if (component.Path == null)
         {
-            Log.Error($"LoneERTRule {uid} started but GridPath is null!");
+            Log.Error($"LoneERTRule {uid} started but 'path' is missing in YAML!");
             return;
         }
-        var path = mapRule.GridPath.Value;
+        var path = component.Path.Value;
 
         try
         {
+            // 3. We use TryLoadMap (which supports full Maps)
             if (_mapLoader.TryLoadMap(path, out var mapEntity, out var roots))
             {
                 if (mapEntity.HasValue)
                 {
                     var mapId = mapEntity.Value.Comp.MapId;
 
-                    // 1. Initialize (Gravity/Atmos)
+                    // Initialize (Gravity/Atmos)
                     _mapSystem.InitializeMap(mapId);
 
-                    // 2. Unpause (Time)
+                    // Unpause (Time)
                     _mapManager.SetMapPaused(mapId, false);
 
                     Log.Info($"LoneERT Map {mapId} initialized and unpaused.");
 
-                    // 3. Make an announcement
+                    // Announcement
                     _chat.DispatchGlobalAnnouncement(
                         Loc.GetString("station-event-lone-ert-shuttle-incoming"),
                         playSound: true,
