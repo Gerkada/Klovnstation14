@@ -1,0 +1,10 @@
+- type: entity
+  id: LoneERTSpawn
+  parent: BaseGameRule
+  name: LoneERTSpawn
+  components:
+  - type: StationEvent
+    weight: 0 # Admin Only
+  - type: LoneERTRule
+  - type: LoadMapRule
+    gridPath: /Maps/_KS14/Shuttles/ShuttleEvent/lone_ert.yml
