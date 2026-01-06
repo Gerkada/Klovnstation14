@@ -222,7 +222,6 @@ entities:
     - type: Broadphase
     - type: OccluderTree
     - type: Shuttle
-    - type: FTL
       soundTravel: !type:SoundPathSpecifier
         params:
           loop: True
