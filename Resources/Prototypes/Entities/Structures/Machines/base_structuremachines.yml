@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseStructure
+  parent: [ BaseStructure, BaseRelaxedAnchoring ]
   id: BaseMachine
   components:
   - type: Animateable
@@ -56,8 +56,22 @@
 
 - type: entity
   abstract: true
+  parent: BaseRelaxedAnchoring
   id: ConstructibleMachine
   components:
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Animateable
   - type: Machine
   - type: ContainerContainer

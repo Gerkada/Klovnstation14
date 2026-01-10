@@ -52,6 +52,7 @@
 
 - type: entity
   id: DebugBatteryStorage
+  parent: BaseRelaxedAnchoring
   name: battery storage
   suffix: DEBUG
   placement:
@@ -87,6 +88,7 @@
 
 - type: entity
   id: DebugBatteryDischarger
+  parent: BaseRelaxedAnchoring
   name: battery discharger
   suffix: DEBUG
   placement:
@@ -156,6 +158,7 @@
 
 - type: entity
   id: DebugPowerReceiver
+  parent: BaseRelaxedAnchoring
   name: power receiver
   suffix: DEBUG
   placement:

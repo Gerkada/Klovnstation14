@@ -366,6 +366,7 @@
   - MobSiliconBase
   - ShowMedicalIcons
   - StripableInventoryBase
+  - BaseRelaxedAnchoring
   id: MobMedibot
   name: medibot
   description: No substitute for a doctor, but better than nothing.

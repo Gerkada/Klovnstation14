@@ -231,7 +231,7 @@
 - type: entity
   name: floodlight
   id: Floodlight
-  parent: BaseLamp
+  parent: [ BaseLamp, BaseRelaxedAnchoring ]
   description: A pole with powerful mounted lights on it.
   components:
   - type: Item
@@ -292,7 +292,7 @@
 - type: entity
   name: broken floodlight
   id: FloodlightBroken
-  parent: BaseItem
+  parent: [ BaseItem, BaseRelaxedAnchoring ]
   description: A pole with powerful mounted lights on it. It's broken.
   components:
   - type: Item
