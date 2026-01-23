@@ -21,6 +21,7 @@ using Content.Shared._KS14.Sparks; // KS14 Addition
 using Content.Shared.Body.Components; // KS14 Addition
 using Content.Shared.Body.Systems; // KS14 Addition
 using Content.Shared.Ghost;
+using Content.Shared.Gibbing;
 using Content.Shared.IdentityManagement; // KS14 Addition
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
@@ -57,7 +58,7 @@ public abstract class SharedPortalSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSparksSystem _sparksSystem = default!; // KS14 Addition
     [Dependency] private readonly IGameTiming _curTiming = default!; // KS14 Addition
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!; // KS14 Addition
+    [Dependency] private readonly GibbingSystem _gibbingSystem = default!; // KS14 Addition
     [Dependency] private readonly ISharedPlayerManager _playerManager = default!; // KS14 Addition
 
     private const string PortalFixture = "portalFixture";
@@ -224,12 +225,12 @@ public abstract class SharedPortalSystem : EntitySystem
     /// Called on an entity being telefragged.
     /// </summary>
     /// <returns>False if the hit was already handled.</returns>
-    public virtual bool OnTelefrag(Entity<BodyComponent?> hitEntity, in Entity<PortalComponent> portalEntity)
+    public virtual bool OnTelefrag(EntityUid hitUid, in Entity<PortalComponent> portalEntity)
     {
-        if (Resolve(hitEntity, ref hitEntity.Comp, logMissing: false))
+        if (!HasComp<BodyComponent>(hitUid))
         {
-            _popup.PopupEntity(Loc.GetString("portal-component-telefrag", ("name", Identity.Name(hitEntity, EntityManager, _playerManager.LocalEntity))), hitEntity, type: PopupType.LargeCaution);
-            _bodySystem.GibBody(hitEntity, gibOrgans: true, body: hitEntity.Comp, splatModifier: 9f);
+            _popup.PopupEntity(Loc.GetString("portal-component-telefrag", ("name", Identity.Name(hitUid, EntityManager, _playerManager.LocalEntity))), hitUid, type: PopupType.LargeCaution);
+            _gibbingSystem.Gib(hitUid, dropGiblets: true);
             return false;
         }
 
@@ -306,7 +307,7 @@ public abstract class SharedPortalSystem : EntitySystem
 
             // where's yo head at
             if (intersected)
-                OnTelefrag((subject, subjectBodyComponent), ent);
+                OnTelefrag(subject, ent);
         }
 
         // KS14: Do sparks

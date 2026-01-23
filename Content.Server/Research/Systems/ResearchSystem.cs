@@ -46,7 +46,7 @@ namespace Content.Server.Research.Systems
             InitializeSource();
             InitializeServer();
 
-            SubscribeLocalEvent<TechnologyDatabaseComponent, ResearchRegistrationChangedEvent>(OnDatabaseRegistrationChanged);
+            SubscribeLocalEvent((EntityEventRefHandler<TechnologyDatabaseComponent, ResearchRegistrationChangedEvent>)OnDatabaseRegistrationChanged);
         }
 
         /// <summary>

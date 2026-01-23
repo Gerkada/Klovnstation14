@@ -197,29 +197,4 @@ public sealed partial class ResearchSystem
 
         args.Handled = true;
     }
-
-    private bool UnlockTechnology(EntityUid uid, string techId, EntityUid actor)
-    {
-        if (!TryComp<ResearchClientComponent>(uid, out var clientComp) || clientComp.Server is not { } serverUid)
-            return false;
-
-        if (!TryComp<ResearchServerComponent>(serverUid, out var serverComp) || !TryComp<TechnologyDatabaseComponent>(serverUid, out var db))
-            return false;
-
-        if (!PrototypeManager.TryIndex<TechnologyPrototype>(techId, out var tech))
-            return false;
-
-        if (serverComp.Points < tech.Cost)
-            return false;
-
-        if (!tech.TechnologyPrerequisites.All(prereq => db.UnlockedTechnologies.Contains(prereq)))
-            return false;
-
-        db.UnlockedTechnologies.Add(techId);
-        serverComp.Points -= tech.Cost;
-        Dirty(db.Owner, db);
-        Dirty(serverUid, serverComp);
-
-        return true;
-    }
 }

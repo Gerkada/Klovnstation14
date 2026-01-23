@@ -645,8 +645,8 @@
   id: UplinkPistol9mmMagazine
   name: uplink-pistol-magazine-name
   description: uplink-pistol-magazine-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
-  productEntity: MagazinePistol
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base-icon }
+  productEntity: MagazinePistolHighCapacity
   cost:
     Telecrystal: 3
   categories:
@@ -889,9 +889,9 @@
   productEntity: Stimpack
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 6
+    Telecrystal: 3 #KS14 change
   cost:
-    Telecrystal: 9 #KS14 change
+    Telecrystal: 6 #KS14 change
   categories:
   - UplinkChemicals
 
@@ -902,9 +902,9 @@
   productEntity: StimkitFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 18
+    Telecrystal: 9 #KS14 change
   cost:
-    Telecrystal: 24 #KS14 change
+    Telecrystal: 15 #KS14 change
   categories:
   - UplinkChemicals
 
@@ -984,9 +984,9 @@
   productEntity: ChameleonProjector
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 12
+    Telecrystal: 6 #KS14 change
   cost:
-    Telecrystal: 21
+    Telecrystal: 9 #KS14 change
   categories:
   - UplinkDeception
 
@@ -2443,7 +2443,7 @@
   description: uplink-smuggler-satchel-desc
   productEntity: ClothingBackpackSatchelSmugglerUnanchored
   cost:
-    Telecrystal: 3
+    Telecrystal: 3 #KS14 change
   categories:
   - UplinkDeception
 

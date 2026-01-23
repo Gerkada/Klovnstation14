@@ -15,7 +15,6 @@
 //
 // SPDX-License-Identifier: MIT
 
-using Content.Shared.Body.Components;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Behaviors;
@@ -33,10 +32,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
 
         public void Execute(EntityUid owner, SharedDestructibleSystem system, EntityUid? cause = null)
         {
-            if (system.EntityManager.TryGetComponent(owner, out BodyComponent? body))
-            {
-                system.BodySystem.GibBody(owner, _recursive, body, splatModifier: 8.5f);
-            }
+            system.GibbingSystem.Gib(owner, _recursive);
         }
     }
 }

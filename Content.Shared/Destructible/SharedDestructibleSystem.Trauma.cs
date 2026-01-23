@@ -15,6 +15,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Gibbing;
 
 namespace Content.Shared.Destructible;
 
@@ -36,6 +37,7 @@ public abstract partial class SharedDestructibleSystem
     [Dependency] public readonly SharedSolutionContainerSystem SolutionContainerSystem = default!;
     [Dependency] public readonly SharedPuddleSystem PuddleSystem = default!;
     [Dependency] public readonly SharedContainerSystem ContainerSystem = default!;
+    [Dependency] public readonly GibbingSystem GibbingSystem = default!;
     [Dependency] public readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] public readonly ISharedAdminLogManager AdminLogger = default!;
 

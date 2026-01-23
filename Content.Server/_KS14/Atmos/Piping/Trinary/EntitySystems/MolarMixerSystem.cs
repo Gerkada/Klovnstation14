@@ -117,8 +117,8 @@ namespace Content.Server._KS14.Atmos.Piping.Trinary.EntitySystems
             {
                 if (inletOne.Air.TotalMoles < transferMolesOne || inletTwo.Air.TotalMoles < transferMolesTwo) //check for undersupply when properly mixing
                 {
-                    var transferCoefficient1 = inletOne.Air.TotalMoles/transferMolesOne;
-                    var transferCoefficient2 = inletTwo.Air.TotalMoles/transferMolesTwo;
+                    var transferCoefficient1 = inletOne.Air.TotalMoles / transferMolesOne;
+                    var transferCoefficient2 = inletTwo.Air.TotalMoles / transferMolesTwo;
                     var transferCoefficient = MathF.Min(transferCoefficient1, transferCoefficient2);
                     transferMolesOne = transferMolesOne * transferCoefficient;
                     transferMolesTwo = transferMolesTwo * transferCoefficient;
@@ -205,7 +205,7 @@ namespace Content.Server._KS14.Atmos.Piping.Trinary.EntitySystems
         private void OnOutputMolarFlowChangeMessage(EntityUid uid, MolarMixerComponent mixer, MolarMixerChangeOutputMolarFlowMessage args)
         {
             mixer.TargetMolarFlow = Math.Clamp(args.MolarFlow, 0f, mixer.MaxTargetMolarFlow);
-            _adminLogger.Add(LogType.AtmosMolarFlowChanged, LogImpact.Medium,
+            _adminLogger.Add(LogType.AtmosRatioChanged, LogImpact.Medium,
                 $"{ToPrettyString(args.Actor):player} set the molar flow on {ToPrettyString(uid):device} to {args.MolarFlow}kPa");
             DirtyUI(uid, mixer);
         }

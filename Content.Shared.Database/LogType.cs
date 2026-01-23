@@ -514,7 +514,7 @@ public enum LogType
     Instrument = 103,
 
     /// <summary>
-    /// KS14 - keeping within one file to keep better track of everything
+    /// Events related to players connecting/disconnecting.
     /// </summary>
-    AtmosMolarFlowChanged = 104,
+    Connection = 104,
 }

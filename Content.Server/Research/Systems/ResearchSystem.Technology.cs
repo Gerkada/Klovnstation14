@@ -172,4 +172,14 @@ public sealed partial class ResearchSystem
         return true;
     }
 
+    private void OnDatabaseRegistrationChanged(Entity<TechnologyDatabaseComponent> entity, ref ResearchRegistrationChangedEvent args)
+    {
+        if (TryComp<ResearchServerComponent>(entity, out var serverComp))
+        {
+            foreach (var client in serverComp.Clients)
+            {
+                RaiseLocalEvent(client, ref args);
+            }
+        }
+    }
 }

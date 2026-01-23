@@ -28,7 +28,7 @@
 // SPDX-FileCopyrightText: 2026 deltanedas
 // SPDX-FileCopyrightText: 2026 github_actions[bot]
 //
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: MIT
 
 // <Trauma>
 using Content.Shared.Destructible.Thresholds;
@@ -38,7 +38,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Body.Systems;
 using Content.Server.Construction;
 using Content.Server.Destructible.Thresholds;
 using Content.Server.Destructible.Thresholds.Behaviors;
@@ -52,6 +51,7 @@ using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.FixedPoint;
+using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Trigger.Systems;
 using JetBrains.Annotations;
