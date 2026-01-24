@@ -605,3 +605,15 @@ Entries:
       message: FPV drones.
   id: 77
   time: '2026-01-23T17:29:10.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: You can now wallshove.
+    - type: Add
+      message: Shoves now push.
+    - type: Tweak
+      message: Shoves have 100% base chance. Disarm malus still applies.
+    - type: Remove
+      message: Removed random disarms from shoving.
+  id: 78
+  time: '2026-01-24T08:53:04.0000000+00:00'
