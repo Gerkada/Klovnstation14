@@ -560,7 +560,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
                     // Something like ballistic might want to leave it in the container still
                     if (!cartridge.DeleteOnSpawn && !Containers.IsEntityInContainer(ent!.Value))
-                        EjectCartridge(Random(gun), ent.Value, angle);
+                        EjectCartridge(Random(gun), ent.Value, angle, user: user); // KS14: added user
 
                     Dirty(ent!.Value, cartridge);
                     break;
@@ -693,7 +693,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         System.Random rand, // Trauma - predicted random instance for the gun
         EntityUid entity,
         Angle? angle = null,
-        bool playSound = true)
+        bool playSound = true,
+        EntityUid? user = null) // KS14 - user, for prediction
     {
         // TODO: Sound limit version.
         // <Trauma> - use random from params
@@ -716,7 +717,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
         if (playSound && TryComp<CartridgeAmmoComponent>(entity, out var cartridge))
         {
-            Audio.PlayPvs(cartridge.EjectSound, entity, AudioParams.Default.WithVariation(SharedContentAudioSystem.DefaultVariation).WithVolume(-1f));
+            // KS14: Predicted
+            Audio.PlayPredicted(cartridge.EjectSound, entity, user: user, AudioParams.Default.WithVariation(SharedContentAudioSystem.DefaultVariation).WithVolume(-1f));
         }
     }
 
