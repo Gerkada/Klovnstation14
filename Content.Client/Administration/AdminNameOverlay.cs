@@ -15,6 +15,7 @@
 // SPDX-FileCopyrightText: 2025 Schrödinger
 // SPDX-FileCopyrightText: 2026 Centronias
 // SPDX-FileCopyrightText: 2026 Princess Cheeseballs
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 

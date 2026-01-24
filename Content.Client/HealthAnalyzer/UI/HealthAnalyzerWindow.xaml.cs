@@ -23,6 +23,7 @@
 // SPDX-FileCopyrightText: 2025 LordCarve
 // SPDX-FileCopyrightText: 2025 nabegator220
 // SPDX-FileCopyrightText: 2026 Fruitsalad
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 

@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: 2022 mirrorcult
 // SPDX-FileCopyrightText: 2023 metalgearsloth
 // SPDX-FileCopyrightText: 2026 ArtisticRoomba
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 

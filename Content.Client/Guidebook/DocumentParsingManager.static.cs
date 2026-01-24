@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2024 Thomas
 // SPDX-FileCopyrightText: 2025 pathetic meowmeow
 // SPDX-FileCopyrightText: 2026 Princess Cheeseballs
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 

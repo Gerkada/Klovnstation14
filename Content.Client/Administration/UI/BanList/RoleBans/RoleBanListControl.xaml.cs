@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2023 DrSmugleaf
 // SPDX-FileCopyrightText: 2026 Pieter-Jan Briers
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 

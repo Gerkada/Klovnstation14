@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2024 Nemanja
 // SPDX-FileCopyrightText: 2025 Pieter-Jan Briers
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
 // SPDX-FileCopyrightText: 2026 slarticodefast
 //
 // SPDX-License-Identifier: MIT

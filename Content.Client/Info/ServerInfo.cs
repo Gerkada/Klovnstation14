@@ -11,6 +11,7 @@
 // SPDX-FileCopyrightText: 2022 mirrorcult
 // SPDX-FileCopyrightText: 2024 Winkarst
 // SPDX-FileCopyrightText: 2026 Princess Cheeseballs
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
 //
 // SPDX-License-Identifier: MIT
 
