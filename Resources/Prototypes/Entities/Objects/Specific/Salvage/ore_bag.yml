@@ -6,7 +6,9 @@
 # SPDX-FileCopyrightText: 2023 metalgearsloth
 # SPDX-FileCopyrightText: 2025 ArtisticRoomba
 # SPDX-FileCopyrightText: 2025 Nox
+# SPDX-FileCopyrightText: 2026 FrauZj
 # SPDX-FileCopyrightText: 2026 FrauzJ
+# SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
 # SPDX-FileCopyrightText: 2026 github_actions[bot]
 #
 # SPDX-License-Identifier: MIT
@@ -18,6 +20,7 @@
   description: A robust bag for salvage specialists and miners alike to carry large amounts of ore. Magnetises any nearby ores when attached to a belt.
   components:
   - type: MagnetPickup
+    slotFlags: [ BELT, POCKET ] # KS14: Added belt, pocket
   - type: Sprite
     sprite: Objects/Specific/Mining/ore_bag.rsi
     state: icon
@@ -31,7 +34,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,1,2
+    - 0,0,9,3 # KS14 change
     quickInsert: true
     areaInsert: true
     whitelist:

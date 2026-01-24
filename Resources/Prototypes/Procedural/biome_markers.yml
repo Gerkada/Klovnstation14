@@ -3,7 +3,9 @@
 # SPDX-FileCopyrightText: 2025 Pieter-Jan Briers
 # SPDX-FileCopyrightText: 2025 ScarKy0
 # SPDX-FileCopyrightText: 2025 metalgearsloth
+# SPDX-FileCopyrightText: 2026 FrauZj
 # SPDX-FileCopyrightText: 2026 FrauzJ
+# SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
 # SPDX-FileCopyrightText: 2026 github_actions[bot]
 #
 # SPDX-License-Identifier: MIT
@@ -18,19 +20,19 @@
   id: WatchersLavaland
   prototype: MobWatcherLavaland
   minGroupSize: 1 # KS14 change
-  maxGroupSize: 3
+  maxGroupSize: 2 # KS14 change
 
 - type: biomeMarkerLayer
   id: WatchersIcewing
   prototype: MobWatcherIcewing
   minGroupSize: 1 # KS14 change
-  maxGroupSize: 3
+  maxGroupSize: 2 # KS14 change
 
 - type: biomeMarkerLayer
   id: WatchersMagmawing
   prototype: MobWatcherMagmawing
   minGroupSize: 1 # KS14 change
-  maxGroupSize: 3
+  maxGroupSize: 2 # KS14 change
 
 - type: biomeMarkerLayer
   id: Cows
