@@ -1,0 +1,17 @@
+# CVar preset to be applied to the KS14 server
+
+[game]
+# Changes the name of the server as it appears in the lobby and launcher.
+hostname = "Klovnstation 14"
+
+# Removes role timers
+role_timers = false
+role_loadout_timers = false
+
+[atmos]
+# Bigger maxcap explo. range
+max_explosion_range = 40
+
+[pointing]
+# Virtually nonexistent somethingburger
+cooldown_seconds = 0.05
