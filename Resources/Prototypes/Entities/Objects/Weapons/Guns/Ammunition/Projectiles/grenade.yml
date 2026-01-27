@@ -4,8 +4,12 @@
 # SPDX-FileCopyrightText: 2024 lzk
 # SPDX-FileCopyrightText: 2024 metalgearsloth
 # SPDX-FileCopyrightText: 2025 ArtisticRoomba
-# SPDX-FileCopyrightText: 2025 github_actions[bot]
+# SPDX-FileCopyrightText: 2025 Hitlinemoss
+# SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
+# SPDX-FileCopyrightText: 2025 ThatGuyUSA
 # SPDX-FileCopyrightText: 2025 nabegator220
+# SPDX-FileCopyrightText: 2026 FrauzJ
+# SPDX-FileCopyrightText: 2026 github_actions[bot]
 #
 # SPDX-License-Identifier: MIT
 
@@ -19,9 +23,9 @@
     deleteOnCollide: false
     damage:
       types:
-        Blunt: 8
+        Blunt: 4
   - type: StaminaDamageOnCollide
-    damage: 55
+    damage: 35
   - type: TimedDespawn
     lifetime: 0.25
 
@@ -35,7 +39,7 @@
     deleteOnCollide: false
     damage:
       types:
-        Piercing: 60
+        Piercing: 45
   - type: TimedDespawn
     lifetime: 0.25
 
@@ -52,7 +56,7 @@
         Blunt: 1
         Heat: 2
   - type: IgniteOnCollide
-    fireStacks: 2
+    fireStacks: 1
     count: 10
   - type: TimedDespawn
     lifetime: 0.25
@@ -67,6 +71,6 @@
     deleteOnCollide: false
     damage:
       types:
-        Piercing: 10
+        Piercing: 5
   - type: TimedDespawn
     lifetime: 0.25

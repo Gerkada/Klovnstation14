@@ -1,3 +1,21 @@
+# SPDX-FileCopyrightText: 2020 Swept
+# SPDX-FileCopyrightText: 2022 Peptide90
+# SPDX-FileCopyrightText: 2022 Rane
+# SPDX-FileCopyrightText: 2023 Maxtone
+# SPDX-FileCopyrightText: 2023 Puro
+# SPDX-FileCopyrightText: 2023 Sigil
+# SPDX-FileCopyrightText: 2023 metalgearsloth
+# SPDX-FileCopyrightText: 2025 FungiFellow
+# SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
+# SPDX-FileCopyrightText: 2025 RedBookcase
+# SPDX-FileCopyrightText: 2025 Tiniest Shark
+# SPDX-FileCopyrightText: 2025 UpAndLeaves
+# SPDX-FileCopyrightText: 2025 nabegator220
+# SPDX-FileCopyrightText: 2026 FrauzJ
+# SPDX-FileCopyrightText: 2026 github_actions[bot]
+#
+# SPDX-License-Identifier: MPL-2.0
+
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothingGasTanks]
   id: ClothingOuterBioGeneral
@@ -17,7 +35,7 @@
       coefficients:
         Caustic: 0.75
   - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.35
+    zombificationResistanceCoefficient: 0.25
   - type: GroupExamine
   - type: ClothingSpeedModifier
     walkModifier: 0.95
@@ -34,6 +52,11 @@
     sprite: Clothing/OuterClothing/Bio/cmo.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Bio/cmo.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.1
 
 - type: entity
   parent: ClothingOuterBioGeneral
@@ -46,10 +69,6 @@
     sprite: Clothing/OuterClothing/Bio/janitor.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Bio/janitor.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Caustic: 0.4
 
 - type: entity
   parent: ClothingOuterBioGeneral
@@ -62,6 +81,12 @@
     sprite: Clothing/OuterClothing/Bio/scientist.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Bio/scientist.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Caustic: 0.5
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.1
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSecurityContraband]
@@ -81,12 +106,12 @@
         Slash: 0.6
         Piercing: 0.8
   - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.4
+    zombificationResistanceCoefficient: 0.2
   - type: GroupExamine
   - type: ClothingSpeedModifier
     walkModifier: 0.95
     sprintModifier: 0.95
-    
+
 - type: entity
   parent: ClothingOuterBioGeneral
   id: ClothingOuterBioVirology
@@ -99,4 +124,4 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Bio/virology.rsi
   - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.25
+    zombificationResistanceCoefficient: 0.05
