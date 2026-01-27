@@ -1,5 +1,7 @@
-# SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 # SPDX-FileCopyrightText: 2026 Gerkada
+# SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
+# SPDX-FileCopyrightText: 2026 github_actions[bot]
+# SPDX-FileCopyrightText: 2026 nabegator220
 #
 # SPDX-License-Identifier: MIT
 
@@ -66,3 +68,35 @@ ClothingUniformColorRainbow: null
 ClothingUnderSocksCoder: null
 ClothingUnderSocksBee: null
 ClothingNeckScarfStripedLesbianLong: null
+
+#2026-01-27 harmony shit removal - mapped to closest equivalents
+ClothingHeadHatBeretSecurityBlueHarmony: ClothingHeadHatBeretSecurity
+ClothingHeadHatBeretSecuritySeniorOfficerHarmony: ClothingHeadHatBeretSecurity
+ClothingHeadHatBeretSeniorTechnicianHarmony: ClothingHeadHatBeretSecurity
+ClothingHeadHatSecsoftBlueFlippedHarmony: ClothingHeadHatSecsoft
+ClothingOuterCoatDetectiveLoadoutBlueHarmony: ClothingOuterCoatDetectiveLoadoutGrey
+ClothingUniformJumpsuitCargoOfficeSlacksHarmony: ClothingUniformJumpsuitCargo
+ClothingUniformJumpsuitDetectiveBlueHarmony: ClothingUniformJumpsuitHoSBlue
+ClothingUniformJumpsuitSeniorTechnicianHarmony: ClothingUniformJumpsuitSeniorEngineer
+ClothingUniformJumpsuitWardenBlueHarmony: ClothingUniformJumpsuitHoS
+PlushieRainbowLizard: null
+ClothingOuterArmorPlateCarrier: ClothingOuterArmorBasic
+PosterHarmonyDoNotGamble: null
+PosterHarmonyEnrico: null
+PosterHarmonyFaded: null
+PosterHarmonyHarmony: null
+PosterHarmonyMagicCandle: null
+PosterHarmonyMakeshiftClown: null
+PosterHarmonyManOfWeh: null
+PosterHarmonyMissing: null
+PosterHarmonyMoney: null
+PosterHarmonyMuhrinePropaganda: null
+PosterHarmonySafetyLizz: null
+PosterHarmonySmokeBreak: null
+PosterHarmonySuperMatter: null
+SpawnPointPermaPrisoner: null
+PhoneInstrumentUpstream: null
+RipleyChassis: null
+SpawnPointZookeeper: null
+ClothingMaskAuralis: ClothingMaskBreath
+ClothingUniformJumpsuitWorkaday: ClothingUniformJumpsuitColorGrey

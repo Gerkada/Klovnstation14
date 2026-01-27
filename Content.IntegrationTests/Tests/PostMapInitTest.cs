@@ -18,7 +18,6 @@
 // SPDX-FileCopyrightText: 2024 778b
 // SPDX-FileCopyrightText: 2024 Ed
 // SPDX-FileCopyrightText: 2024 Emisse
-// SPDX-FileCopyrightText: 2024 Errant
 // SPDX-FileCopyrightText: 2024 Leon Friedrich
 // SPDX-FileCopyrightText: 2024 Rainfey
 // SPDX-FileCopyrightText: 2024 Southbridge
@@ -26,20 +25,26 @@
 // SPDX-FileCopyrightText: 2025 ArtisticRoomba
 // SPDX-FileCopyrightText: 2025 Deerstop
 // SPDX-FileCopyrightText: 2025 ElectroJr
+// SPDX-FileCopyrightText: 2025 Errant
+// SPDX-FileCopyrightText: 2025 FrauZj
 // SPDX-FileCopyrightText: 2025 FrauzJ
 // SPDX-FileCopyrightText: 2025 IProduceWidgets
+// SPDX-FileCopyrightText: 2025 Kate
 // SPDX-FileCopyrightText: 2025 Killerqu00
-// SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 // SPDX-FileCopyrightText: 2025 Pieter-Jan Briers
+// SPDX-FileCopyrightText: 2025 Pok
 // SPDX-FileCopyrightText: 2025 SlamBamActionman
 // SPDX-FileCopyrightText: 2025 Spessmann
 // SPDX-FileCopyrightText: 2025 Tayrtahn
 // SPDX-FileCopyrightText: 2025 Unisol
 // SPDX-FileCopyrightText: 2025 Vortebo
 // SPDX-FileCopyrightText: 2025 compilatron
-// SPDX-FileCopyrightText: 2025 github_actions[bot]
+// SPDX-FileCopyrightText: 2025 lettuce
 // SPDX-FileCopyrightText: 2025 metalgearsloth
-// SPDX-FileCopyrightText: 2025 nabegator220
+// SPDX-FileCopyrightText: 2025 tanuko
+// SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
+// SPDX-FileCopyrightText: 2026 nabegator220
 //
 // SPDX-License-Identifier: MIT
 
@@ -117,7 +122,8 @@ namespace Content.IntegrationTests.Tests
         private static readonly string[] DoNotMapWhitelist =
         {
             "/Maps/centcomm.yml",
-            "/Maps/Shuttles/AdminSpawn/**" // admin gaming
+            "/Maps/_Moffstation/frezon.yml", // Contains handheld crew monitor & other head of staff items
+            "/Maps/Shuttles/AdminSpawn/ERT-Small-Deathsquad.yml" // handheld crew mon
         };
 
         /// <summary>
@@ -129,6 +135,9 @@ namespace Content.IntegrationTests.Tests
 
         public static readonly string[] GameMaps =
         {
+            "Spire", // KS14: ported from Harmony, Developed by Dogbone10, PenguinCodest, Jack_the_Dragon
+            "Jellyfish", // KS14: ported from Harmony, Developed by whythelettuce
+            "Mira", // KS14: ported from Harmony, developed by tanuko
             "Dev",
             "TestTeg",
             "Fland",
@@ -147,8 +156,10 @@ namespace Content.IntegrationTests.Tests
             "dm01-entryway",
             // "Exo", // KS14: Commented out
             "Meta", // KS14: Added back
-            "Omega", // KS14: Added back
-            "Snowball"
+            "Omega", // KS14: Added back and replaced with new harmony version updated from Spanky's version by OrnamentalFreak and CrimsonJupiter
+            "Wonderland", // KS14: ported from Umbra
+            "Snowball",
+            "Frezon" //KS14: ported from Moff
         };
 
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";

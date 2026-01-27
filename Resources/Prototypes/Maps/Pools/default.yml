@@ -16,14 +16,17 @@
 # SPDX-FileCopyrightText: 2025 ArtisticRoomba
 # SPDX-FileCopyrightText: 2025 Deerstop
 # SPDX-FileCopyrightText: 2025 Emisse
+# SPDX-FileCopyrightText: 2025 FrauZj
 # SPDX-FileCopyrightText: 2025 FrauzJ
+# SPDX-FileCopyrightText: 2025 Kate
 # SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 # SPDX-FileCopyrightText: 2025 SlamBamActionman
 # SPDX-FileCopyrightText: 2025 Spessmann
 # SPDX-FileCopyrightText: 2025 compilatron
-# SPDX-FileCopyrightText: 2025 github_actions[bot]
+# SPDX-FileCopyrightText: 2025 lettuce
 # SPDX-FileCopyrightText: 2025 nabegator220
 # SPDX-FileCopyrightText: 2025 rottenheadphones
+# SPDX-FileCopyrightText: 2026 github_actions[bot]
 #
 # SPDX-License-Identifier: MIT
 
@@ -34,12 +37,22 @@
   - Box
   - Fland
   - Marathon
-  # - Oasis # KS14: remove map
   - Packed
-  # - Plasma # KS14: remove map
   - Reach
-  # - Exo # KS14: remove map
-  - Saltern # KS14: bring saltern back
   - Snowball
-  - Meta # KS14: bring meta back
-  - Omega # KS14: bring omega back
+  # KS14 restored maps
+  - Saltern
+  - Meta
+  # KS14 removed maps
+  # - Oasis
+  # - Plasma
+  # - Exo
+  # KS14 ported Harmony maps
+  - Mira
+  - Omega
+  - Spire
+  - Jellyfish
+  # KS14 ported Umbra maps
+  - Wonderland
+  # KS14 ported Moff maps
+  - Frezon
