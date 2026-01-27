@@ -649,3 +649,15 @@ Entries:
       message: Omega station has been brought to modern standards
   id: 82
   time: '2026-01-27T20:47:32.0000000+00:00'
+- author: FrauZj
+  changes:
+    - type: Tweak
+      message: Guns are back to their old values. Armors tweaked.
+    - type: Tweak
+      message: >-
+        Zeds wont infect bio suits as often, and CMO hardsuit gives true 100%
+        resistance.
+    - type: Tweak
+      message: Some armors now have flat resistances.
+  id: 83
+  time: '2026-01-27T21:40:17.0000000+00:00'
