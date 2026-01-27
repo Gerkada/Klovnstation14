@@ -641,3 +641,11 @@ Entries:
         reflection prediction issues.
   id: 81
   time: '2026-01-27T15:05:15.0000000+00:00'
+- author: nabegator220
+  changes:
+    - type: Add
+      message: 'Added new lowpop maps: Frezon, Wonderland, Spire, Jellyfish, Mira'
+    - type: Tweak
+      message: Omega station has been brought to modern standards
+  id: 82
+  time: '2026-01-27T20:47:32.0000000+00:00'
