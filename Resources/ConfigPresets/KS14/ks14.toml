@@ -3,15 +3,34 @@
 [game]
 # Changes the name of the server as it appears in the lobby and launcher.
 hostname = "Klovnstation 14"
-
-# Removes role timers
+desc = "Klovnstation 14 is a low-rule"
+maxplayers = 120
+soft_max_players = 90
+lobbyduration    = 300 # 5 minutes lobby timer
+# Removes role timers - we keep this until we have proper game time for everyone
 role_timers = false
 role_loadout_timers = false
 
+[infolinks]
+bug_report = "https://github.com/Space-Klovns/Klovnstation14/issues/new/choose"
+discord    = "https://discord.gg/adkEEQQyRj"
+github     = "https://github.com/Space-Klovns/Klovnstation14"
+website    = "https://klovnstation.org"
+wiki       = "https://klovnstation14.miraheze.org/wiki/Main_Page"
+
+[auth]
+server = "https://auth.simplestation.org/"
+
 [atmos]
 # Bigger maxcap explo. range
-max_explosion_range = 40
+max_explosion_range = 60
+#disable deltap
+delta_pressure_damage = false
 
 [pointing]
 # Virtually nonexistent somethingburger
 cooldown_seconds = 0.05
+
+[hub]
+tags = "lang:en,region:eu_w,rp:low"
+hub_urls = "https://hub.simplestation.org/, https://hub.singularity14.co.uk/, https://cdn.spacestationmultiverse.com/hub/"
