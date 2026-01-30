@@ -661,3 +661,9 @@ Entries:
       message: Some armors now have flat resistances.
   id: 83
   time: '2026-01-27T21:40:17.0000000+00:00'
+- author: nabegator220
+  changes:
+    - type: Tweak
+      message: Better sprites for the FPV drone and arc flash suit
+  id: 84
+  time: '2026-01-30T14:29:01.0000000+00:00'
