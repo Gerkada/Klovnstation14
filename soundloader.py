@@ -23,7 +23,7 @@ lobbysongs = [
 print(f"Found {len(lobbysongs)} tracks")
 
 # Sound collection (cross-platform dirs)
-output_dir = script_path / "Resources" / "Prototypes" / "Soundcollections"
+output_dir = script_path / "Resources" / "Prototypes" / "SoundCollections"
 output_dir.mkdir(parents=True, exist_ok=True)
 lobby_cfg = output_dir / "lobby.yml"
 
