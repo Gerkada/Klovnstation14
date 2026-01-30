@@ -32,5 +32,6 @@ delta_pressure_damage = false
 cooldown_seconds = 0.05
 
 [hub]
+advertise = true
 tags = "lang:en,region:eu_w,rp:low"
 hub_urls = "https://hub.simplestation.org/, https://hub.singularity14.co.uk/, https://cdn.spacestationmultiverse.com/hub/"
